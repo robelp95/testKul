@@ -1,8 +1,6 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -18,10 +16,9 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="#">
-                Pideasy
+                Kulko.app
             </Link>{' '}
             {new Date().getFullYear()}
-            {'.'}
         </Typography>
     );
 }
@@ -63,8 +60,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const steps = ['Datos del cliente', 'Resumen de orden'];
-
 function getStepContent(step) {
     switch (step) {
         case 0:
@@ -76,9 +71,10 @@ function getStepContent(step) {
     }
 }
 
-export default function Checkout() {
+export default function Checkout(props) {
+    console.log(props);
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
+    const {steps, activeStep, setActiveStep} = props;
 
     const handleNext = () => {
         setActiveStep(activeStep + 1);
@@ -91,14 +87,6 @@ export default function Checkout() {
     return (
         <React.Fragment>
             <CssBaseline />
-            <AppBar position="absolute" color="default" className={classes.appBar}>
-                <Toolbar>
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Pideasy
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-
 
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
@@ -137,14 +125,20 @@ export default function Checkout() {
                                         color="primary"
                                         onClick={handleNext}
                                         className={classes.button}
+                                        type={activeStep === steps.length - 1 ? "submit" : "button"}
+
                                     >
-                                        {activeStep === steps.length - 1 ? 'Generar pedido' : 'Siguiente'}
+                                        {
+                                            activeStep === steps.length - 1 ? 'Generar pedido' : 'Siguiente'
+                                        }
                                     </Button>
                                 </div>
                             </React.Fragment>
                         )}
                     </React.Fragment>
                 </Paper>
+
+
                 <Copyright />
             </main>
         </React.Fragment>
