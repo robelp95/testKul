@@ -116,7 +116,8 @@ dist
 /build
 
 # misc
-.DS_Store
+.DS_Stored
+.DS_Stored
 .env.local
 .env.development.local
 .env.test.local
