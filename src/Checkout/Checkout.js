@@ -60,10 +60,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function getStepContent(step) {
+function getStepContent(step, props) {
+    const {values, handleChange} = props;
     switch (step) {
         case 0:
-            return <AddressForm />;
+            return <AddressForm values={values} handleChange={handleChange} />;
         case 1:
             return <Review />;
         default:
@@ -72,7 +73,6 @@ function getStepContent(step) {
 }
 
 export default function Checkout(props) {
-    console.log(props);
     const classes = useStyles();
     const {steps, activeStep, setActiveStep} = props;
 
@@ -113,7 +113,11 @@ export default function Checkout(props) {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {getStepContent(activeStep)}
+
+
+                                {getStepContent(activeStep, props)}
+
+
                                 <div className={classes.buttons}>
                                     {activeStep !== 0 && (
                                         <Button onClick={handleBack} className={classes.button}>

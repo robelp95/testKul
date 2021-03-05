@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import RadioButtonGroup from "./RadioButtonGroup";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
-export default function AddressForm({handleChange}) {
+export default function AddressForm({values, handleChange}) {
 
     const [value, setValue] = React.useState('delivery');
     return (
@@ -20,6 +20,7 @@ export default function AddressForm({handleChange}) {
                         id="firstName"
                         name="firstName"
                         label="Nombre"
+                        value={values.firstName}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -30,17 +31,20 @@ export default function AddressForm({handleChange}) {
                         id="lastName"
                         name="lastName"
                         label="Apellido"
+                        value={values.lastName}
+                        onChange={handleChange}
                         fullWidth
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
-                        id="whatsapp"
-                        name="whatsapp"
+                        id="phoneNumber"
+                        name="phoneNumber"
                         label="Whatsapp"
+                        value={values.phoneNumber}
+                        onChange={handleChange}
                         placeholder="Número de Whatsapp"
                         fullWidth
-                        autoComplete="numero whatsapp"
                         InputProps={{
                             startAdornment: <InputAdornment position="start">+56</InputAdornment>,
                         }}
@@ -57,9 +61,10 @@ export default function AddressForm({handleChange}) {
                             id="address1"
                             name="address1"
                             label="Dirección 1"
+                            value={values.address1}
+                            onChange={handleChange}
                             placeholder="Apartamento / Edificio / Localidad"
                             fullWidth
-                            autoComplete="shipping address-line1"
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -67,9 +72,10 @@ export default function AddressForm({handleChange}) {
                             id="address2"
                             name="address2"
                             label="Dirección 2"
+                            value={values.address2}
+                            onChange={handleChange}
                             placeholder="Ciudad / Codigo Postal"
                             fullWidth
-                            autoComplete="shipping address-line2"
                         />
                     </Grid>
                 </>
@@ -77,8 +83,11 @@ export default function AddressForm({handleChange}) {
 
                 <Grid item xs={12}>
                     <TextField
-                        id="multiline"
+                        id="comment"
+                        name="comment"
                         label="Comentario"
+                        value={values.comment}
+                        onChange={handleChange}
                         multiline
                         rows={2}
                         fullWidth
