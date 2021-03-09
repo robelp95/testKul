@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -61,10 +61,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getStepContent(step, props) {
-    const {values, handleChange} = props;
+    const {values, handleChange, errors, initialErrors} = props;
     switch (step) {
         case 0:
-            return <AddressForm values={values} handleChange={handleChange} />;
+            return <AddressForm values={values} handleChange={handleChange} errors={errors} initialErrors={initialErrors} />;
         case 1:
             return <Review />;
         default:
@@ -74,8 +74,11 @@ function getStepContent(step, props) {
 
 export default function Checkout(props) {
     const classes = useStyles();
-    const {steps, activeStep, setActiveStep} = props;
-
+    const {steps, activeStep, setActiveStep, errors, dirty} = props;
+    const [formIsValid, setFormIsValid] = useState(dirty);
+    useEffect(() => {
+        if (dirty) setFormIsValid(Object.keys(errors).length == 0)
+    }, [errors])
     const handleNext = () => {
         setActiveStep(activeStep + 1);
     };
@@ -130,7 +133,7 @@ export default function Checkout(props) {
                                         onClick={handleNext}
                                         className={classes.button}
                                         type={activeStep === steps.length - 1 ? "submit" : "button"}
-
+                                        disabled={!formIsValid}
                                     >
                                         {
                                             activeStep === steps.length - 1 ? 'Generar pedido' : 'Siguiente'
@@ -141,8 +144,6 @@ export default function Checkout(props) {
                         )}
                     </React.Fragment>
                 </Paper>
-
-
                 <Copyright />
             </main>
         </React.Fragment>

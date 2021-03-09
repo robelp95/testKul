@@ -2,12 +2,14 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import RadioButtonGroup from "./RadioButtonGroup";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import {Field} from "formik";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import FormLabel from "@material-ui/core/FormLabel";
+import {RadioGroup} from 'formik-material-ui';
 
-export default function AddressForm({values, handleChange}) {
-
-    const [value, setValue] = React.useState('delivery');
+export default function AddressForm({values, handleChange, errors, isSubmitting}) {
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -21,6 +23,7 @@ export default function AddressForm({values, handleChange}) {
                         name="firstName"
                         label="Nombre"
                         value={values.firstName}
+                        error={errors.firstName != undefined}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -32,6 +35,8 @@ export default function AddressForm({values, handleChange}) {
                         name="lastName"
                         label="Apellido"
                         value={values.lastName}
+                        error={errors.lastName != undefined}
+
                         onChange={handleChange}
                         fullWidth
                     />
@@ -42,6 +47,7 @@ export default function AddressForm({values, handleChange}) {
                         name="phoneNumber"
                         label="Whatsapp"
                         value={values.phoneNumber}
+                        error={errors.phoneNumber != undefined}
                         onChange={handleChange}
                         placeholder="Número de Whatsapp"
                         fullWidth
@@ -51,34 +57,48 @@ export default function AddressForm({values, handleChange}) {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <RadioButtonGroup value={value} setValue={setValue} />
+                    <Field component={RadioGroup} name="deliveryType">
+                        <FormLabel component="legend">Tipo de envío</FormLabel>
+                        <FormControlLabel
+                            value="pickup"
+                            name="deliveryType"
+                            control={<Radio disabled={isSubmitting} />}
+                            label="Pick-up"
+                        />
+                        <FormControlLabel
+                            value="delivery"
+                            name="deliveryType"
+                            control={<Radio disabled={isSubmitting}/>}
+                            label="Delivery"
+                        />
+                    </Field>
                 </Grid>
-                {value ==='delivery' &&
-                <>
-                    <Grid item xs={12}>
-                        <TextField
-                            required
-                            id="address1"
-                            name="address1"
-                            label="Dirección 1"
-                            value={values.address1}
-                            onChange={handleChange}
-                            placeholder="Apartamento / Edificio / Localidad"
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            id="address2"
-                            name="address2"
-                            label="Dirección 2"
-                            value={values.address2}
-                            onChange={handleChange}
-                            placeholder="Ciudad / Codigo Postal"
-                            fullWidth
-                        />
-                    </Grid>
-                </>
+                {values.deliveryType === 'delivery' &&
+                    <>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="address1"
+                                name="address1"
+                                label="Dirección 1"
+                                value={values.address1}
+                                onChange={handleChange}
+                                placeholder="Apartamento / Edificio / Localidad"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                id="address2"
+                                name="address2"
+                                label="Dirección 2"
+                                value={values.address2}
+                                onChange={handleChange}
+                                placeholder="Ciudad / Codigo Postal"
+                                fullWidth
+                            />
+                        </Grid>
+                    </>
                 }
 
                 <Grid item xs={12}>
