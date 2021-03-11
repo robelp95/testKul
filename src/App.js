@@ -4,7 +4,7 @@ import {Redirect, Route} from "react-router-dom";
 import {Switch} from 'react-router';
 import Home from "./Home";
 import Toolbar from "@material-ui/core/Toolbar";
-import Menu from "./Checkout/Catalogo";
+import Menu from "./Checkout/Menu";
 
 function App() {
   return (
