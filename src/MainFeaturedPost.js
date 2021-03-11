@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'rgba(0,0,0,.3)',
     },
     mainFeaturedPostContent: {
+        textAlign: "center",
         position: 'relative',
         padding: theme.spacing(3),
         [theme.breakpoints.up('md')]: {
