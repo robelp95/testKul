@@ -95,7 +95,6 @@ const Header = props => {
         setOpen(false);
     };
     const handleMenuClick = (pageUrl) => {
-        console.log(pageUrl);
         history.push(pageUrl);
         handleDrawerClose();
     }

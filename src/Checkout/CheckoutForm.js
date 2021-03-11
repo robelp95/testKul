@@ -44,7 +44,7 @@ export const CheckoutForm = ({initialClient})=>{
                             onSubmit={handleSubmit}
                         >
                             <Checkout steps={steps} activeStep={activeStep} setActiveStep={setActiveStep} errors={errors} {...props}/>
-                            <pre style={{textAlign:"center"}}>{JSON.stringify(values, null, 2)}</pre>
+                            {/*<pre style={{textAlign:"center"}}>{JSON.stringify(values, null, 2)}</pre>*/}
                         </Form>
                     )
             }}
