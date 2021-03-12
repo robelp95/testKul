@@ -2,7 +2,8 @@ import MainFeaturedPost from "../MainFeaturedPost";
 import {CheckoutForm} from "./CheckoutForm";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import VerticalTabs from "../ShoppingCart/VerticalTabs";
+import CartItem from "../ShoppingCart/CartItem";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
     layout:{
@@ -33,8 +34,12 @@ export default function Menu() {
                 image: 'https://source.unsplash.com/random',
                 imgText: 'main image description'
             }} />
+
             <div className={classes.layout}>
-                <VerticalTabs/>
+                <Box>
+                    <CartItem/>
+                </Box>
+
                 <CheckoutForm
                     initialClient={{
                     firstName : '',
