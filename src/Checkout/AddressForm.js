@@ -23,7 +23,7 @@ export default function AddressForm({values, handleChange, errors, isSubmitting}
                         name="firstName"
                         label="Nombre"
                         value={values.firstName}
-                        error={errors.firstName != undefined}
+                        error={errors.firstName !== undefined}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -35,7 +35,7 @@ export default function AddressForm({values, handleChange, errors, isSubmitting}
                         name="lastName"
                         label="Apellido"
                         value={values.lastName}
-                        error={errors.lastName != undefined}
+                        error={errors.lastName !== undefined}
 
                         onChange={handleChange}
                         fullWidth
@@ -47,7 +47,7 @@ export default function AddressForm({values, handleChange, errors, isSubmitting}
                         name="phoneNumber"
                         label="Whatsapp"
                         value={values.phoneNumber}
-                        error={errors.phoneNumber != undefined}
+                        error={errors.phoneNumber !== undefined}
                         onChange={handleChange}
                         placeholder="Número de Whatsapp"
                         fullWidth

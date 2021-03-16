@@ -77,7 +77,7 @@ export default function Checkout(props) {
     const {steps, activeStep, setActiveStep, errors, dirty} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
     useEffect(() => {
-        if (dirty) setFormIsValid(Object.keys(errors).length == 0)
+        if (dirty) setFormIsValid(Object.keys(errors).length === 0)
     }, [errors])
     const handleNext = () => {
         setActiveStep(activeStep + 1);

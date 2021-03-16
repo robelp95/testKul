@@ -34,7 +34,6 @@ export const CheckoutForm = ({initialClient})=>{
 
                     const {
                         errors,
-                        values,
                         handleSubmit,
                     } = props;
 
