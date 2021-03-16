@@ -9,12 +9,15 @@ import {Grid} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Hidden from "@material-ui/core/Hidden";
+import * as _ from 'lodash';
 
 const useStyles = makeStyles({
     root: {
+        width: "100%"
     },
     card: {
-        width: 500,
+        width: "100%",
         display: 'flex',
         flexDirection: 'row',
     },
@@ -24,16 +27,19 @@ const useStyles = makeStyles({
     },
     cardContent: {
         flexGrow: 1,
-        width:50
+        width:70
     },
 });
-export default function CartItem() {
+export default function Product({product, onAddToCart}) {
 
+    const {id, nombre, descripcion, price, quantity} = product;
     const classes = useStyles();
 
+    const handleAddToCart = (categoryId) => onAddToCart(categoryId,id, 1);
+
     return (
-        <div>
-            <Grid item xs={12} sm={6}>
+        <div className={classes.root} style={{margin: "auto", paddingTop:5, paddingBottom:5}}>
+            <Grid  item xs={12} sm={10} style={{margin: "auto"}}>
                 <Card className={classes.card}>
                     <CardMedia
                         className={classes.cardMedia}
@@ -42,23 +48,33 @@ export default function CartItem() {
                     />
                     <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h5" component="h2">
-                            Nombre producto
+                            {nombre} {quantity ? '- `${quantity}`': ''}
                         </Typography>
                         <Typography>
-                            Descripción producto
+                            {_.truncate(descripcion, {length: 30})}
                         </Typography>
                         <Typography>
-                            $ 250
+                            ${price}
                         </Typography>
+                        <Hidden smUp>
+                            <IconButton disabled={true}>
+                                <DeleteIcon disabled={true} />
+                            </IconButton>
+                            <IconButton onClick={handleAddToCart}>
+                                <AddIcon/>
+                            </IconButton>
+                        </Hidden>
                     </CardContent>
-                    <CardActions>
-                        <IconButton>
-                            <DeleteIcon></DeleteIcon>
-                        </IconButton>
-                        <IconButton>
-                            <AddIcon></AddIcon>
-                        </IconButton>
-                    </CardActions>
+                    <Hidden xsDown>
+                        <CardActions>
+                            <IconButton disabled={true}>
+                                <DeleteIcon/>
+                            </IconButton>
+                            <IconButton onClick={handleAddToCart}>
+                                <AddIcon/>
+                            </IconButton>
+                        </CardActions>
+                    </Hidden>
                 </Card>
             </Grid>
         </div>
