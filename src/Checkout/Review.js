@@ -55,7 +55,7 @@ export default function Review({client, order}) {
             </Typography>
             <List disablePadding>
                 {order.products.map(({product, quantity}, index) => (
-                    <ListItem className={classes.listItem} key={product.name}>
+                    <ListItem className={classes.listItem} key={index}>
                         <ListItemText primary={product.name} secondary={product.desc} />
                         <Typography variant="body2">{product.price}</Typography>
                     </ListItem>
