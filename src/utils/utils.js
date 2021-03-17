@@ -17,12 +17,17 @@ function userData(values) {
         NEW_LINE + "*Dirección%202*:" + SPACE + values.address1
         + NEW_LINE + "*Detalle*:" + SPACE + values.comment;
 }
-
-export function generateWhatsappMsg(values) {
+function orderData({orderNumber, products}){
+    return JSON.stringify(products);
+}
+export function generateWhatsappMsg({values, order}) {
+    console.log(values, order);
 
     let message = "https://api.whatsapp.com/send?phone=5491161347712&text=*Kulko.app*%0A%0A*Nuevo%20pedido%20nª%20213123*" + NEW_LINE;
     let data = userData(values);
     message += data;
+    message += NEW_LINE;
+    message += orderData(order);
     return message;
 }
 
