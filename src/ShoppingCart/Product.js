@@ -29,7 +29,7 @@ const useStyles = makeStyles({
         width:70
     },
 });
-export default function Product({product, onAddToCart, onRemoveToCart}) {
+export default function Product({product, onAddToCart, onRemoveToCart, submitting}) {
 
     const {id, name, desc, price, quantity} = product;
     const classes = useStyles();
@@ -57,20 +57,20 @@ export default function Product({product, onAddToCart, onRemoveToCart}) {
                             ${price}
                         </Typography>
                         <Hidden smUp>
-                            <IconButton disabled={!product.added} onClick={handleRemoveFromCart}>
+                            <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
                                 <DeleteIcon />
                             </IconButton>
-                            <IconButton onClick={handleAddToCart}>
+                            <IconButton disabled={submitting} onClick={handleAddToCart}>
                                 <AddIcon/>
                             </IconButton>
                         </Hidden>
                     </CardContent>
                     <Hidden xsDown>
                         <CardActions>
-                            <IconButton disabled={!product.added} onClick={handleRemoveFromCart}>
+                            <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
                                 <DeleteIcon/>
                             </IconButton>
-                            <IconButton onClick={handleAddToCart}>
+                            <IconButton disabled={submitting} onClick={handleAddToCart}>
                                 <AddIcon/>
                             </IconButton>
                         </CardActions>

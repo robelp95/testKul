@@ -153,6 +153,7 @@ export default function Menu() {
 
     const [orderNumber, setOrderNumber] = useState(nanoid());
     const [products, setProducts] = useState([]);
+    const [submitting, setSubmitting] = useState(false);
     const onAddToCart = (product, qty) => {
         product.added = true;
         setProducts(products => [...products, product]);
@@ -185,6 +186,7 @@ export default function Menu() {
                     products ={catalog["products"]}
                     onAddToCart={onAddToCart}
                     onRemoveToCart={onRemoveToCart}
+                    submitting={submitting}
                 />
                 <CheckoutForm
                     initialClient={{
@@ -197,6 +199,7 @@ export default function Menu() {
                     comment: ''
                     }}
                     order={{products, orderNumber, total}}
+                    setSubmitting={setSubmitting}
                 />
             </div>
         </>

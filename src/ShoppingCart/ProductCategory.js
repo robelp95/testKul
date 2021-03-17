@@ -4,7 +4,7 @@ import React from "react";
 import * as _ from 'lodash';
 
 export default function ProductCategory(props){
-    const {products, onAddToCart, onRemoveToCart} = props;
+    const {products, onAddToCart, onRemoveToCart, submitting} = props;
     let cat = _.map(products, p=>{return p.category});
     const categories = _.uniqWith(cat,_.isEqual);
     return (
@@ -26,7 +26,8 @@ export default function ProductCategory(props){
                                             <Product key={index2}
                                                      product={product}
                                                      onAddToCart={onAddToCart}
-                                                     onRemoveToCart={onRemoveToCart}/>
+                                                     onRemoveToCart={onRemoveToCart}
+                                                     submitting={submitting}/>
                                         )
                                     )
                                 }

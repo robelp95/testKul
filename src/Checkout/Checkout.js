@@ -64,7 +64,7 @@ function getStepContent(step, props) {
     const {values, handleChange, errors, initialErrors, order} = props;
     switch (step) {
         case 0:
-            return <AddressForm values={values} handleChange={handleChange} errors={errors} initialErrors={initialErrors} />;
+            return <AddressForm values={values} handleChange={handleChange} errors={errors} initialErrors={initialErrors}/>;
         case 1:
             return <Review client={values} order={order} />;
         default:
@@ -76,6 +76,7 @@ export default function Checkout(props) {
     const classes = useStyles();
     const {steps, activeStep, setActiveStep, errors, order, dirty} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
+
     useEffect(() => {
         if (dirty) setFormIsValid(Object.keys(errors).length === 0)
     }, [errors])

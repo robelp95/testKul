@@ -14,7 +14,7 @@ const formSchema = Yup.object().shape({
         comment: Yup.string(),
 });
 
-export const CheckoutForm = ({initialClient, order})=>{
+export const CheckoutForm = ({initialClient, order, setSubmitting})=>{
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = ['Datos del cliente', 'Resumen de orden'];
 
@@ -25,9 +25,7 @@ export const CheckoutForm = ({initialClient, order})=>{
     const handleNext = () => [
         setActiveStep(Math.min(activeStep + 1, steps.length))
     ];
-    const onSubmit = (values, formikBag) => {
-        const { setSubmitting } = formikBag;
-
+    const onSubmit = (values) => {
         if (!isLastStep()) {
             setSubmitting(false);
             handleNext();
@@ -35,13 +33,16 @@ export const CheckoutForm = ({initialClient, order})=>{
         }
 
         setTimeout(() => {
-            handleNext();
-            let msg = generateWhatsappMsg({values, order});
-            window.open(
-            msg,
-            "_blank");
+            setSubmitting(true);
+            if (order.products.length > 0) {
+                handleNext();
+                let msg = generateWhatsappMsg({values, order});
+                window.open(
+                    msg,
+                    "_blank");
+            }
             setSubmitting(false);
-        }, 10);
+        }, 1000);
     };
 
     return (
@@ -69,6 +70,7 @@ export const CheckoutForm = ({initialClient, order})=>{
                                 setActiveStep={setActiveStep}
                                 errors={errors}
                                 order={order}
+                                isSubmitting={isSubmitting}
                                 {...props}
                             />
                         </Form>
