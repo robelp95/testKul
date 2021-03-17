@@ -1,37 +1,24 @@
-const NEW_LINE = "%0A";
-const SPACE = "%20";
-const PLUS_SYMBOL = "%2b";
+const NEW_LINE = "\n";
 
-function userData(values) {
-    //Contacto  5645345678
-    //
-    // Tipo de Envío Pickup/delivery
-    //
-    // Dirección Calle falsa, 123
-    //
-    // Detalle comentario extra sobre el pedido bla bla bla, bla bla
-    return "*Cliente*:" + SPACE + values.lastName + "," + SPACE
-        + values.firstName + NEW_LINE + "*Contacto*:" + SPACE
-        + PLUS_SYMBOL +"56" + values.phoneNumber + NEW_LINE
-        + "*Dirección%201*:" + SPACE + values.address1 +
-        NEW_LINE + "*Dirección%202*:" + SPACE + values.address1
-        + NEW_LINE + "*Detalle*:" + SPACE + values.comment;
-}
-function orderData({orderNumber, products}){
-    return JSON.stringify(products);
-}
 export function generateWhatsappMsg({values, order}) {
-    console.log(values, order);
 
-    let message = "https://api.whatsapp.com/send?phone=5491161347712&text=*Kulko.app*%0A%0A*Nuevo%20pedido%20nª%20213123*" + NEW_LINE;
-    let data = userData(values);
-    message += data;
-    message += NEW_LINE;
-    message += orderData(order);
+    let newMessage = "🛒 *Nuevo pedido via Kulko.App* 🛒" + NEW_LINE + NEW_LINE;
+    newMessage += "*Pedido* #" + order.orderNumber + NEW_LINE + NEW_LINE;
+    for (let [key, value] of Object.entries(order.products)) {
+        newMessage+= ('*1x ' + value.name + '* - $' + value.price);
+        newMessage+=NEW_LINE;
+    }
+    newMessage+= "*Total:* $" + order.total + NEW_LINE + NEW_LINE;
+    newMessage+= "*Tipo de entrega:* " + values.deliveryType + NEW_LINE + NEW_LINE;
+    newMessage+= "*Datos del cliente* " + NEW_LINE + values.firstName + ", " + values.lastName + NEW_LINE;
+    newMessage+= "*Contacto:* " + "+56 " + values.phoneNumber;
+    if(values.deliveryType === "delivery"){
+        newMessage+= "*Informacion de envio:* " + NEW_LINE + values.address1 + NEW_LINE + values.address2 + NEW_LINE;
+    }
+    if (values.comment !== ""){
+        newMessage+= "*Comentario:* " + values.comment + NEW_LINE;
+    }
+    let wspmsg = encodeURIComponent(newMessage);
+    let message = "https://api.whatsapp.com/send?phone=5491161347712&text=" + wspmsg;
     return message;
-}
-
-
-function products() {
-
 }

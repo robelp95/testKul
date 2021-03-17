@@ -36,12 +36,12 @@ export const CheckoutForm = ({initialClient, order})=>{
 
         setTimeout(() => {
             handleNext();
-            // let msg = generateWhatsappMsg({values, order});
-            // window.open(
-            // msg,
-            // "_blank");
+            let msg = generateWhatsappMsg({values, order});
+            window.open(
+            msg,
+            "_blank");
             setSubmitting(false);
-        }, 1000);
+        }, 10);
     };
 
     return (

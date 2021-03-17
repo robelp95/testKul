@@ -165,6 +165,8 @@ export default function Menu() {
         setProducts(copy);
     }
 
+    const total = _.sum(products.map((product) => parseInt(product.price))) || 0;
+
     const [catalog, setCatalog] = useState(initialCatalog);
     const classes = useStyles();
 
@@ -194,7 +196,7 @@ export default function Menu() {
                     address2: '',
                     comment: ''
                     }}
-                    order={{products, orderNumber}}
+                    order={{products, orderNumber, total}}
                 />
             </div>
         </>

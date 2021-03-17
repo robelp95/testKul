@@ -46,7 +46,7 @@ export default function Review({client, order}) {
                 <ListItem className={classes.listItem}>
                     <ListItemText primary="Total" />
                     <Typography variant="subtitle1" className={classes.total}>
-                        ${total}
+                        ${order.total}
                     </Typography>
                 </ListItem>
             </List>
