@@ -29,12 +29,13 @@ const useStyles = makeStyles({
         width:70
     },
 });
-export default function Product({product, onAddToCart}) {
+export default function Product({product, onAddToCart, onRemoveToCart}) {
 
     const {id, name, desc, price, quantity} = product;
     const classes = useStyles();
 
     const handleAddToCart = () => onAddToCart(product, 1);
+    const handleRemoveFromCart = () => onRemoveToCart(product);
 
     return (
         <div className={classes.root} style={{margin: "auto", paddingTop:5, paddingBottom:5}}>
@@ -56,8 +57,8 @@ export default function Product({product, onAddToCart}) {
                             ${price}
                         </Typography>
                         <Hidden smUp>
-                            <IconButton disabled={true}>
-                                <DeleteIcon disabled={true} />
+                            <IconButton disabled={!product.added} onClick={handleRemoveFromCart}>
+                                <DeleteIcon />
                             </IconButton>
                             <IconButton onClick={handleAddToCart}>
                                 <AddIcon/>
@@ -66,7 +67,7 @@ export default function Product({product, onAddToCart}) {
                     </CardContent>
                     <Hidden xsDown>
                         <CardActions>
-                            <IconButton disabled={true}>
+                            <IconButton disabled={!product.added} onClick={handleRemoveFromCart}>
                                 <DeleteIcon/>
                             </IconButton>
                             <IconButton onClick={handleAddToCart}>

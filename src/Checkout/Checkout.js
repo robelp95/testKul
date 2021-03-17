@@ -74,7 +74,7 @@ function getStepContent(step, props) {
 
 export default function Checkout(props) {
     const classes = useStyles();
-    const {steps, activeStep, setActiveStep, errors,order, dirty} = props;
+    const {steps, activeStep, setActiveStep, errors, order, dirty} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
     useEffect(() => {
         if (dirty) setFormIsValid(Object.keys(errors).length === 0)

@@ -4,7 +4,7 @@ import React from "react";
 import * as _ from 'lodash';
 
 export default function ProductCategory(props){
-    const {products, onAddToCart} = props;
+    const {products, onAddToCart, onRemoveToCart} = props;
     let cat = _.map(products, p=>{return p.category});
     const categories = _.uniqWith(cat,_.isEqual);
     return (
@@ -23,7 +23,10 @@ export default function ProductCategory(props){
                                 {
                                     _.filter(products, (p) => p["category"] == category).map(
                                         (product, index2) =>(
-                                            <Product key={index2} product={product} onAddToCart={onAddToCart}/>
+                                            <Product key={index2}
+                                                     product={product}
+                                                     onAddToCart={onAddToCart}
+                                                     onRemoveToCart={onRemoveToCart}/>
                                         )
                                     )
                                 }

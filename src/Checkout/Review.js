@@ -7,22 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import * as _ from 'lodash';
 
-
-const products = [
-    { name: 'Producto 1', desc: 'Artículo 1', price: '$9.99' },
-    { name: 'Producto 2', desc: 'Artículo 2', price: '$3.45' },
-    { name: 'Producto 3', desc: 'Artículo 3', price: '$6.51' },
-    { name: 'Producto 4', desc: 'Artículo 4', price: '$14.11' },
-    { name: 'Envío', desc: '', price: 'Gratis' },
-];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-    { name: 'Tipo de envio', detail: 'Visa' },
-    { name: 'Nombre', detail: 'Mr John Smith' },
-    { name: 'Numero de contacto', detail: 'xxxx-xxxx-xxxx-1234' },
-    { name: 'Direccion', detail: '04/2024' },
-];
-
 const useStyles = makeStyles((theme) => ({
     listItem: {
         padding: theme.spacing(1, 0),
@@ -44,8 +28,7 @@ export default function Review({client, order}) {
         { name: 'Comentario', detail: client.comment },
     ];
 
-
-    const total = _.sum(order.products.map(({product, quantity}) => parseInt(product.price)));
+    const total = _.sum(order.products.map((product) => parseInt(product.price))) || 0;
     const classes = useStyles();
 
     return (
@@ -54,7 +37,7 @@ export default function Review({client, order}) {
                 Productos
             </Typography>
             <List disablePadding>
-                {order.products.map(({product, quantity}, index) => (
+                {order.products.map((product, index) => (
                     <ListItem className={classes.listItem} key={index}>
                         <ListItemText primary={product.name} secondary={product.desc} />
                         <Typography variant="body2">{product.price}</Typography>
