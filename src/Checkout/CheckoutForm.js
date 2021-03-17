@@ -2,6 +2,7 @@ import React from "react";
 import {Form, Formik} from "formik";
 import Checkout from "./Checkout";
 import * as Yup from 'yup';
+import {generateWhatsappMsg} from "../utils/utils";
 
 const formSchema = Yup.object().shape({
         firstName: Yup.string().required(undefined),
@@ -17,17 +18,37 @@ export const CheckoutForm = ({initialClient, order})=>{
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = ['Datos del cliente', 'Resumen de orden'];
 
+    const isLastStep = () => {
+        return activeStep === steps.length - 1;
+    };
+
+    const handleNext = () => [
+        setActiveStep(Math.min(activeStep + 1, steps.length))
+    ];
+    const onSubmit = (values, formikBag) => {
+        const { setSubmitting } = formikBag;
+
+        if (!isLastStep()) {
+            setSubmitting(false);
+            handleNext();
+            return;
+        }
+
+        setTimeout(() => {
+            handleNext();
+            // let msg = generateWhatsappMsg({values, order});
+            // window.open(
+            // msg,
+            // "_blank");
+            setSubmitting(false);
+        }, 1000);
+    };
+
     return (
         <Formik
             initialValues={initialClient}
             validationSchema={formSchema}
-            onSubmit={async (values, {setSubmitting, submitForm}) => {
-                // await new Promise(resolve => setTimeout(resolve, 500));
-                // let msg = generateWhatsappMsg({values, order});
-                // window.open(
-                // msg,
-                // "_blank");
-            }}
+            onSubmit={onSubmit}
         >
             {
                 props => {
@@ -35,12 +56,12 @@ export const CheckoutForm = ({initialClient, order})=>{
                     const {
                         errors,
                         handleSubmit,
+                        isSubmitting,
                     } = props;
 
                     return (
                         <Form
                             method="POST"
-                            onSubmit={handleSubmit}
                         >
                             <Checkout
                                 steps={steps}
