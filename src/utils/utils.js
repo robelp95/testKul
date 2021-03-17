@@ -8,7 +8,7 @@ export function generateWhatsappMsg({values, order}) {
         newMessage+= ('*1x ' + value.name + '* - $' + value.price);
         newMessage+=NEW_LINE;
     }
-    newMessage+= "*Total:* $" + order.total + NEW_LINE + NEW_LINE;
+    newMessage+= NEW_LINE + "*Total:* $" + order.total + NEW_LINE + NEW_LINE;
     newMessage+= "*Tipo de entrega:* " + values.deliveryType + NEW_LINE + NEW_LINE;
     newMessage+= "*Datos del cliente* " + NEW_LINE + values.firstName + ", " + values.lastName + NEW_LINE;
     newMessage+= "*Contacto:* " + "+56 " + values.phoneNumber;
