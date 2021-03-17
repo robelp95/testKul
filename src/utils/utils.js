@@ -23,8 +23,6 @@ export function generateWhatsappMsg(values) {
     let message = "https://api.whatsapp.com/send?phone=5491161347712&text=*Kulko.app*%0A%0A*Nuevo%20pedido%20nª%20213123*" + NEW_LINE;
     let data = userData(values);
     message += data;
-    console.log(data);
-    console.log(message);
     return message;
 }
 

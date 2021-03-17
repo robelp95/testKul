@@ -61,12 +61,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getStepContent(step, props) {
-    const {values, handleChange, errors, initialErrors} = props;
+    const {values, handleChange, errors, initialErrors, order} = props;
     switch (step) {
         case 0:
             return <AddressForm values={values} handleChange={handleChange} errors={errors} initialErrors={initialErrors} />;
         case 1:
-            return <Review />;
+            return <Review client={values} order={order} />;
         default:
             throw new Error('Unknown step');
     }
@@ -74,7 +74,7 @@ function getStepContent(step, props) {
 
 export default function Checkout(props) {
     const classes = useStyles();
-    const {steps, activeStep, setActiveStep, errors, dirty} = props;
+    const {steps, activeStep, setActiveStep, errors,order, dirty} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
     useEffect(() => {
         if (dirty) setFormIsValid(Object.keys(errors).length === 0)
@@ -110,7 +110,7 @@ export default function Checkout(props) {
                                     Gracias por realizar tu pedido.
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                    Tu número de orden es #2001539. Te enviamos un mail de confirmación,
+                                    Tu número de orden es #{order.orderNumber}. Te enviamos un mail de confirmación,
                                     haremos el seguimiento por Whatsapp.
                                 </Typography>
                             </React.Fragment>
@@ -127,12 +127,13 @@ export default function Checkout(props) {
                                             Volver
                                         </Button>
                                     )}
+
                                     <Button
                                         variant="contained"
                                         color="primary"
                                         onClick={handleNext}
                                         className={classes.button}
-                                        type={activeStep === steps.length - 1 ? "submit" : "button"}
+                                        type="submit"
                                         disabled={!formIsValid}
                                     >
                                         {

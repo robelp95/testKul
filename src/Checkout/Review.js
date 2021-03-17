@@ -5,6 +5,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import * as _ from 'lodash';
+
 
 const products = [
     { name: 'Producto 1', desc: 'Artículo 1', price: '$9.99' },
@@ -15,10 +17,10 @@ const products = [
 ];
 const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
-    { name: 'Tipo tarjeta', detail: 'Visa' },
+    { name: 'Tipo de envio', detail: 'Visa' },
     { name: 'Nombre', detail: 'Mr John Smith' },
-    { name: 'Numero tarjeta', detail: 'xxxx-xxxx-xxxx-1234' },
-    { name: 'Fecha exp', detail: '04/2024' },
+    { name: 'Numero de contacto', detail: 'xxxx-xxxx-xxxx-1234' },
+    { name: 'Direccion', detail: '04/2024' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +35,17 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Review() {
+export default function Review({client, order}) {
+    const clientDetail = [
+        { name: 'Tipo de envio', detail: client.deliveryType },
+        { name: 'Nombre', detail: client.firstName + ' ' + client.lastName },
+        { name: 'Numero de contacto', detail: client.phoneNumber },
+        { name: 'Direccion', detail: client.address1 + ' ' + client.address2 },
+        { name: 'Comentario', detail: client.comment },
+    ];
+
+
+    const total = _.sum(order.products.map(({product, quantity}) => parseInt(product.price)));
     const classes = useStyles();
 
     return (
@@ -42,7 +54,7 @@ export default function Review() {
                 Productos
             </Typography>
             <List disablePadding>
-                {products.map((product) => (
+                {order.products.map(({product, quantity}, index) => (
                     <ListItem className={classes.listItem} key={product.name}>
                         <ListItemText primary={product.name} secondary={product.desc} />
                         <Typography variant="body2">{product.price}</Typography>
@@ -51,24 +63,25 @@ export default function Review() {
                 <ListItem className={classes.listItem}>
                     <ListItemText primary="Total" />
                     <Typography variant="subtitle1" className={classes.total}>
-                        $34.06
+                        ${total}
                     </Typography>
                 </ListItem>
             </List>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom className={classes.title}>
-                        Envío
+                        Nombre Negocio
                     </Typography>
-                    <Typography gutterBottom>John Smith</Typography>
-                    <Typography gutterBottom>{addresses.join(', ')}</Typography>
+                    <Typography gutterBottom>Horario atencion</Typography>
+                    <Typography gutterBottom></Typography>
+                    <Typography gutterBottom>+56 {client.phoneNumber}</Typography>
                 </Grid>
                 <Grid item container direction="column" xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom className={classes.title}>
-                        Detalle de pago
+                        Detalle de cliente
                     </Typography>
                     <Grid container>
-                        {payments.map((payment) => (
+                        {clientDetail.map((payment) => (
                             <React.Fragment key={payment.name}>
                                 <Grid item xs={6}>
                                     <Typography gutterBottom>{payment.name}</Typography>

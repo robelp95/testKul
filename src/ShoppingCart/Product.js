@@ -23,7 +23,6 @@ const useStyles = makeStyles({
     },
     cardMedia: {
         width: 151,
-        // paddingTop: '56.25%', // 16:9
     },
     cardContent: {
         flexGrow: 1,
@@ -32,10 +31,10 @@ const useStyles = makeStyles({
 });
 export default function Product({product, onAddToCart}) {
 
-    const {id, nombre, descripcion, price, quantity} = product;
+    const {id, name, desc, price, quantity} = product;
     const classes = useStyles();
 
-    const handleAddToCart = (categoryId) => onAddToCart(categoryId,id, 1);
+    const handleAddToCart = () => onAddToCart(product, 1);
 
     return (
         <div className={classes.root} style={{margin: "auto", paddingTop:5, paddingBottom:5}}>
@@ -48,10 +47,10 @@ export default function Product({product, onAddToCart}) {
                     />
                     <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h5" component="h2">
-                            {nombre} {quantity ? '- `${quantity}`': ''}
+                            {name} {quantity ? '- `${quantity}`': ''}
                         </Typography>
                         <Typography>
-                            {_.truncate(descripcion, {length: 30})}
+                            {_.truncate(desc, {length: 30})}
                         </Typography>
                         <Typography>
                             ${price}

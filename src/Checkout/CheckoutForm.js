@@ -13,16 +13,22 @@ const formSchema = Yup.object().shape({
         comment: Yup.string(),
 });
 
-export const CheckoutForm = ({initialClient})=>{
+export const CheckoutForm = ({initialClient, order})=>{
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = ['Datos del cliente', 'Resumen de orden'];
+    const isLastStep = () => {
+        return activeStep === steps.length - 1;
+    };
     return (
         <Formik
             initialValues={initialClient}
             validationSchema={formSchema}
-            onSubmit={async values => {
-                await new Promise(resolve => setTimeout(resolve, 500));
-                // console.log(values);
+            onSubmit={async (values, {setSubmitting}) => {
+                if (!isLastStep()){
+                    setSubmitting(false);
+                    return;
+                }
+                // await new Promise(resolve => setTimeout(resolve, 500));
                 // let msg = generateWhatsappMsg(values);
                 // window.open(
                 // msg,
@@ -42,8 +48,7 @@ export const CheckoutForm = ({initialClient})=>{
                             method="POST"
                             onSubmit={handleSubmit}
                         >
-                            <Checkout steps={steps} activeStep={activeStep} setActiveStep={setActiveStep} errors={errors} {...props}/>
-                            {/*<pre style={{textAlign:"center"}}>{JSON.stringify(values, null, 2)}</pre>*/}
+                            <Checkout steps={steps} activeStep={activeStep} setActiveStep={setActiveStep} errors={errors} order={order} {...props}/>
                         </Form>
                     )
             }}
