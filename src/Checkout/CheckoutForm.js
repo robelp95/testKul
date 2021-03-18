@@ -7,8 +7,8 @@ import {generateWhatsappMsg} from "../utils/utils";
 const formSchema = Yup.object().shape({
         firstName: Yup.string().required(undefined),
         lastName: Yup.string().required(undefined),
-        phoneNumber: Yup.number().required(),//.max(9, 'Telefono debe contener 9 números'),
-        deliveryType: Yup.string().matches(/(pickup|delivery)/, { excludeEmptyString: true }).required(),//Yup.boolean().required('Seleccione tipo de envío'),
+        phoneNumber: Yup.string().matches(/^[0-9]{8,8}$/).required(undefined),
+        deliveryType: Yup.string().matches(/(pickup|delivery)/, { excludeEmptyString: true }).required(),
         address1: Yup.string(),
         address2: Yup.string(),
         comment: Yup.string(),
@@ -56,10 +56,8 @@ export const CheckoutForm = ({initialClient, order, setSubmitting})=>{
 
                     const {
                         errors,
-                        handleSubmit,
                         isSubmitting,
                     } = props;
-
                     return (
                         <Form
                             method="POST"

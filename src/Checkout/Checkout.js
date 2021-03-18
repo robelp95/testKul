@@ -107,8 +107,7 @@ export default function Checkout(props) {
                                     Gracias por realizar tu pedido.
                                 </Typography>
                                 <Typography variant="subtitle1">
-                                    Tu número de orden es #{order.orderNumber}. Te enviamos un mail de confirmación,
-                                    haremos el seguimiento por Whatsapp.
+                                    Tu número de orden es #{order.orderNumber}. Haremos el seguimiento por Whatsapp.
                                 </Typography>
                             </React.Fragment>
                         ) : (

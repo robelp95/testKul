@@ -48,10 +48,10 @@ export default function AddressForm({values, handleChange, errors}) {
                         value={values.phoneNumber}
                         error={errors.phoneNumber !== undefined}
                         onChange={handleChange}
-                        placeholder="Número de Whatsapp"
+                        placeholder="Número de Whatsapp sin prefijo"
                         fullWidth
                         InputProps={{
-                            startAdornment: <InputAdornment position="start">+56</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">+569</InputAdornment>,
                         }}
                     />
                 </Grid>
