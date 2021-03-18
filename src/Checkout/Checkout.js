@@ -64,7 +64,7 @@ function getStepContent(step, props) {
     const {values, handleChange, errors, initialErrors, order} = props;
     switch (step) {
         case 0:
-            return <AddressForm values={values} handleChange={handleChange} errors={errors} initialErrors={initialErrors} />;
+            return <AddressForm values={values} handleChange={handleChange} errors={errors} initialErrors={initialErrors}/>;
         case 1:
             return <Review client={values} order={order} />;
         default:
@@ -76,17 +76,14 @@ export default function Checkout(props) {
     const classes = useStyles();
     const {steps, activeStep, setActiveStep, errors, order, dirty} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
+
     useEffect(() => {
         if (dirty) setFormIsValid(Object.keys(errors).length === 0)
     }, [errors])
-    const handleNext = () => {
-        setActiveStep(activeStep + 1);
-    };
 
     const handleBack = () => {
-        setActiveStep(activeStep - 1);
+        setActiveStep(Math.max(activeStep - 1, 0));
     };
-
     return (
         <React.Fragment>
             <CssBaseline />
@@ -131,7 +128,6 @@ export default function Checkout(props) {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={handleNext}
                                         className={classes.button}
                                         type="submit"
                                         disabled={!formIsValid}

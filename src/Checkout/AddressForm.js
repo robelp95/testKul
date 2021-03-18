@@ -9,7 +9,7 @@ import Radio from "@material-ui/core/Radio";
 import FormLabel from "@material-ui/core/FormLabel";
 import {RadioGroup} from 'formik-material-ui';
 
-export default function AddressForm({values, handleChange, errors, isSubmitting}) {
+export default function AddressForm({values, handleChange, errors}) {
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -36,7 +36,6 @@ export default function AddressForm({values, handleChange, errors, isSubmitting}
                         label="Apellido"
                         value={values.lastName}
                         error={errors.lastName !== undefined}
-
                         onChange={handleChange}
                         fullWidth
                     />
@@ -62,13 +61,13 @@ export default function AddressForm({values, handleChange, errors, isSubmitting}
                         <FormControlLabel
                             value="pickup"
                             name="deliveryType"
-                            control={<Radio disabled={isSubmitting} />}
+                            control={<Radio/>}
                             label="Pick-up"
                         />
                         <FormControlLabel
                             value="delivery"
                             name="deliveryType"
-                            control={<Radio disabled={isSubmitting}/>}
+                            control={<Radio/>}
                             label="Delivery"
                         />
                     </Field>
