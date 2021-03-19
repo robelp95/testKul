@@ -5,6 +5,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import ProductCategory from "../ShoppingCart/ProductCategory";
 import {nanoid} from 'nanoid';
 import * as _ from 'lodash';
+import PartialCart from "../ShoppingCart/PartialCart";
+import Slide from "@material-ui/core/Slide";
+import Alert from '@material-ui/lab/Alert';
+import Notification from "../ShoppingCart/Notification";
+
 
 const useStyles = makeStyles((theme) => ({
     layout:{
@@ -17,7 +22,17 @@ const useStyles = makeStyles((theme) => ({
             marginRight: 'auto',
         },
         margin: 10
-    }
+    },
+    paper: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(2),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+            marginTop: theme.spacing(6),
+            marginBottom: theme.spacing(6),
+            padding: theme.spacing(3),
+        },
+    },
 }));
 
 const initialCatalog =
@@ -154,9 +169,15 @@ export default function Menu() {
     const [orderNumber, setOrderNumber] = useState(nanoid());
     const [products, setProducts] = useState([]);
     const [submitting, setSubmitting] = useState(false);
+
+    const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
+
     const onAddToCart = (product, qty) => {
         product.added = true;
+
         setProducts(products => [...products, product]);
+
+        setNotify({isOpen:true, message: 'Item agregado al carrito', type:'success'});
     }
     const onRemoveToCart = (product, qty) => {
         product.added = false;
@@ -164,6 +185,7 @@ export default function Menu() {
             return e.id !== product.id
         });
         setProducts(copy);
+        setNotify({isOpen:true, message: 'Item eliminado del carrito', type:'info'});
     }
 
     const total = _.sum(products.map((product) => parseInt(product.price))) || 0;
@@ -182,12 +204,16 @@ export default function Menu() {
             }} />
 
             <div className={classes.layout}>
+                <Slide direction="up">
+                    <Alert severity="info">This is an info alert — check it out!</Alert>
+                </Slide>
                 <ProductCategory
                     products ={catalog["products"]}
                     onAddToCart={onAddToCart}
                     onRemoveToCart={onRemoveToCart}
                     submitting={submitting}
                 />
+               <PartialCart products={products}/>
                 <CheckoutForm
                     initialClient={{
                     firstName : '',
@@ -201,6 +227,7 @@ export default function Menu() {
                     order={{products, orderNumber, total}}
                     setSubmitting={setSubmitting}
                 />
+                <Notification notify={notify} setNotify={setNotify}/>
             </div>
         </>
     );

@@ -1,11 +1,8 @@
 import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
-import * as _ from 'lodash';
+import CartItemList from "../ShoppingCart/CartItemList";
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
@@ -28,28 +25,15 @@ export default function Review({client, order}) {
         { name: 'Comentario', detail: client.comment },
     ];
 
-    const total = _.sum(order.products.map((product) => parseInt(product.price))) || 0;
     const classes = useStyles();
 
     return (
         <React.Fragment>
-            <Typography variant="h6" gutterBottom>
-                Productos
-            </Typography>
-            <List disablePadding>
-                {order.products.map((product, index) => (
-                    <ListItem className={classes.listItem} key={index}>
-                        <ListItemText primary={product.name} secondary={product.desc} />
-                        <Typography variant="body2">{product.price}</Typography>
-                    </ListItem>
-                ))}
-                <ListItem className={classes.listItem}>
-                    <ListItemText primary="Total" />
-                    <Typography variant="subtitle1" className={classes.total}>
-                        ${order.total}
-                    </Typography>
-                </ListItem>
-            </List>
+
+            <CartItemList
+                products={order.products}
+                total={order.total}
+            />
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom className={classes.title}>
