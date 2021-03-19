@@ -5,6 +5,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import ProductCategory from "../ShoppingCart/ProductCategory";
 import {nanoid} from 'nanoid';
 import * as _ from 'lodash';
+import PartialCart from "../ShoppingCart/PartialCart";
 
 const useStyles = makeStyles((theme) => ({
     layout:{
@@ -17,7 +18,17 @@ const useStyles = makeStyles((theme) => ({
             marginRight: 'auto',
         },
         margin: 10
-    }
+    },
+    paper: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(2),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+            marginTop: theme.spacing(6),
+            marginBottom: theme.spacing(6),
+            padding: theme.spacing(3),
+        },
+    },
 }));
 
 const initialCatalog =
@@ -188,6 +199,7 @@ export default function Menu() {
                     onRemoveToCart={onRemoveToCart}
                     submitting={submitting}
                 />
+               <PartialCart products={products}/>
                 <CheckoutForm
                     initialClient={{
                     firstName : '',
