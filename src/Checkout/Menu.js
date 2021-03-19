@@ -2,13 +2,11 @@ import MainFeaturedPost from "../MainFeaturedPost";
 import {CheckoutForm} from "./CheckoutForm";
 import React, {useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import ProductCategory from "../ShoppingCart/ProductCategory";
 import {nanoid} from 'nanoid';
 import * as _ from 'lodash';
 import PartialCart from "../ShoppingCart/PartialCart";
-import Slide from "@material-ui/core/Slide";
-import Alert from '@material-ui/lab/Alert';
 import Notification from "../ShoppingCart/Notification";
+import ScrollableTabsButtonAuto from "../ShoppingCart/ScrollableTabsButtonAuto";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -204,10 +202,7 @@ export default function Menu() {
             }} />
 
             <div className={classes.layout}>
-                <Slide direction="up">
-                    <Alert severity="info">This is an info alert — check it out!</Alert>
-                </Slide>
-                <ProductCategory
+                <ScrollableTabsButtonAuto
                     products ={catalog["products"]}
                     onAddToCart={onAddToCart}
                     onRemoveToCart={onRemoveToCart}
