@@ -7,6 +7,9 @@ import * as _ from 'lodash';
 import PartialCart from "../ShoppingCart/PartialCart";
 import Notification from "../ShoppingCart/Notification";
 import ScrollableTabsButtonAuto from "../ShoppingCart/ScrollableTabsButtonAuto";
+import ScrollToCheckout from "../ScrollToCheckout";
+import Fab from "@material-ui/core/Fab";
+import {CreditCard} from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -159,6 +162,39 @@ const initialCatalog =
                 "category": "Remeras",
                 "added": false
             }
+            ,
+            {
+                "id": 15,
+                "name": "Práctico Acero Pollo",
+                "desc": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+                "price": "147.00",
+                "category": "Materiales",
+                "added": false
+            },
+            {
+                "id": 16,
+                "name": "Guapa Granito Sopa",
+                "desc": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                "price": "869.00",
+                "category": "Abrigo",
+                "added": false
+            },
+            {
+                "id": 17,
+                "name": "Guapa Granito Sopa",
+                "desc": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                "price": "869.00",
+                "category": "Comida",
+                "added": false
+            },
+            {
+                "id": 18,
+                "name": "Guapa Granito Sopa",
+                "desc": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+                "price": "869.00",
+                "category": "Bebidas",
+                "added": false
+            }
         ],
 
     };
@@ -193,13 +229,14 @@ export default function Menu() {
 
     return (
         <>
-            <MainFeaturedPost post={{
+            <MainFeaturedPost
+                post={{
                 title: 'Catálogo de mi emprendimiento',
                 description:
                     "Descripción del catálogo de productos",
                 image: 'https://source.unsplash.com/random',
-                imgText: 'main image description'
-            }} />
+                imgText: 'main image description' }}
+            />
 
             <div className={classes.layout}>
                 <ScrollableTabsButtonAuto
@@ -223,6 +260,11 @@ export default function Menu() {
                     setSubmitting={setSubmitting}
                 />
                 <Notification notify={notify} setNotify={setNotify}/>
+                <ScrollToCheckout>
+                    <Fab color="primary" size="medium" aria-label="scroll back to top">
+                        <CreditCard />
+                    </Fab>
+                </ScrollToCheckout>
             </div>
         </>
     );

@@ -12,19 +12,14 @@ import ProductCategory from "./ProductCategory";
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
-    },
-    root2: {
-        flexGrow: 1,
-        width: '100%',
-    },
+    }
 }));
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    console.log(props);
 
     return (
-        <div style={{backgroundColor: "none"}}
+        <div
             role="tabpanel"
             hidden={value !== index}
             id={`scrollable-auto-tabpanel-${index}`}
@@ -66,16 +61,16 @@ export default function ScrollableTabsButtonAuto(props) {
         setValue(newValue);
     };
     return (
-        <div className={classes.root2}>
+        <div className={classes.root}>
             <AppBar position="static" color="default">
                 <Tabs
                     value={value}
                     onChange={handleChange}
                     indicatorColor="primary"
                     textColor="primary"
-                    variant="scrollable"
-                    scrollButtons="auto"
-                    aria-label="scrollable auto tabs example"
+                    aria-label="scrollable caterogy tabs"
+                    variant={"scrollable"}
+                    scrollButtons={"desktop"}
                 >
                     {categories.map( (cat, index) => (
                         <Tab key={index} label={cat} {...a11yProps(index)} />
