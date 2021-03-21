@@ -10,7 +10,7 @@ function App() {
   return (
       <div>
           <Header />
-          <Toolbar /> {/* Fix altura del contenido */}
+          <Toolbar/>
           <div>
               <Switch>
                   <Route exact from="/login" render={props => <Home page="Login" {...props}/>}/>
