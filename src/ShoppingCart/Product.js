@@ -47,7 +47,7 @@ export default function Product({product, onAddToCart, onRemoveToCart, submittin
                         title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography gutterBottom variant="h6" component="h6">
                             {name} {quantity ? '- `${quantity}`': ''}
                         </Typography>
                         <Typography>
