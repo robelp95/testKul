@@ -28,6 +28,9 @@ const useStyles = makeStyles({
         flexGrow: 1,
         width:70
     },
+    subtitle:{
+        fontWeight: "lighter"
+    }
 });
 export default function Product({product, onAddToCart, onRemoveToCart, submitting}) {
 
@@ -47,10 +50,10 @@ export default function Product({product, onAddToCart, onRemoveToCart, submittin
                         title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h6" component="h6">
+                        <Typography gutterBottom variant="h7" component="h7">
                             {name} {quantity ? '- `${quantity}`': ''}
                         </Typography>
-                        <Typography>
+                        <Typography className={classes.subtitle}>
                             {_.truncate(desc, {length: 30})}
                         </Typography>
                         <Typography>
