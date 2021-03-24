@@ -8,30 +8,18 @@ import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import UploadButton from "../utils/UploadButton";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        width: "100%"
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-}));
+import FormSelect from "../utils/FormSelect";
 
 export default function ShoppingCartForm({values, handleChange, errors}){
 
-    const classes = useStyles();
 
     return (
         <>
-            <Typography variant="h6" gutterBottom>
-                Datos del Negocio
-            </Typography>
+            <Grid item xs={12} style={{marginTop:"5%"}}>
+                <Typography component="h1" variant="h4" align="center">
+                    Ajustes del negocio
+                </Typography>
+            </Grid>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <TextField
@@ -113,11 +101,6 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                     <UploadButton/>
                 </Grid>
             </Grid>
-            <div>
-                <Typography variant="h6" gutterBottom>
-                    Datos del Cliente
-                </Typography>
-            </div>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
                     <TextField
@@ -127,18 +110,6 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                         label="Tu nombre"
                         value={values.name}
                         error={errors.name !== undefined}
-                        onChange={handleChange}
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        id="description"
-                        name="description"
-                        label="Descripcion"
-                        value={values.description}
-                        error={errors.description !== undefined}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -160,7 +131,7 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                         required
                         id="phoneNumber"
                         name="phoneNumber"
-                        label="Recibir ordenes en este nímero de Whatsapp"
+                        label="Recibir ordenes en este número"
                         value={values.address}
                         error={errors.address !== undefined}
                         onChange={handleChange}
@@ -169,56 +140,64 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <FormControl required className={classes.formControl}>
-                        <InputLabel id="demo-simple-select-required-label">Moneda</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-required-label"
-                            id="demo-simple-select-required"
-                            value={values.coin}
-                            onChange={handleChange}
-                            error={errors.coin !== undefined}
-                            className={classes.selectEmpty}
-                        >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value="$">Chilean Peso($)</MenuItem>
-                            <MenuItem value="R$">Brazilian Real(R$)</MenuItem>
-                            <MenuItem value="$">Argentinian Peso($)</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <FormSelect
+                        label="Moneda"
+                        items={[
+                            {value:"0", desc: "Peso Chileno ($)"},
+                            {value:"1", desc: "Peso Argentino ($)"},
+                            {value:"2", desc: "Real Brasileño (R$)"},
+                        ]}
+                        name="coin"
+                        handleChange={handleChange}
+                        selectValue={values.coin}
+                        error={errors.coin}
+                    />
 
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        id="category"
-                        name="category"
+                    <FormSelect
                         label="Categoria"
-                        value={values.category}
-                        error={errors.category !== undefined}
-                        onChange={handleChange}
-                        fullWidth
+                        items={[
+                            {value:"0", desc: "Apparel"},
+                            {value:"1", desc: "Artisanal / handcrafted goods"},
+                            {value:"2", desc: "Baby care products"},
+                            {value:"3", desc: "Bakery"},
+                            {value:"4", desc: "Bar / club / lounge"},
+                            {value:"5", desc: "Beauty &amp; cosmetics"},
+                            {value:"6", desc: "Cafe / coffee shop"},
+                            {value:"7", desc: "Caterer"},
+                            {value:"8", desc: "Consumer electronics"},
+                            {value:"9", desc: "Delivery only restaurant"},
+                            {value:"10", desc: "Fashion accessories"},
+                            {value:"11", desc: "Fitness &amp; sports"},
+                            {value:"12", desc: "Flowers / greetings and gifts"},
+                            {value:"13", desc: "Food &amp; beverages"},
+                            {value:"14", desc: "Gadgets and accessories"},
+                            {value:"15", desc: "Hawker center stall"},
+                            {value:"16", desc: "Health and wellness"},
+                            {value:"17", desc: "Home decor"},
+                            {value:"18", desc: "Home goods / appliances and utility"},
+                            {value:"19", desc: "Hotels and Hostels"},
+                            {value:"20", desc: "Ice-cream parlour"},
+                            {value:"21", desc: "Jewelry and watches"},
+                            {value:"22", desc: "Life hack products"},
+                            {value:"23", desc: "Marketing agency"},
+                            {value:"24", desc: "Pet products"},
+                            {value:"25", desc: "Pop-up event stall"},
+                            {value:"26", desc: "Pre order and catering"},
+                            {value:"27", desc: "Restaurant"},
+                            {value:"28", desc: "Street food cart"},
+                            {value:"29", desc: "Takeaway"},
+                            {value:"30", desc: "Toys &amp; children products"},
+                            {value:"31", desc: "Video games / consoles / and accessory"},
+                            {value:"32", desc: "Web Development agency"},
+                        ]}
+                        name="category"
+                        handleChange={handleChange}
+                        selectValue={values.category}
+                        error={errors.category}
                     />
-                </Grid>
-            </Grid>
-            <div>
-                <Typography variant="h6" gutterBottom>
-                    Ajuste de Ordenes
-                </Typography>
-            </div>
-            <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        id="minDelivery"
-                        name="minDelivery"
-                        label="Minimo para delivery"
-                        value={values.minDelivery}
-                        error={errors.minDelivery !== undefined}
-                        onChange={handleChange}
-                        fullWidth
-                    />
+
                 </Grid>
             </Grid>
         </>

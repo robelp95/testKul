@@ -2,7 +2,6 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Form, Formik} from "formik";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import ShoppingCartForm from "./ShoppingCartForm";
 
 const useStyles = makeStyles((theme) => ({
@@ -62,10 +61,6 @@ return (
                     return (
                         <Form>
                             <Paper className={classes.paper}>
-
-                                <Typography component="h1" variant="h4" align="center">
-                                    Ajustes del negocio
-                                </Typography>
                                 <ShoppingCartForm
                                     values={values}
                                     handleChange={handleChange}
