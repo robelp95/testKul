@@ -10,12 +10,23 @@ import Radio from "@material-ui/core/Radio";
 import UploadButton from "../utils/UploadButton";
 import FormSelect from "../utils/FormSelect";
 
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Button from "@material-ui/core/Button";
+
+const useStyles = makeStyles((theme) => ({
+    title: {
+        marginTop:"5%"
+    }
+}));
+
+
 export default function ShoppingCartForm({values, handleChange, errors}){
 
+    const classes = useStyles();
 
     return (
         <>
-            <Grid item xs={12} style={{marginTop:"5%"}}>
+            <Grid item xs={12} className={classes.title}>
                 <Typography component="h1" variant="h4" align="center">
                     Ajustes del negocio
                 </Typography>
@@ -72,6 +83,34 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                         fullWidth
                     />
                 </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        label="Recibir ordenes en este número"
+                        value={values.address}
+                        error={errors.address !== undefined}
+                        onChange={handleChange}
+                        placeholder="Ingrese su número sin el código del país"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <FormSelect
+                        label="Pais"
+                        items={[
+                            {value:"0", desc: "Argentina(54)"},
+                            {value:"1", desc: "Brasil(55)"},
+                            {value:"2", desc: "Chile(56)"},
+                        ]}
+                        name="country"
+                        handleChange={handleChange}
+                        selectValue={values.country}
+                        error={errors.country}
+                    />
+
+                </Grid>
                 <Grid item xs={12}>
                     <TextField
                         required
@@ -93,7 +132,7 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                             name="orderVia"
                             control={<Radio/>}
                             label="Whatsapp"
-                            checked="true"
+                            checked={true}
                         />
                     </Field>
                 </Grid>
@@ -123,19 +162,6 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                         value={values.address}
                         error={errors.address !== undefined}
                         onChange={handleChange}
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <TextField
-                        required
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        label="Recibir ordenes en este número"
-                        value={values.address}
-                        error={errors.address !== undefined}
-                        onChange={handleChange}
-                        placeholder="Ingrese su número sin el código del país"
                         fullWidth
                     />
                 </Grid>
@@ -198,6 +224,17 @@ export default function ShoppingCartForm({values, handleChange, errors}){
                         error={errors.category}
                     />
 
+                </Grid>
+            </Grid>
+            <Grid container spacing={6} justify={"center"} style={{marginTop: "10px"}}>
+                <Grid item xs={4} style={{textAlign: "center"}}>
+                    <Button
+                        color="primary"
+                        variant="outlined"
+                        size="large"
+                    >
+                        Guardar Ajustes
+                    </Button>
                 </Grid>
             </Grid>
         </>

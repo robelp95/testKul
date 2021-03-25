@@ -20,7 +20,7 @@ export default function FormSelect(props){
     const {label, items, name, handleChange, error, selectValue} = props;
     const classes = useStyles();
     return (
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
             <FormControl required className={classes.formControl}>
                 <InputLabel id="demo-simple-select-required-label">{label}</InputLabel>
                 <Select
@@ -33,8 +33,8 @@ export default function FormSelect(props){
                     className={classes.selectEmpty}
                 >
                     {
-                        items.map( (item) => (
-                            <MenuItem name={name} value={item.value}>{item.desc}</MenuItem>
+                        items.map( (item, index) => (
+                            <MenuItem key={index} name={name} value={item.value}>{item.desc}</MenuItem>
                         ))
                     }
                 </Select>

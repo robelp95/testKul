@@ -49,6 +49,7 @@ return (
             phoneNumber: '',
             coin: '',
             category:'',
+            country:'',
 
         }}>
             {
