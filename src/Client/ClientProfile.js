@@ -3,6 +3,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Form, Formik} from "formik";
 import Paper from "@material-ui/core/Paper";
 import ShoppingCartForm from "./ShoppingCartForm";
+import ClientProfileCatalogs from "./ClientProfileCatalogs";
+import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     layout:{
@@ -25,14 +27,13 @@ const useStyles = makeStyles((theme) => ({
             marginBottom: theme.spacing(6),
             padding: theme.spacing(3),
         },
-    },
+    }
 }));
 
-
-export default function ClientProfile(){
+function ClientProfileConfig(){
     const classes = useStyles();
 return (
-    <div className={classes.layout}>
+    <>
         <Formik
         initialValues={{
             businessName: '',
@@ -73,6 +74,17 @@ return (
                 }
             }
         </Formik>
-    </div>
+    </>
 )
 }
+
+const ClientProfile = () => {
+    const classes = useStyles();
+    return (
+        <div className={classes.layout}>
+            <ClientProfileCatalogs/>
+            <ClientProfileConfig/>
+        </div>
+    )
+}
+export default ClientProfile;
