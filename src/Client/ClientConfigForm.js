@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ShoppingCartForm({values, handleChange, errors}){
+export default function ClientConfigForm({values, handleChange, errors}){
 
     const classes = useStyles();
 

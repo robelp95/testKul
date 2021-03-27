@@ -200,6 +200,7 @@ const initialCatalog =
     };
 export default function Menu() {
 
+
     const [orderNumber, setOrderNumber] = useState(nanoid());
     const [products, setProducts] = useState([]);
     const [submitting, setSubmitting] = useState(false);

@@ -2,9 +2,8 @@ import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Form, Formik} from "formik";
 import Paper from "@material-ui/core/Paper";
-import ShoppingCartForm from "./ShoppingCartForm";
+import ClientConfigForm from "./ClientConfigForm";
 import ClientProfileCatalogs from "./ClientProfileCatalogs";
-import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     layout:{
@@ -63,7 +62,7 @@ return (
                     return (
                         <Form>
                             <Paper className={classes.paper}>
-                                <ShoppingCartForm
+                                <ClientConfigForm
                                     values={values}
                                     handleChange={handleChange}
                                     errors={errors}
