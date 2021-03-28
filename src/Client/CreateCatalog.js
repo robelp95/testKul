@@ -39,7 +39,7 @@ export default function CreateCatalog() {
             "name": "Pequeño Plástico Zapatos",
             "desc": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
             "price": "328.00",
-            "category": "Calzado",
+            "category": "calzado",
             "added": false
         },
         {
@@ -47,7 +47,7 @@ export default function CreateCatalog() {
             "name": "Guapo Plástico Raton",
             "desc": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
             "price": "319.00",
-            "category": "Calzado",
+            "category": "calzado",
             "added": false
         },
         {
@@ -55,7 +55,7 @@ export default function CreateCatalog() {
             "name": "Ergonómico Hormigon Camiseta",
             "desc": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
             "price": "206.00",
-            "category": "Pantalones",
+            "category": "pantalones",
             "added": false
         },
         {
@@ -63,9 +63,14 @@ export default function CreateCatalog() {
             "name": "Artesanal Algodón Mesa",
             "desc": "The Football Is Good For Training And Recreational Purposes",
             "price": "507.00",
-            "category": "Calzado",
+            "category": "calzado",
             "added": false
         }]);
+
+    const addProduct = (prod) => {
+        products.push(prod);
+        setProducts(products);
+    }
 
     const classes = useStyles();
     return (
@@ -83,7 +88,7 @@ export default function CreateCatalog() {
                 {/*        Nuevo producto*/}
                 {/*    </Fab>*/}
                 {/*</div>*/}
-                <FormDialog/>
+                <FormDialog addProduct={addProduct}/>
 
             </div>
 

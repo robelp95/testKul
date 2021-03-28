@@ -12,12 +12,14 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import {nanoid} from "nanoid";
 
-export default function FormDialog() {
+export default function FormDialog({addProduct}) {
     const [open, setOpen] = React.useState(false);
     const [openCategories, setOpenCategories] = React.useState(false);
-    const [category, setCategory] = useState("");
+    const [newCategory, setNewCategory] = useState("");
     const [categories, setCategories] = useState(["calzado", "pantalones"]);
+    const [product, setProduct] = useState({id: nanoid(), name: "", desc: "", price: "", category: "", added: false, enabled: true});
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,18 +37,37 @@ export default function FormDialog() {
     };
 
     const handleAddCategory = () => {
-        let cat = category;
+        let cat = newCategory;
         if (cat.length > 3) {
             categories.push(cat);
             setCategories([...new Set(categories)]);
-            setCategory("");
+            setNewCategory("");
         }
+        handleCloseCategories();
 
     }
     const handleChangeCategory = (e) => {
         let cat = e.target.value;
         if (cat.length > 3)
-            setCategory(cat);
+            setNewCategory(cat);
+
+    }
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setProduct({
+            ...product,
+            [name]:value
+        });
+    }
+
+    const handleAddProduct = () => {
+        if (product.name !== "" && product.category !== "" && product.price !== "" && product.desc !== ""){
+            addProduct(product);
+        }else{
+            console.log("prod invalido");
+        }
+        handleClose();
 
     }
 
@@ -72,39 +93,40 @@ export default function FormDialog() {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="name"
+                        name="name"
                         label="Nombre"
                         type="text"
                         fullWidth
+                        onChange={handleInputChange}
                     />
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="desc"
+                        name="desc"
                         label="Descripcion"
                         type="text"
                         fullWidth
+                        onChange={handleInputChange}
                     />
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="price"
+                        name="price"
                         label="Precio"
                         type="text"
                         fullWidth
+                        onChange={handleInputChange}
                     />
                     <FormControl required style={{width:"100%"}}>
                         <InputLabel id="demo-simple-select-required-label">Categorias</InputLabel>
                         <Select
                             labelId="demo-simple-select-required-label"
-                            id="demo-simple-select-required"
-                            name="categories"
-                            value=""
-                            onChange={() => {}}
+                            name="category"
+                            onChange={handleInputChange}
                         >
                             {
                                 categories.map( (cat, index) => (
-                                    <MenuItem key={index} name="categories" value={index}>{cat}</MenuItem>
+                                    <MenuItem key={index} name="category" value={cat}>{cat}</MenuItem>
                                 ))
                             }
                         </Select>
@@ -114,7 +136,7 @@ export default function FormDialog() {
                     <Button onClick={handleClose} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={handleClose} color="primary">
+                    <Button onClick={handleAddProduct} color="primary">
                         Agregar
                     </Button>
                 </DialogActions>
@@ -128,7 +150,7 @@ export default function FormDialog() {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="category"
+                        name="categories"
                         label="Nueva Categoria"
                         onChange={handleChangeCategory}
                         type="text"
