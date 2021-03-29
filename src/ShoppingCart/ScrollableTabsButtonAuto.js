@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import * as _ from "lodash";
 import ProductCategory from "./ProductCategory";
+import {getCategoriesFromProducts} from "../utils/utils";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -50,9 +51,8 @@ function a11yProps(index) {
 
 
 export default function ScrollableTabsButtonAuto(props) {
-    const {products, onAddToCart, onRemoveToCart, submitting} = props;
-    let cat = _.map(products, p=>{return p.category});
-    const categories = _.uniqWith(cat,_.isEqual);
+    const {products, onAddToCart, onRemoveToCart, submitting, onRemoveItemFromCart, onToggleDisableItem, editMode} = props;
+    const categories = getCategoriesFromProducts(products)
 
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
@@ -87,6 +87,9 @@ export default function ScrollableTabsButtonAuto(props) {
                                 onAddToCart={onAddToCart}
                                 onRemoveToCart={onRemoveToCart}
                                 submitting={submitting}
+                                onRemoveItemFromCart={onRemoveItemFromCart}
+                                onToggleDisableItem={onToggleDisableItem}
+                                editMode={editMode}
                             />
                         </TabPanel>
                     </div>
