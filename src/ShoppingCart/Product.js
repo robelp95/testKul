@@ -11,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Hidden from "@material-ui/core/Hidden";
 import * as _ from 'lodash';
+import FormSwitch from "../utils/FormSwitch";
 
 const useStyles = makeStyles({
     root: {
@@ -32,13 +33,15 @@ const useStyles = makeStyles({
         fontWeight: "lighter"
     }
 });
-export default function Product({product, onAddToCart, onRemoveToCart, submitting}) {
+export default function Product({product, onAddToCart, onRemoveToCart, submitting, onRemoveItemFromCart, onToggleDisableItem, editMode}) {
 
     const {id, name, desc, price, quantity} = product;
     const classes = useStyles();
 
     const handleAddToCart = () => onAddToCart(product, 1);
     const handleRemoveFromCart = () => onRemoveToCart(product);
+    const handleRemoveItemFromCart = () => onRemoveItemFromCart(product);
+    const handleToggleDisableItem = () => onToggleDisableItem(product)
 
     return (
         <div className={classes.root} style={{margin: "auto", paddingTop:5, paddingBottom:5}}>
@@ -50,7 +53,7 @@ export default function Product({product, onAddToCart, onRemoveToCart, submittin
                         title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h7" component="h7">
+                        <Typography gutterBottom variant="body1" component="body1">
                             {name} {quantity ? '- `${quantity}`': ''}
                         </Typography>
                         <Typography className={classes.subtitle}>
@@ -60,22 +63,46 @@ export default function Product({product, onAddToCart, onRemoveToCart, submittin
                             ${price}
                         </Typography>
                         <Hidden smUp>
-                            <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
-                                <DeleteIcon />
-                            </IconButton>
-                            <IconButton disabled={submitting} onClick={handleAddToCart}>
-                                <AddIcon/>
-                            </IconButton>
+                            {editMode && (
+                                <>
+                                    <FormSwitch product={product} handleToggleDisableItem={handleToggleDisableItem}/>
+                                    <IconButton onClick={handleRemoveItemFromCart}>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                </>
+                            )}
+                            {!editMode && (
+                                <>
+                                    <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                    <IconButton disabled={submitting} onClick={handleAddToCart}>
+                                        <AddIcon/>
+                                    </IconButton>
+                                </>
+                            )}
                         </Hidden>
                     </CardContent>
                     <Hidden xsDown>
                         <CardActions>
-                            <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
-                                <DeleteIcon/>
-                            </IconButton>
-                            <IconButton disabled={submitting} onClick={handleAddToCart}>
-                                <AddIcon/>
-                            </IconButton>
+                            {editMode && (
+                                <>
+                                    <FormSwitch product={product} handleToggleDisableItem={handleToggleDisableItem}/>
+                                    <IconButton onClick={handleRemoveItemFromCart}>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                </>
+                                )}
+                            {!editMode && (
+                                <>
+                                    <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                    <IconButton disabled={submitting} onClick={handleAddToCart}>
+                                        <AddIcon/>
+                                    </IconButton>
+                                </>
+                            )}
                         </CardActions>
                     </Hidden>
                 </Card>

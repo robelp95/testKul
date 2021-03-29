@@ -39,9 +39,7 @@ const ClientProfileCatalogs = (props) => {
                 </Typography>
             </Grid>
             <Grid container justify="center" spacing={3}>
-                        <Button color="primary" onClick={() => handleMenuClick('/create-catalog')}>Crear Catálogo</Button>
-                        <Button color="primary" onClick={() => handleMenuClick('/edit-catalog')}>Editar Catálogo</Button>
-
+                        <Button color="primary" onClick={() => handleMenuClick('/manage-catalog')}>Administrar Catálogo</Button>
             </Grid>
         </Paper>
     )

@@ -6,19 +6,28 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import {nanoid} from "nanoid";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-export default function FormDialog({addProduct}) {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+}));
+
+
+export default function FormDialog({addProduct, productCategories}) {
     const [open, setOpen] = React.useState(false);
     const [openCategories, setOpenCategories] = React.useState(false);
     const [newCategory, setNewCategory] = useState("");
-    const [categories, setCategories] = useState(["calzado", "pantalones"]);
+    const [categories, setCategories] = useState(productCategories);
     const [product, setProduct] = useState({id: nanoid(), name: "", desc: "", price: "", category: "", added: false, enabled: true});
 
     const handleClickOpen = () => {
@@ -71,17 +80,29 @@ export default function FormDialog({addProduct}) {
 
     }
 
+    const classes = useStyles();
+
     return (
         <div>
             <div style={{textAlign:"center"}} >
-                <Fab variant="extended" onClick={handleClickOpen}>
-                    <AddIcon/>
-                    Nuevo producto
-                </Fab>
-                <Fab variant="extended" onClick={handleClickOpenCategories}>
-                    <AddIcon/>
-                    Nueva categoria
-                </Fab>
+                <div className={classes.root}>
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        startIcon={<AddIcon/>}
+                        onClick={handleClickOpen}
+                    >
+                        Nuevo Producto
+                    </Button>
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        startIcon={<AddIcon/>}
+                        onClick={handleClickOpenCategories}
+                    >
+                        Nueva categoria
+                    </Button>
+                </div>
             </div>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -122,6 +143,7 @@ export default function FormDialog({addProduct}) {
                         <Select
                             labelId="demo-simple-select-required-label"
                             name="category"
+                            value={categories[0]}
                             onChange={handleInputChange}
                         >
                             {

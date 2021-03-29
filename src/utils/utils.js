@@ -1,10 +1,12 @@
+import * as _ from "lodash";
+
 const NEW_LINE = "\n";
 
 export function generateWhatsappMsg({values, order}) {
 
     let newMessage = "🛒 *Nuevo pedido via Kulko.App* 🛒" + NEW_LINE + NEW_LINE;
     newMessage += "*Pedido* #" + order.orderNumber + NEW_LINE + NEW_LINE;
-    for (let [key, value] of Object.entries(order.products)) {
+    for (let [key, value] of Object.entries(order.orderProducts)) {
         newMessage+= ('*1x ' + value.name + '* - $' + value.price);
         newMessage+=NEW_LINE;
     }
@@ -21,4 +23,10 @@ export function generateWhatsappMsg({values, order}) {
     let wspmsg = encodeURIComponent(newMessage);
     let message = "https://api.whatsapp.com/send?phone=5491161347712&text=" + wspmsg;
     return message;
+}
+
+
+export function getCategoriesFromProducts(products) {
+    let cat = _.map(products, p=>{return p.category});
+    return _.uniqWith(cat,_.isEqual);
 }

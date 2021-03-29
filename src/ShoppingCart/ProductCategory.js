@@ -3,7 +3,15 @@ import Product from "./Product";
 import React from "react";
 
 export default function ProductCategory(props){
-    const {products, onAddToCart, onRemoveToCart, submitting} = props;
+    const {
+        products,
+        onAddToCart,
+        onRemoveToCart,
+        submitting,
+        onRemoveItemFromCart,
+        onToggleDisableItem,
+        editMode
+    } = props;
     return (
         <>
             {
@@ -18,7 +26,11 @@ export default function ProductCategory(props){
                                              product={product}
                                              onAddToCart={onAddToCart}
                                              onRemoveToCart={onRemoveToCart}
-                                             submitting={submitting}/>
+                                             submitting={submitting}
+                                             onRemoveItemFromCart={onRemoveItemFromCart}
+                                             onToggleDisableItem={onToggleDisableItem}
+                                             editMode={editMode}
+                                    />
                                 )
                             )
                         }
