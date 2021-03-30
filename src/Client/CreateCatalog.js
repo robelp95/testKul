@@ -1,18 +1,19 @@
 import React, {useState} from "react";
 import ScrollableTabsButtonAuto from "../ShoppingCart/ScrollableTabsButtonAuto";
-import FormDialog from "./FormDialog";
+import CartButtonsWithDialog from "./CartButtonsWithDialog";
 import * as _ from 'lodash';
 import {getCategoriesFromProducts} from "../utils/utils";
 import {useCommonStyles} from "../utils/commonStyles";
-
+import EmptyCartMessage from "../ShoppingCart/EmptyCartMessage";
 
 export default function CreateCatalog({productList}) {
 
     const [products, setProducts] = useState(productList);
     const productCategories = getCategoriesFromProducts(products);
+    const [categories, setCategories] = useState(productCategories);
+
 
     const addProduct = (prod) => {
-        // products.push(prod);
         let newProductos = _.union(products, [prod]);
         setProducts(newProductos);
     }
@@ -31,21 +32,31 @@ export default function CreateCatalog({productList}) {
     }
 
     const classes = useCommonStyles();
+
     return (
         <>
             <div className={classes.layout}>
-                <ScrollableTabsButtonAuto
-                    products ={products}
-                    onAddToCart={() => {}}
-                    onRemoveToCart={() => {}}
-                    submitting={false}
-                    onRemoveItemFromCart={onRemoveItemFromCart}
-                    onToggleDisableItem={onToggleDisableItem}
-                    editMode={true}
-                />
-                <FormDialog
+
+                {products.length === 0 && (
+                    <EmptyCartMessage/>
+                )}
+                {products.length > 0 &&
+                (
+                    <ScrollableTabsButtonAuto
+                        products ={products}
+                        onAddToCart={() => {}}
+                        onRemoveToCart={() => {}}
+                        submitting={false}
+                        onRemoveItemFromCart={onRemoveItemFromCart}
+                        onToggleDisableItem={onToggleDisableItem}
+                        editMode={true}
+                    />
+                )
+                }
+                <CartButtonsWithDialog
                     addProduct={addProduct}
-                    productCategories={productCategories}
+                    categories={categories}
+                    setCategories={setCategories}
                 />
             </div>
 

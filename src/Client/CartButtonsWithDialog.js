@@ -11,8 +11,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import {nanoid} from "nanoid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+const { customAlphabet } = require('nanoid')
+
+const nanoid = customAlphabet('1234567890', 3)
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,15 +22,20 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
         },
     },
+    centered: {
+        textAlign: "center"
+    }
 }));
 
 
-export default function FormDialog({addProduct, productCategories}) {
+const initProduct = {id: 0, name: "", desc: "", price: "",category: "", added: false, enabled: true};
+
+export default function CartButtonsWithDialog({addProduct, categories, setCategories}) {
     const [open, setOpen] = React.useState(false);
     const [openCategories, setOpenCategories] = React.useState(false);
     const [newCategory, setNewCategory] = useState("");
-    const [categories, setCategories] = useState(productCategories);
-    const [product, setProduct] = useState({id: nanoid(), name: "", desc: "", price: "", category: "", added: false, enabled: true});
+    const [product, setProduct] = useState(initProduct);
+    const [selectedCategory, setSelectedCategory] = useState("");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -59,8 +66,11 @@ export default function FormDialog({addProduct, productCategories}) {
         let cat = e.target.value;
         if (cat.length > 3)
             setNewCategory(cat);
-
     }
+    const handleChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -71,11 +81,12 @@ export default function FormDialog({addProduct, productCategories}) {
     }
 
     const handleAddProduct = () => {
-        if (product.name !== "" && product.category !== "" && product.price !== "" && product.desc !== ""){
+        if (product.name !== "" && selectedCategory !== "" && product.price !== "" && product.desc !== ""){
+            product.category = selectedCategory;
+            product.id = nanoid();
             addProduct(product);
-        }else{
-            console.log("prod invalido");
         }
+        setProduct(initProduct);
         handleClose();
 
     }
@@ -84,13 +95,14 @@ export default function FormDialog({addProduct, productCategories}) {
 
     return (
         <div>
-            <div style={{textAlign:"center"}} >
+            <div className={classes.centered}>
                 <div className={classes.root}>
                     <Button
                         color="primary"
                         variant="contained"
                         startIcon={<AddIcon/>}
                         onClick={handleClickOpen}
+                        disabled={!categories.length > 0}
                     >
                         Nuevo Producto
                     </Button>
@@ -139,16 +151,15 @@ export default function FormDialog({addProduct, productCategories}) {
                         onChange={handleInputChange}
                     />
                     <FormControl required style={{width:"100%"}}>
-                        <InputLabel id="demo-simple-select-required-label">Categorias</InputLabel>
+                        <InputLabel>Categorias</InputLabel>
                         <Select
-                            labelId="demo-simple-select-required-label"
                             name="category"
-                            value={categories[0]}
-                            onChange={handleInputChange}
+                            value={selectedCategory}
+                            onChange={handleChange}
                         >
                             {
                                 categories.map( (cat, index) => (
-                                    <MenuItem key={index} name="category" value={cat}>{cat}</MenuItem>
+                                    <MenuItem key={index} value={cat}>{cat}</MenuItem>
                                 ))
                             }
                         </Select>
