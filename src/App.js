@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "./Header";
 import {Redirect, Route} from "react-router-dom";
 import {Switch} from 'react-router';
@@ -7,6 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Menu from "./Checkout/Menu";
 import ClientProfile from "./Client/ClientProfile";
 import CreateCatalog from "./Client/CreateCatalog";
+import Notification from "./ShoppingCart/Notification";
 
 
 const productList = [
@@ -192,17 +193,28 @@ const state =
 
     };
 function App() {
+    const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
+
   return (
       <div>
           <Header />
           <Toolbar/>
+          <Notification notify={notify} setNotify={setNotify}/>
           <div>
               <Switch>
                   <Route exact from="/login" render={props => <Home page="Login" {...props}/>}/>
                   <Route exact from="/cliente" render={props => <ClientProfile {...props}/>}/>
                   <Route exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}/>
-                  <Route exact from="/manage-catalog" render={props => <CreateCatalog productList={state["products"]} {...props}/>}/>
-                  <Route exact from="/menu" render={props => <Menu productList={state["products"]} {...props}/>}/>
+                  <Route exact from="/manage-catalog" render={props => <CreateCatalog
+                      productList={state["products"]}
+                      notify={notify}
+                      setNotify={setNotify}
+                      {...props}/>}/>
+                  <Route exact from="/menu" render={props => <Menu
+                      productList={state["products"]}
+                      notify={notify}
+                      setNotify={setNotify}
+                      {...props}/>}/>
                   <Route path="*">
                       <Redirect to="/menu" /> {/* Default route */}
                   </Route>

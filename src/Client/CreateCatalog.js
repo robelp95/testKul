@@ -5,13 +5,26 @@ import * as _ from 'lodash';
 import {getCategoriesFromProducts} from "../utils/utils";
 import {useCommonStyles} from "../utils/commonStyles";
 import EmptyCartMessage from "../ShoppingCart/EmptyCartMessage";
+import Button from "@material-ui/core/Button";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-export default function CreateCatalog({productList}) {
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+        },
+    },
+    centered: {
+        textAlign: "center"
+    }
+}));
+
+export default function CreateCatalog({productList, notify, setNotify}) {
 
     const [products, setProducts] = useState(productList);
     const productCategories = getCategoriesFromProducts(products);
     const [categories, setCategories] = useState(productCategories);
-
 
     const addProduct = (prod) => {
         let newProductos = _.union(products, [prod]);
@@ -28,10 +41,10 @@ export default function CreateCatalog({productList}) {
             return elem.id === prod.id ? {...prod, enabled: !prod.enabled} : elem;
         });
         setProducts(newProducts);
-
     }
 
     const classes = useCommonStyles();
+    const altClasses = useStyles();
 
     return (
         <>
@@ -58,6 +71,16 @@ export default function CreateCatalog({productList}) {
                     categories={categories}
                     setCategories={setCategories}
                 />
+                <div className={altClasses.centered}>
+                    <div className={altClasses.root}>
+                        <Button
+                            variant={"outlined"}
+                            onClick={() => setNotify({isOpen:true, message: 'Carrito actualizado', type:'success'})}
+                        >
+                            Guardar carrito
+                        </Button>
+                    </div>
+                </div>
             </div>
 
         </>
