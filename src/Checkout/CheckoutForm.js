@@ -34,7 +34,7 @@ export const CheckoutForm = ({initialClient, order, setSubmitting})=>{
 
         setTimeout(() => {
             setSubmitting(true);
-            if (order.products.length > 0) {
+            if (order.orderProducts.length > 0) {
                 handleNext();
                 let msg = generateWhatsappMsg({values, order});
                 window.open(

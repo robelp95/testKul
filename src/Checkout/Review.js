@@ -31,7 +31,7 @@ export default function Review({client, order}) {
         <React.Fragment>
 
             <CartItemList
-                products={order.products}
+                products={order.orderProducts}
                 total={order.total}
             />
             <Grid container spacing={2}>
