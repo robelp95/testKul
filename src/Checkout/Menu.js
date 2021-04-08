@@ -7,7 +7,7 @@ import PartialCart from "../ShoppingCart/PartialCart";
 import ScrollableTabsButtonAuto from "../ShoppingCart/ScrollableTabsButtonAuto";
 import ScrollToCheckout from "../ScrollToCheckout";
 import Fab from "@material-ui/core/Fab";
-import {CreditCard} from '@material-ui/icons';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useCommonStyles} from "../utils/commonStyles";
 
 
@@ -75,7 +75,7 @@ export default function Menu({productList, editMode, setNotify}) {
 
                 <ScrollToCheckout>
                     <Fab color="primary" size="medium" aria-label="scroll back to top">
-                        <CreditCard />
+                        <ShoppingCartIcon />
                     </Fab>
                 </ScrollToCheckout>
             </div>
