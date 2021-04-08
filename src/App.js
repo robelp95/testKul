@@ -196,6 +196,7 @@ function App() {
           <Toolbar/>
           <div>
               <Switch>
+                  <Route exact from="/" render={props => <Home page="Landing Page" {...props}/>}/>
                   <Route exact from="/login" render={props => <Home page="Login" {...props}/>}/>
                   <Route exact from="/cliente" render={props => <ClientProfile {...props}/>}/>
                   <Route exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}/>
