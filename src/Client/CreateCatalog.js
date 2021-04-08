@@ -20,15 +20,22 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function CreateCatalog({productList, notify, setNotify}) {
+const initProduct = {id: 0, name: "", desc: "", price: "",category: "", added: false, enabled: true};
+
+export default function CreateCatalog({productList, editMode, setNotify}) {
 
     const [products, setProducts] = useState(productList);
+    const [product, setProduct] = useState(initProduct);
     const productCategories = getCategoriesFromProducts(products);
     const [categories, setCategories] = useState(productCategories);
+    const [openAdd, setOpenAdd] = React.useState(false);
+    const [openEdit, setOpenEdit] = React.useState(false);
+
 
     const addProduct = (prod) => {
         let newProductos = _.union(products, [prod]);
         setProducts(newProductos);
+        setProduct(initProduct);
     }
     const onRemoveItemFromCart = (prod) => {
         let newProducts = _.filter(products, function (elem) {
@@ -41,6 +48,20 @@ export default function CreateCatalog({productList, notify, setNotify}) {
             return elem.id === prod.id ? {...prod, enabled: !prod.enabled} : elem;
         });
         setProducts(newProducts);
+    }
+    const editProduct = (prod) => {
+        let newProducts = _.map(products, function (elem) {
+             return elem.id === prod.id ? prod : elem;
+        });
+        setProducts(newProducts);
+        setProduct(initProduct);
+    }
+
+    function setProductById(id){
+        let prod = _.filter(products, function (elem) {
+            return elem.id === id;
+        })[0] || {};
+        setProduct(prod ? prod : initProduct)
     }
 
     const classes = useCommonStyles();
@@ -57,20 +78,35 @@ export default function CreateCatalog({productList, notify, setNotify}) {
                 (
                     <ScrollableTabsButtonAuto
                         products ={products}
-                        onAddToCart={() => {}}
-                        onRemoveToCart={() => {}}
                         submitting={false}
                         onRemoveItemFromCart={onRemoveItemFromCart}
                         onToggleDisableItem={onToggleDisableItem}
-                        editMode={true}
+                        editMode={editMode}
+                        editProduct={editProduct}
+                        open={openEdit}
+                        setOpen={setOpenEdit}
+                        setCategories={setCategories}
+                        setProductById={setProductById}
+                        product={product}
+                        setProduct={setProduct}
                     />
                 )
                 }
                 <CartButtonsWithDialog
+                    open={openAdd}
+                    setOpen={setOpenAdd}
                     addProduct={addProduct}
+                    editProduct={editProduct}
+                    editMode={editMode}
                     categories={categories}
                     setCategories={setCategories}
+                    product={product}
+                    setProduct={setProduct}
+                    setProductById={setProductById}
                 />
+                <pre>
+                    {JSON.stringify(products, null, 2)}
+                </pre>
                 <div className={altClasses.centered}>
                     <div className={altClasses.root}>
                         <Button

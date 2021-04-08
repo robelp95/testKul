@@ -7,11 +7,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from "@material-ui/icons/Add";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import ProductDialog from "./ProductDialog";
 
 const { customAlphabet } = require('nanoid')
 
@@ -31,12 +28,14 @@ const useStyles = makeStyles((theme) => ({
 
 const initProduct = {id: 0, name: "", desc: "", price: "",category: "", added: false, enabled: true};
 
-export default function CartButtonsWithDialog({addProduct, categories, setCategories}) {
-    const [open, setOpen] = React.useState(false);
+export default function CartButtonsWithDialog({open, setOpen, addProduct, editProduct, editMode, categories, setCategories, product, setProduct, setProductById}) {
     const [openCategories, setOpenCategories] = React.useState(false);
     const [newCategory, setNewCategory] = useState("");
-    const [product, setProduct] = useState(initProduct);
+
     const [selectedCategory, setSelectedCategory] = useState("");
+
+
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -81,13 +80,15 @@ export default function CartButtonsWithDialog({addProduct, categories, setCatego
         });
     }
 
-    const handleAddProduct = () => {
+    const handleAddProduct = (product) => {
         if (product.name !== "" && selectedCategory !== "" && product.price !== "" && product.desc !== ""){
             product.category = selectedCategory;
-            product.id = nanoid();
+            if (!product.id) {
+                product.id = nanoid();
+            }
             addProduct(product);
         }
-        setProduct(initProduct);
+
         handleClose();
 
     }
@@ -118,63 +119,19 @@ export default function CartButtonsWithDialog({addProduct, categories, setCatego
                 </div>
             </div>
 
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Crear Nuevo producto</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Complete todos los campos
-                    </DialogContentText>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        name="name"
-                        label="Nombre"
-                        type="text"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        name="desc"
-                        label="Descripcion"
-                        type="text"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        name="price"
-                        label="Precio"
-                        type="text"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
-                    <FormControl required style={{width:"100%"}}>
-                        <InputLabel>Categorias</InputLabel>
-                        <Select
-                            name="category"
-                            value={selectedCategory}
-                            onChange={handleChange}
-                        >
-                            {
-                                categories.map( (cat, index) => (
-                                    <MenuItem key={index} value={cat}>{cat}</MenuItem>
-                                ))
-                            }
-                        </Select>
-                    </FormControl>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancelar
-                    </Button>
-                    <Button onClick={handleAddProduct} color="primary">
-                        Agregar
-                    </Button>
-                </DialogActions>
-            </Dialog>
+            <ProductDialog
+                categories={categories}
+                selectedCategory={selectedCategory}
+                handleChange={handleChange}
+                handleInputChange={handleInputChange}
+                handleProductAction={handleAddProduct} //edit o insert
+                actionLabel="Agregar"
+                product={product}
+                setProduct={setProduct}
+                setProductById={setProductById}
+                open={open}
+                setOpen={setOpen}
+            />
             <Dialog open={openCategories} onClose={handleCloseCategories} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Agregar nueva categoria</DialogTitle>
                 <DialogContent>

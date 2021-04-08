@@ -207,12 +207,14 @@ function App() {
                   <Route exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}/>
                   <Route exact from="/manage-catalog" render={props => <CreateCatalog
                       productList={state["products"]}
-                      notify={notify}
+                      // notify={notify}
+                      editMode={true}
                       setNotify={setNotify}
                       {...props}/>}/>
                   <Route exact from="/menu" render={props => <Menu
                       productList={state["products"]}
                       notify={notify}
+                      editMode={false}
                       setNotify={setNotify}
                       {...props}/>}/>
                   <Route path="*">

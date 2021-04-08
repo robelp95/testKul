@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import * as _ from "lodash";
 import ProductCategory from "./ProductCategory";
 import {getCategoriesFromProducts} from "../utils/utils";
+import ProductDialog from "../Client/ProductDialog";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,8 +52,24 @@ function a11yProps(index) {
 
 
 export default function ScrollableTabsButtonAuto(props) {
-    const {products, onAddToCart, onRemoveToCart, submitting, onRemoveItemFromCart, onToggleDisableItem, editMode} = props;
-    const categories = getCategoriesFromProducts(products)
+    const {
+        products,
+        onAddToCart,
+        onRemoveToCart,
+        submitting,
+        onRemoveItemFromCart,
+        onToggleDisableItem,
+        editMode,
+        editProduct,
+        open,
+        setOpen,
+        setCategories,
+        setProductById,
+        product,
+        setProduct
+    } = props;
+
+    const categories = getCategoriesFromProducts(products);
 
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
@@ -90,11 +107,31 @@ export default function ScrollableTabsButtonAuto(props) {
                                 onRemoveItemFromCart={onRemoveItemFromCart}
                                 onToggleDisableItem={onToggleDisableItem}
                                 editMode={editMode}
+                                handleProductAction={editProduct}
+                                open={open}
+                                setOpen={setOpen}
+                                setProductById={setProductById}
                             />
                         </TabPanel>
                     </div>
                 )))
             }
+            <div>
+                <ProductDialog
+                    open={open}
+                    setOpen={setOpen}
+                    addProduct={() => {}}
+                    editProduct={editProduct}
+                    editMode={editMode}
+                    categories={categories}
+                    product={product}
+                    setProduct={setProduct}
+                    setCategories={setCategories}
+                    handleProductAction={editProduct} //edit o insert
+                    actionLabel="Actualizar"
+                    handleChange={() => {}}
+                />
+            </div>
         </div>
     );
 }

@@ -11,7 +11,7 @@ import {CreditCard} from '@material-ui/icons';
 import {useCommonStyles} from "../utils/commonStyles";
 
 
-export default function Menu({productList, notify, setNotify}) {
+export default function Menu({productList, editMode, setNotify}) {
 
 
     const [orderNumber] = useState(nanoid());
@@ -55,7 +55,8 @@ export default function Menu({productList, notify, setNotify}) {
                     onAddToCart={onAddToCart}
                     onRemoveToCart={onRemoveToCart}
                     submitting={submitting}
-                    editMode={false}
+                    editMode={editMode}
+                    setProductById={() => {}}
                 />
                <PartialCart products={orderProducts}/>
                 <CheckoutForm
