@@ -51,12 +51,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getStepContent(step, props) {
-    const {values, handleChange, errors, initialErrors, order} = props;
+    const {values, handleChange, errors, initialErrors, order, userData} = props;
     switch (step) {
         case 0:
             return <AddressForm values={values} handleChange={handleChange} errors={errors} initialErrors={initialErrors}/>;
         case 1:
-            return <Review client={values} order={order} />;
+            return <Review userData={userData} client={values} order={order} />;
         default:
             throw new Error('Unknown step');
     }
@@ -64,7 +64,7 @@ function getStepContent(step, props) {
 
 export default function Checkout(props) {
     const classes = useStyles();
-    const {steps, activeStep, setActiveStep, errors, order, dirty} = props;
+    const {steps, activeStep, setActiveStep, errors, order, dirty, userData} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
 
     useEffect(() => {

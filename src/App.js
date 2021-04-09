@@ -184,11 +184,31 @@ const productList = [
         "enabled": true
     }
 ];
+const userData = {
+    "id": 0,
+    "username": "User.Prueba",
+    "name": "Usuario de Prueba",
+    "email": "emailfalso@gmail.com",
+    "address": "Calle Falsa 123",
+    "costumerName": "Usuario Falso",
+    "phoneNumber": "+56945344567",
+    "category": "Gastronomia",
+    "coin": "$",
+    "takeOrderVia": "whatsapp",
+    "paymentInstructions": "Efectivo o Transferencia",
+    "opening": "8 a 20 hs",
+    "open": true,
+    "brandName": "Nombre de la marca del negocio",
+    "description": "Descripcion del catalogo de productos",
+    "imagePath": null,
+    "catalog": {
+        "id":0,
+        "products": productList
+    },
+};
 const state =
     {
-        "id": 0,
-        "username": "Jorge.Longoria",
-        "email": "Raquel27@yahoo.com",
+        "user" :userData,
         "products": productList
 
     };
@@ -209,12 +229,14 @@ function App() {
                       productList={state["products"]}
                       editMode={true}
                       setNotify={setNotify}
+                      userData={userData}
                       {...props}/>}/>
                   <Route exact from="/menu" render={props => <Menu
                       productList={state["products"]}
                       notify={notify}
                       editMode={false}
                       setNotify={setNotify}
+                      userData={userData}
                       {...props}/>}/>
                   <Route path="*">
                       <Redirect to="/menu" /> {/* Default route */}

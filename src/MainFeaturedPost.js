@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Chip from "@material-ui/core/Chip";
 
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
@@ -47,10 +48,30 @@ export default function MainFeaturedPost(props) {
                 <Grid item md={12}>
                     <div className={classes.mainFeaturedPostContent}>
                         <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                            {post.title}
+                            {post.brandName}
                         </Typography>
                         <Typography variant="h5" color="inherit" paragraph>
                             {post.description}
+                        </Typography>
+
+                        <Typography variant="h6" color="inherit" paragraph>
+                            Horario: {post.opening}
+                        </Typography>
+                        <Typography variant="h6" color="inherit" paragraph>
+
+                            {
+                                post.open ?
+                                    <Chip
+                                        label="Negocio Abierto"
+                                        color="primary"
+                                        style={{backgroundColor:"#4caf50"}}
+                                    /> :
+                                    <Chip
+                                        label="Negocio Cerrado"
+                                        color="primary"
+                                        style={{backgroundColor:"#f44336"}}
+                                    />
+                            } {post.phoneNumber}
                         </Typography>
                     </div>
                 </Grid>
