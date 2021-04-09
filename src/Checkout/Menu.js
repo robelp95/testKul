@@ -11,13 +11,14 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useCommonStyles} from "../utils/commonStyles";
 
 
-export default function Menu({productList, editMode, setNotify}) {
+export default function Menu({productList, editMode, setNotify, userData}) {
 
 
     const [orderNumber] = useState(nanoid());
     const [products] = useState(productList);
     const [submitting, setSubmitting] = useState(false);
     const [orderProducts, setOrderProducts] = useState([]);
+    const [user, setUser] = useState(userData);
 
     const onAddToCart = (product, qty) => {
         product.added = true;
@@ -42,11 +43,19 @@ export default function Menu({productList, editMode, setNotify}) {
         <>
             <MainFeaturedPost
                 post={{
-                title: 'Catálogo de mi emprendimiento',
-                description:
-                    "Descripción del catálogo de productos",
-                image: 'https://source.unsplash.com/random',
-                imgText: 'main image description' }}
+                    title: user.name,
+                    description: user.description,
+                    image: user.imagePath ? user.imagePath : 'https://source.unsplash.com/random',
+                    imgText: 'main image description',
+                    opening: user.opening,
+                    category: user.category,
+                    coin:user.coin,
+                    address: user.address,
+                    brandName: user.brandName,
+                    open: user.open,
+                    paymentInstructions: user.paymentInstructions,
+                    phoneNumber: user.phoneNumber
+                }}
             />
 
             <div className={classes.layout}>
@@ -71,6 +80,7 @@ export default function Menu({productList, editMode, setNotify}) {
                     }}
                     order={{orderProducts, orderNumber, total}}
                     setSubmitting={setSubmitting}
+                    userData={userData}
                 />
 
                 <ScrollToCheckout>
