@@ -10,8 +10,13 @@ export default function ProductCategory(props){
         submitting,
         onRemoveItemFromCart,
         onToggleDisableItem,
-        editMode
+        editMode,
+        setProductById,
+        setOpen,
+        setEditting,
     } = props;
+
+
     return (
         <>
             {
@@ -30,6 +35,11 @@ export default function ProductCategory(props){
                                              onRemoveItemFromCart={onRemoveItemFromCart}
                                              onToggleDisableItem={onToggleDisableItem}
                                              editMode={editMode}
+
+                                             setProductById={setProductById}
+
+                                             setOpen={setOpen}
+                                             setEditting={setEditting}
                                     />
                                 )
                             )

@@ -4,23 +4,20 @@ import React, {useState} from "react";
 import {nanoid} from 'nanoid';
 import * as _ from 'lodash';
 import PartialCart from "../ShoppingCart/PartialCart";
-import Notification from "../ShoppingCart/Notification";
 import ScrollableTabsButtonAuto from "../ShoppingCart/ScrollableTabsButtonAuto";
 import ScrollToCheckout from "../ScrollToCheckout";
 import Fab from "@material-ui/core/Fab";
-import {CreditCard} from '@material-ui/icons';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useCommonStyles} from "../utils/commonStyles";
 
 
-export default function Menu({productList}) {
+export default function Menu({productList, editMode, setNotify}) {
 
 
     const [orderNumber] = useState(nanoid());
     const [products] = useState(productList);
     const [submitting, setSubmitting] = useState(false);
     const [orderProducts, setOrderProducts] = useState([]);
-
-    const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
 
     const onAddToCart = (product, qty) => {
         product.added = true;
@@ -58,7 +55,8 @@ export default function Menu({productList}) {
                     onAddToCart={onAddToCart}
                     onRemoveToCart={onRemoveToCart}
                     submitting={submitting}
-                    editMode={false}
+                    editMode={editMode}
+                    setProductById={() => {}}
                 />
                <PartialCart products={orderProducts}/>
                 <CheckoutForm
@@ -74,10 +72,10 @@ export default function Menu({productList}) {
                     order={{orderProducts, orderNumber, total}}
                     setSubmitting={setSubmitting}
                 />
-                <Notification notify={notify} setNotify={setNotify}/>
+
                 <ScrollToCheckout>
                     <Fab color="primary" size="medium" aria-label="scroll back to top">
-                        <CreditCard />
+                        <ShoppingCartIcon />
                     </Fab>
                 </ScrollToCheckout>
             </div>
