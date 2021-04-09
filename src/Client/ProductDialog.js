@@ -15,19 +15,21 @@ export default function ProductDialog(props) {
 
     const {
         categories,
-        selectedCategory,
+        setSelectedCategory,
         handleChange,
-        handleProductAction, //edit o insert
-        // handleInputChange,
         actionLabel,
         product,
         setProduct,
         open,
         setOpen,
-        setProductById
+        handleProductAction,
+        initialiceProduct
     } = props;
 
+
     const handleClose = () => {
+        setSelectedCategory('');
+        initialiceProduct();
         setOpen(false);
     };
 
@@ -35,9 +37,6 @@ export default function ProductDialog(props) {
         handleProductAction(product);
         handleClose();
     };
-
-
-
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -89,7 +88,7 @@ export default function ProductDialog(props) {
                     <InputLabel>Categorias</InputLabel>
                     <Select
                         name="category"
-                        value={selectedCategory || product.category}
+                        value={product.category}
                         onChange={handleChange}
                     >
                         {

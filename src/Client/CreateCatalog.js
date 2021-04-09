@@ -1,12 +1,11 @@
 import React, {useState} from "react";
-import ScrollableTabsButtonAuto from "../ShoppingCart/ScrollableTabsButtonAuto";
-import CartButtonsWithDialog from "./CartButtonsWithDialog";
 import * as _ from 'lodash';
 import {getCategoriesFromProducts} from "../utils/utils";
 import {useCommonStyles} from "../utils/commonStyles";
 import EmptyCartMessage from "../ShoppingCart/EmptyCartMessage";
 import Button from "@material-ui/core/Button";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import CreateCatalogBody from "./CreateCatalogBody";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,14 +27,16 @@ export default function CreateCatalog({productList, editMode, setNotify}) {
     const [product, setProduct] = useState(initProduct);
     const productCategories = getCategoriesFromProducts(products);
     const [categories, setCategories] = useState(productCategories);
-    const [openAdd, setOpenAdd] = React.useState(false);
-    const [openEdit, setOpenEdit] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
+
+    const initialiceProduct = () => {
+        setProduct(initProduct);
+    }
 
     const addProduct = (prod) => {
         let newProductos = _.union(products, [prod]);
         setProducts(newProductos);
-        setProduct(initProduct);
     }
     const onRemoveItemFromCart = (prod) => {
         let newProducts = _.filter(products, function (elem) {
@@ -54,14 +55,13 @@ export default function CreateCatalog({productList, editMode, setNotify}) {
              return elem.id === prod.id ? prod : elem;
         });
         setProducts(newProducts);
-        setProduct(initProduct);
     }
 
     function setProductById(id){
         let prod = _.filter(products, function (elem) {
             return elem.id === id;
         })[0] || {};
-        setProduct(prod ? prod : initProduct)
+        setProduct(prod)
     }
 
     const classes = useCommonStyles();
@@ -74,27 +74,8 @@ export default function CreateCatalog({productList, editMode, setNotify}) {
                 {products.length === 0 && (
                     <EmptyCartMessage/>
                 )}
-                {products.length > 0 &&
-                (
-                    <ScrollableTabsButtonAuto
-                        products ={products}
-                        submitting={false}
-                        onRemoveItemFromCart={onRemoveItemFromCart}
-                        onToggleDisableItem={onToggleDisableItem}
-                        editMode={editMode}
-                        editProduct={editProduct}
-                        open={openEdit}
-                        setOpen={setOpenEdit}
-                        setCategories={setCategories}
-                        setProductById={setProductById}
-                        product={product}
-                        setProduct={setProduct}
-                    />
-                )
-                }
-                <CartButtonsWithDialog
-                    open={openAdd}
-                    setOpen={setOpenAdd}
+                <CreateCatalogBody
+                    products={products}
                     addProduct={addProduct}
                     editProduct={editProduct}
                     editMode={editMode}
@@ -103,10 +84,12 @@ export default function CreateCatalog({productList, editMode, setNotify}) {
                     product={product}
                     setProduct={setProduct}
                     setProductById={setProductById}
+                    onRemoveItemFromCart={onRemoveItemFromCart}
+                    onToggleDisableItem={onToggleDisableItem}
+                    open={open}
+                    setOpen={setOpen}
+                    initialiceProduct={initialiceProduct}
                 />
-                <pre>
-                    {JSON.stringify(products, null, 2)}
-                </pre>
                 <div className={altClasses.centered}>
                     <div className={altClasses.root}>
                         <Button

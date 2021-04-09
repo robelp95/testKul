@@ -8,11 +8,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AddIcon from "@material-ui/icons/Add";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import ProductDialog from "./ProductDialog";
-
-const { customAlphabet } = require('nanoid')
-
-const nanoid = customAlphabet('1234567890', 3)
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,24 +21,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const initProduct = {id: 0, name: "", desc: "", price: "",category: "", added: false, enabled: true};
 
-export default function CartButtonsWithDialog({open, setOpen, addProduct, editProduct, editMode, categories, setCategories, product, setProduct, setProductById}) {
+export default function CartButtonsWithDialog(
+    {
+        addProduct,
+        editProduct,
+        editMode,
+        categories,
+        setCategories,
+        product,
+        setProduct,
+        setProductById,
+        setOpen,
+        setEditting,
+        selectedCategory,
+        setSelectedCategory
+    }
+    ) {
     const [openCategories, setOpenCategories] = React.useState(false);
     const [newCategory, setNewCategory] = useState("");
 
-    const [selectedCategory, setSelectedCategory] = useState("");
-
-
-
-
     const handleClickOpen = () => {
+        setEditting(false);
         setOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
     const handleClickOpenCategories = () => {
         setOpenCategories(true);
     };
@@ -67,32 +69,6 @@ export default function CartButtonsWithDialog({open, setOpen, addProduct, editPr
         if (cat.length > 3)
             setNewCategory(cat);
     }
-    const handleChange = (event) => {
-        setSelectedCategory(event.target.value);
-    };
-
-
-    const handleInputChange = (e) => {
-        const {name, value} = e.target;
-        setProduct({
-            ...product,
-            [name]:value
-        });
-    }
-
-    const handleAddProduct = (product) => {
-        if (product.name !== "" && selectedCategory !== "" && product.price !== "" && product.desc !== ""){
-            product.category = selectedCategory;
-            if (!product.id) {
-                product.id = nanoid();
-            }
-            addProduct(product);
-        }
-
-        handleClose();
-
-    }
-
     const classes = useStyles();
 
     return (
@@ -118,20 +94,6 @@ export default function CartButtonsWithDialog({open, setOpen, addProduct, editPr
                     </Button>
                 </div>
             </div>
-
-            <ProductDialog
-                categories={categories}
-                selectedCategory={selectedCategory}
-                handleChange={handleChange}
-                handleInputChange={handleInputChange}
-                handleProductAction={handleAddProduct} //edit o insert
-                actionLabel="Agregar"
-                product={product}
-                setProduct={setProduct}
-                setProductById={setProductById}
-                open={open}
-                setOpen={setOpen}
-            />
             <Dialog open={openCategories} onClose={handleCloseCategories} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Agregar nueva categoria</DialogTitle>
                 <DialogContent>

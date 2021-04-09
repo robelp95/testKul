@@ -43,8 +43,10 @@ export default function Product(
         onRemoveItemFromCart,
         onToggleDisableItem,
         editMode,
+        setProductById,
+
         setOpen,
-        setProductById
+        setEditting
     }
     ) {
 
@@ -58,7 +60,9 @@ export default function Product(
 
     const handleEditItemFromCart = () => {
         setProductById(id);
+        setEditting(true);
         setOpen(true);
+
     };
     return (
         <div className={classes.root} style={{margin: "auto", paddingTop:5, paddingBottom:5}}>

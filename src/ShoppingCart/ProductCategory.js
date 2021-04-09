@@ -1,7 +1,6 @@
 import GridList from "@material-ui/core/GridList";
 import Product from "./Product";
 import React from "react";
-import * as _ from "lodash";
 
 export default function ProductCategory(props){
     const {
@@ -12,18 +11,11 @@ export default function ProductCategory(props){
         onRemoveItemFromCart,
         onToggleDisableItem,
         editMode,
-        editProduct,
+        setProductById,
         setOpen,
-        setProductById
+        setEditting,
     } = props;
 
-
-    const getProduct = (prodId) => {
-        return _.filter(products, function (elem) {
-            return elem.id === prodId;
-        })
-    }
-    const handleEditProduct = () => editProduct(getProduct())
 
     return (
         <>
@@ -43,9 +35,11 @@ export default function ProductCategory(props){
                                              onRemoveItemFromCart={onRemoveItemFromCart}
                                              onToggleDisableItem={onToggleDisableItem}
                                              editMode={editMode}
-                                             handleEditProduct={handleEditProduct}
-                                             setOpen={setOpen}
+
                                              setProductById={setProductById}
+
+                                             setOpen={setOpen}
+                                             setEditting={setEditting}
                                     />
                                 )
                             )

@@ -9,7 +9,6 @@ import Box from '@material-ui/core/Box';
 import * as _ from "lodash";
 import ProductCategory from "./ProductCategory";
 import {getCategoriesFromProducts} from "../utils/utils";
-import ProductDialog from "../Client/ProductDialog";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -61,12 +60,9 @@ export default function ScrollableTabsButtonAuto(props) {
         onToggleDisableItem,
         editMode,
         editProduct,
-        open,
-        setOpen,
-        setCategories,
         setProductById,
-        product,
-        setProduct
+        setOpen,
+        setEditting
     } = props;
 
     const categories = getCategoriesFromProducts(products);
@@ -108,30 +104,14 @@ export default function ScrollableTabsButtonAuto(props) {
                                 onToggleDisableItem={onToggleDisableItem}
                                 editMode={editMode}
                                 handleProductAction={editProduct}
-                                open={open}
-                                setOpen={setOpen}
                                 setProductById={setProductById}
+                                setOpen={setOpen}
+                                setEditting={setEditting}
                             />
                         </TabPanel>
                     </div>
                 )))
             }
-            <div>
-                <ProductDialog
-                    open={open}
-                    setOpen={setOpen}
-                    addProduct={() => {}}
-                    editProduct={editProduct}
-                    editMode={editMode}
-                    categories={categories}
-                    product={product}
-                    setProduct={setProduct}
-                    setCategories={setCategories}
-                    handleProductAction={editProduct} //edit o insert
-                    actionLabel="Actualizar"
-                    handleChange={() => {}}
-                />
-            </div>
         </div>
     );
 }
