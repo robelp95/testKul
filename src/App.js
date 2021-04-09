@@ -189,7 +189,7 @@ const state =
         "id": 0,
         "username": "Jorge.Longoria",
         "email": "Raquel27@yahoo.com",
-        "products": []
+        "products": productList
 
     };
 function App() {
@@ -207,7 +207,6 @@ function App() {
                   <Route exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}/>
                   <Route exact from="/manage-catalog" render={props => <CreateCatalog
                       productList={state["products"]}
-                      // notify={notify}
                       editMode={true}
                       setNotify={setNotify}
                       {...props}/>}/>
