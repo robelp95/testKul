@@ -18,7 +18,7 @@ export default function Menu({productList, editMode, setNotify, userData}) {
     const [products] = useState(productList);
     const [submitting, setSubmitting] = useState(false);
     const [orderProducts, setOrderProducts] = useState([]);
-    const [user, setUser] = useState(userData);
+    const [user] = useState(userData);
 
     const onAddToCart = (product, qty) => {
         product.added = true;
