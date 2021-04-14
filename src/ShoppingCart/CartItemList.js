@@ -4,6 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles((theme) => ({
     listItem: {
@@ -17,9 +19,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function CartItemList(props) {
-    const {products, total} = props;
+    const {products, total, onDeleteFromCart} = props;
 
     const classes = useStyles();
+
+    const handleRemoveFromCart = (product) =>onDeleteFromCart(product, 1);
+
     return (
         <React.Fragment>
             { total !== null && (<Typography variant="h6" gutterBottom>
@@ -33,8 +38,11 @@ export default function CartItemList(props) {
                 ) : ''}
                 {products.map((product, index) => (
                     <ListItem className={classes.listItem} key={index}>
-                        <ListItemText primary={product.name} secondary={product.desc} />
+                        <ListItemText primary={product.name + " (x" + product.quantity + ")"} secondary={product.desc} />
                         <Typography variant="body2">{product.price}</Typography>
+                        <IconButton disabled={!product.added} onClick={() => handleRemoveFromCart(product)}>
+                            <DeleteIcon/>
+                        </IconButton>
                     </ListItem>
                 ))}
                 {total !== null && (<ListItem className={classes.listItem}>

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PartialCart(props) {
-    const {products} = props;
+    const {products, onDeleteFromCart} = props;
     const classes = useStyles();
     return (
         <>
@@ -27,7 +27,11 @@ export default function PartialCart(props) {
                 <Typography component="h1" variant="h4" align="center">
                     Carrito
                 </Typography>
-                <CartItemList products={products} total={null} />
+                <CartItemList
+                    products={products}
+                    total={null}
+                    onDeleteFromCart={onDeleteFromCart}
+                />
             </Paper>
         </>
     )

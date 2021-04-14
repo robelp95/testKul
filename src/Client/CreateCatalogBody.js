@@ -70,6 +70,13 @@ export default function CreateCatalogBody(props) {
                         />
                     )
             }
+            <pre>
+                {JSON.stringify(editMode, null, 2)}
+                {JSON.stringify(editting, null, 2)}
+            </pre>
+            <pre>
+                {JSON.stringify(products, null,2)}
+            </pre>
             <CartButtonsWithDialog
                 addProduct={addProduct}
                 editProduct={editProduct}

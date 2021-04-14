@@ -18,7 +18,8 @@ const productList = [
         "price": "328.00",
         "category": "calzado",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 1,
@@ -27,7 +28,8 @@ const productList = [
         "price": "319.00",
         "category": "calzado",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 2,
@@ -36,7 +38,8 @@ const productList = [
         "price": "206.00",
         "category": "pantalones",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 3,
@@ -45,7 +48,8 @@ const productList = [
         "price": "507.00",
         "category": "calzado",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 4,
@@ -54,7 +58,8 @@ const productList = [
         "price": "499.00",
         "category": "remeras",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 5,
@@ -63,7 +68,8 @@ const productList = [
         "price": "507.00",
         "category": "pantalones",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 6,
@@ -72,7 +78,8 @@ const productList = [
         "price": "662.00",
         "category": "pantalones",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 7,
@@ -81,7 +88,8 @@ const productList = [
         "price": "279.00",
         "category": "remeras",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 8,
@@ -90,7 +98,8 @@ const productList = [
         "price": "861.00",
         "category": "pantalones",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 9,
@@ -99,7 +108,8 @@ const productList = [
         "price": "764.00",
         "category": "calzado",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 10,
@@ -108,7 +118,8 @@ const productList = [
         "price": "805.00",
         "category": "calzado",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 11,
@@ -117,7 +128,8 @@ const productList = [
         "price": "534.00",
         "category": "pantalones",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 12,
@@ -126,7 +138,8 @@ const productList = [
         "price": "982.00",
         "category": "calzado",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 13,
@@ -135,7 +148,8 @@ const productList = [
         "price": "147.00",
         "category": "calzado",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 14,
@@ -144,7 +158,8 @@ const productList = [
         "price": "869.00",
         "category": "remeras",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     }
     ,
     {
@@ -154,7 +169,8 @@ const productList = [
         "price": "147.00",
         "category": "materiales",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 16,
@@ -163,7 +179,8 @@ const productList = [
         "price": "869.00",
         "category": "abrigo",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 17,
@@ -172,7 +189,8 @@ const productList = [
         "price": "869.00",
         "category": "comida",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     },
     {
         "id": 18,
@@ -181,7 +199,8 @@ const productList = [
         "price": "869.00",
         "category": "bebidas",
         "added": false,
-        "enabled": true
+        "enabled": true,
+        "quantity": 0
     }
 ];
 const userData = {
