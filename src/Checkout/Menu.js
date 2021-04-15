@@ -18,17 +18,50 @@ export default function Menu({productList, editMode, setNotify, userData}) {
     const [products] = useState(productList);
     const [submitting, setSubmitting] = useState(false);
     const [orderProducts, setOrderProducts] = useState([]);
-    const [user, setUser] = useState(userData);
+    const [user] = useState(userData);
 
-    const onAddToCart = (product, qty) => {
+    const onAddToCart = (product) => {
         product.added = true;
+        let qty = product.quantity ? (product.quantity + 1): 1;
+        product.quantity = qty;
+        let exists = _.filter(orderProducts, (e) => {
+            return e.id === product.id
+        }).length>0;
 
-        setOrderProducts(products => [...products, product]);
-
+        if(!orderProducts.length>0) {
+            setOrderProducts(orderProducts => [...orderProducts, product]);
+        }else {
+            if (!exists){
+                setOrderProducts(orderProducts => [...orderProducts, product]);
+            }else{
+                setOrderProducts(orderProducts => orderProducts.map((p) => {
+                    return p.id === product.id ? product : p;
+                }));
+            }
+        }
         setNotify({isOpen:true, message: 'Item agregado al carrito', type:'success'});
     }
-    const onRemoveToCart = (product, qty) => {
+
+    //Diminish one item
+    const onRemoveFromCart = (product) => {
+        let needsDeletion = !Math.max(0, product.quantity -1) > 0;
+        if (needsDeletion) {
+            onDeleteFromCart(product);
+            return;
+        }
+        let qty = product.quantity-1;
+        product.quantity = qty;
+        setOrderProducts(orderProducts => orderProducts.map((p) => {
+            return p.id === product.id ? product : p;
+        }));
+
+        setNotify({isOpen:true, message: 'Item eliminado al carrito', type:'info'});
+    }
+
+    //Completely delete item from cart
+    const onDeleteFromCart = (product) => {
         product.added = false;
+        product.quantity= 0;
         let copy = _.filter(orderProducts, (e) => {
             return e.id !== product.id
         });
@@ -62,12 +95,18 @@ export default function Menu({productList, editMode, setNotify, userData}) {
                 <ScrollableTabsButtonAuto
                     products ={products}
                     onAddToCart={onAddToCart}
-                    onRemoveToCart={onRemoveToCart}
+                    onRemoveFromCart={onRemoveFromCart}
                     submitting={submitting}
                     editMode={editMode}
                     setProductById={() => {}}
                 />
-               <PartialCart products={orderProducts}/>
+               <PartialCart
+                   products={orderProducts}
+                   onDeleteFromCart={onDeleteFromCart}
+               />
+               <pre>
+                   {JSON.stringify(orderProducts, null, 2)}
+               </pre>
                 <CheckoutForm
                     initialClient={{
                     firstName : '',

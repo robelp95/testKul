@@ -16,13 +16,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Review({client, order}) {
+export default function Review({userData, client, order}) {
     const clientDetail = [
         { name: 'Tipo de envio', detail: client.deliveryType },
         { name: 'Nombre', detail: client.firstName + ' ' + client.lastName },
         { name: 'Numero de contacto', detail: client.phoneNumber },
         { name: 'Direccion', detail: client.address1 + ' ' + client.address2 },
         { name: 'Comentario', detail: client.comment },
+        { name: 'Horario de atencion', detail: userData.opening },
     ];
 
     const classes = useStyles();
@@ -39,9 +40,9 @@ export default function Review({client, order}) {
                     <Typography variant="h6" gutterBottom className={classes.title}>
                         Nombre Negocio
                     </Typography>
-                    <Typography gutterBottom>Horario atencion</Typography>
+                    <Typography gutterBottom>Horario atencion: {userData.opening}</Typography>
                     <Typography gutterBottom></Typography>
-                    <Typography gutterBottom>+56 {client.phoneNumber}</Typography>
+                    <Typography gutterBottom>{userData.phoneNumber}</Typography>
                 </Grid>
                 <Grid item container direction="column" xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom className={classes.title}>

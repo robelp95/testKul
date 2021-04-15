@@ -24,18 +24,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CartButtonsWithDialog(
     {
-        addProduct,
-        editProduct,
-        editMode,
         categories,
         setCategories,
-        product,
-        setProduct,
-        setProductById,
         setOpen,
         setEditting,
-        selectedCategory,
-        setSelectedCategory
     }
     ) {
     const [openCategories, setOpenCategories] = React.useState(false);

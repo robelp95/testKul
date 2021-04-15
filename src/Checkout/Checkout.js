@@ -6,6 +6,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
@@ -120,9 +121,10 @@ export default function Checkout(props) {
                                         className={classes.button}
                                         type="submit"
                                         disabled={!formIsValid}
+                                        startIcon={activeStep === steps.length -1 ? <WhatsAppIcon/> : ''}
                                     >
                                         {
-                                            activeStep === steps.length - 1 ? 'Generar pedido' : 'Siguiente'
+                                            activeStep === steps.length - 1 ? 'Pedir por whatsapp' : 'Siguiente'
                                         }
                                     </Button>
                                 </div>

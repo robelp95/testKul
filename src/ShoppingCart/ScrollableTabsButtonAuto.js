@@ -54,7 +54,7 @@ export default function ScrollableTabsButtonAuto(props) {
     const {
         products,
         onAddToCart,
-        onRemoveToCart,
+        onRemoveFromCart,
         submitting,
         onRemoveItemFromCart,
         onToggleDisableItem,
@@ -98,7 +98,7 @@ export default function ScrollableTabsButtonAuto(props) {
                             <ProductCategory
                                 products ={_.filter(products, (p) => p["category"] == category)}
                                 onAddToCart={onAddToCart}
-                                onRemoveToCart={onRemoveToCart}
+                                onRemoveFromCart={onRemoveFromCart}
                                 submitting={submitting}
                                 onRemoveItemFromCart={onRemoveItemFromCart}
                                 onToggleDisableItem={onToggleDisableItem}
