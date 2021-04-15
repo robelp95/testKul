@@ -25,7 +25,6 @@ export default function CreateCatalogBody(props) {
     } = props;
 
     const [editting, setEditting] = useState(null);
-    const [selectedCategory, setSelectedCategory] = useState("");
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
@@ -37,7 +36,7 @@ export default function CreateCatalogBody(props) {
 
     const handleProductAction = (product) => {
         if (product.name !== "" && product.category !== "" && product.price !== "" && product.desc !== ""){
-            if (!product.id) {
+            if (product.id < 0) {
                 product.id = nanoid();
             }
             editting ? editProduct(product) : addProduct(product);
@@ -45,9 +44,6 @@ export default function CreateCatalogBody(props) {
 
         }
     }
-    const handleChange = (event) => {
-        product.category = event.target.value;
-    };
 
     return (
 
@@ -70,30 +66,14 @@ export default function CreateCatalogBody(props) {
                         />
                     )
             }
-            <pre>
-                {JSON.stringify(editMode, null, 2)}
-                {JSON.stringify(editting, null, 2)}
-            </pre>
-            <pre>
-                {JSON.stringify(products, null,2)}
-            </pre>
             <CartButtonsWithDialog
-                addProduct={addProduct}
-                editProduct={editProduct}
-                editMode={editMode}
                 categories={categories}
                 setCategories={setCategories}
-                product={product}
-                setProduct={setProduct}
-                setProductById={setProductById}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
                 setOpen={setOpen}
                 setEditting={setEditting}
             />
             <ProductDialog
                 categories={categories}
-                handleChange={handleChange}
                 handleInputChange={handleInputChange}
                 actionLabel={ editting ? "Actualizar" : "Agregar" }
                 product={product}

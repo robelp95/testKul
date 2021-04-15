@@ -15,8 +15,6 @@ export default function ProductDialog(props) {
 
     const {
         categories,
-        setSelectedCategory,
-        handleChange,
         actionLabel,
         product,
         setProduct,
@@ -28,7 +26,6 @@ export default function ProductDialog(props) {
 
 
     const handleClose = () => {
-        setSelectedCategory('');
         initialiceProduct();
         setOpen(false);
     };
@@ -89,7 +86,7 @@ export default function ProductDialog(props) {
                     <Select
                         name="category"
                         value={product.category}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                     >
                         {
                             categories.map( (cat, index) => (

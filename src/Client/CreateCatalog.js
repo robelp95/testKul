@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const initProduct = {id: 0, name: "", desc: "", price: "",category: "", added: false, enabled: true};
+const initProduct = {id: -1, name: "", desc: "", price: "",category: "", added: false, enabled: true};
 
 export default function CreateCatalog({productList, editMode, setNotify, userData}) {
 
