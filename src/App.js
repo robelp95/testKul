@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import Header from "./Header";
 import {Redirect, Route} from "react-router-dom";
 import {Switch} from 'react-router';
@@ -8,7 +8,9 @@ import Menu from "./Checkout/Menu";
 import ClientProfile from "./Client/ClientProfile";
 import CreateCatalog from "./Client/CreateCatalog";
 import Notification from "./ShoppingCart/Notification";
-
+import netlifyIdentity from 'netlify-identity-widget';
+import {UserContext} from './UserContext';
+import * as _ from 'lodash';
 
 const productList = [
     {
@@ -227,42 +229,101 @@ const userData = {
     "minDelivery": 100,
     "deliveryCharge": 100
 };
-const state =
-    {
-        "user" :userData,
-        "products": productList
 
-    };
+netlifyIdentity.init({locale: 'es'});
+
 function App() {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
+    const [state, setState] = useState({user:null,products:_.take(productList, 3)});
+    const value = useMemo(() => ({ state, setState }), [state, setState]);
+
+
+    netlifyIdentity.on('logout', () => {
+        setState({
+            ...state,
+            user: null
+        });
+        //TODO redirect to homepage
+    });
+
+    useEffect(() => {
+        const user = netlifyIdentity.currentUser();
+        if (user !== null){
+            setState({
+                ...state,
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    createdAt: user.created_at,
+                    username: user.user_metadata.full_name
+                }});
+        }
+
+    }, [])
+
+    const handleLogin = () => {
+        netlifyIdentity.open();
+        netlifyIdentity.on('login', user => {
+            setState({
+                ...state,
+                user: {
+                id: user.id,
+                    email: user.email,
+                    createdAt: user.created_at,
+                    username: user.user_metadata.full_name
+            }});
+        });
+    }
+
+    const fetchProducts = async (user) => {
+        setTimeout(() => {}, 200);
+        return productList;
+    }
 
   return (
       <div>
-          <Header />
+          <Header handleLogin={handleLogin}/>
           <Toolbar/>
           <Notification notify={notify} setNotify={setNotify}/>
           <div>
-              <Switch>
-                  <Route exact from="/login" render={props => <Home page="Login" {...props}/>}/>
-                  <Route exact from="/cliente" render={props => <ClientProfile {...props}/>}/>
-                  <Route exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}/>
-                  <Route exact from="/manage-catalog" render={props => <CreateCatalog
-                      productList={state["products"]}
-                      editMode={true}
-                      setNotify={setNotify}
-                      userData={userData}
-                      {...props}/>}/>
-                  <Route exact from="/menu" render={props => <Menu
-                      productList={state["products"]}
-                      notify={notify}
-                      editMode={false}
-                      setNotify={setNotify}
-                      userData={userData}
-                      {...props}/>}/>
+              <UserContext.Provider value={value}>
+
+
+                  <Switch>
+                      <Route
+                          exact from="/home" render={props => <Home page="Landing Page" {...props}/>}
+                      />
+
+                      <Route
+                          exact from="/cliente" render={props => <ClientProfile {...props}/>}
+                      />
+                      <Route
+                          exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}
+                      />
+                      <Route
+                          exact from="/manage-catalog" render={props => <CreateCatalog
+                          productList={state["products"]}
+                          fetchProducts={fetchProducts}
+                          editMode={true}
+                          setNotify={setNotify}
+                          userData={userData}
+                          {...props}/>}
+                      />
+                      <Route
+                          exact from="/menu" render={props => <Menu
+                          productList={state["products"]}
+                          fetchProducts={fetchProducts}
+                          notify={notify}
+                          editMode={false}
+                          setNotify={setNotify}
+                          userData={userData}
+                          {...props}/>}
+                      />
                   <Route path="*">
-                      <Redirect to="/menu" /> {/* Default route */}
+                      <Redirect to="/home" /> {/* Default route */}
                   </Route>
-              </Switch>
+                  </Switch>
+              </UserContext.Provider>
           </div>
       </div>
   )

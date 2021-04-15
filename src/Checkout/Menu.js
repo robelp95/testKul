@@ -1,6 +1,6 @@
 import MainFeaturedPost from "../MainFeaturedPost";
 import {CheckoutForm} from "./CheckoutForm";
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {nanoid} from 'nanoid';
 import * as _ from 'lodash';
 import PartialCart from "../ShoppingCart/PartialCart";
@@ -9,16 +9,24 @@ import ScrollToCheckout from "../ScrollToCheckout";
 import Fab from "@material-ui/core/Fab";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useCommonStyles} from "../utils/commonStyles";
+import {UserContext} from "../UserContext";
 
 
-export default function Menu({productList, editMode, setNotify, userData}) {
+export default function Menu({productList, editMode, setNotify, userData, fetchProducts}) {
 
 
     const [orderNumber] = useState(nanoid());
-    const [products] = useState(productList);
+    const [products, setProducts] = useState(productList);
     const [submitting, setSubmitting] = useState(false);
     const [orderProducts, setOrderProducts] = useState([]);
-    const [user] = useState(userData);
+    // const [user] = useState(userData);
+
+    const { user } = useContext(UserContext);
+
+    useEffect(async () => {
+        const prods = await fetchProducts(user.id);
+        setProducts(prods);
+    }, []);
 
     const onAddToCart = (product) => {
         product.added = true;

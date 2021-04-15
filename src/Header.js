@@ -85,7 +85,7 @@ const Header = props => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
-    const { history } = props;
+    const { history, handleLogin} = props;
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -123,7 +123,7 @@ const Header = props => {
                         Kulko.app
                     </Typography>
                     <div>
-                        <Button color="inherit" onClick={() => handleMenuClick('/login') }>Login clientes</Button>
+                        <Button color="inherit" onClick={handleLogin }>Login clientes</Button>
                     </div>
 
                 </Toolbar>
