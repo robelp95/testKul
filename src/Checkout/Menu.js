@@ -104,9 +104,6 @@ export default function Menu({productList, editMode, setNotify, userData}) {
                    products={orderProducts}
                    onDeleteFromCart={onDeleteFromCart}
                />
-               <pre>
-                   {JSON.stringify(orderProducts, null, 2)}
-               </pre>
                 <CheckoutForm
                     initialClient={{
                     firstName : '',
