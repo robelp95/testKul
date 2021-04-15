@@ -51,8 +51,21 @@ function a11yProps(index) {
 
 
 export default function ScrollableTabsButtonAuto(props) {
-    const {products, onAddToCart, onRemoveToCart, submitting, onRemoveItemFromCart, onToggleDisableItem, editMode} = props;
-    const categories = getCategoriesFromProducts(products)
+    const {
+        products,
+        onAddToCart,
+        onRemoveFromCart,
+        submitting,
+        onRemoveItemFromCart,
+        onToggleDisableItem,
+        editMode,
+        editProduct,
+        setProductById,
+        setOpen,
+        setEditting
+    } = props;
+
+    const categories = getCategoriesFromProducts(products);
 
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
@@ -85,11 +98,15 @@ export default function ScrollableTabsButtonAuto(props) {
                             <ProductCategory
                                 products ={_.filter(products, (p) => p["category"] == category)}
                                 onAddToCart={onAddToCart}
-                                onRemoveToCart={onRemoveToCart}
+                                onRemoveFromCart={onRemoveFromCart}
                                 submitting={submitting}
                                 onRemoveItemFromCart={onRemoveItemFromCart}
                                 onToggleDisableItem={onToggleDisableItem}
                                 editMode={editMode}
+                                handleProductAction={editProduct}
+                                setProductById={setProductById}
+                                setOpen={setOpen}
+                                setEditting={setEditting}
                             />
                         </TabPanel>
                     </div>

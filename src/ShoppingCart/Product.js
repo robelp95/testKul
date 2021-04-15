@@ -8,7 +8,9 @@ import CardActions from "@material-ui/core/CardActions";
 import {Grid} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 import Hidden from "@material-ui/core/Hidden";
 import * as _ from 'lodash';
 import FormSwitch from "../utils/FormSwitch";
@@ -33,16 +35,36 @@ const useStyles = makeStyles({
         fontWeight: "lighter"
     }
 });
-export default function Product({product, onAddToCart, onRemoveToCart, submitting, onRemoveItemFromCart, onToggleDisableItem, editMode}) {
+export default function Product(
+    {
+        product,
+        onAddToCart,
+        onRemoveFromCart,
+        submitting,
+        onRemoveItemFromCart,
+        onToggleDisableItem,
+        editMode,
+        setProductById,
+        setOpen,
+        setEditting
+    }
+    ) {
 
     const {id, name, desc, price, quantity} = product;
     const classes = useStyles();
 
     const handleAddToCart = () => onAddToCart(product, 1);
-    const handleRemoveFromCart = () => onRemoveToCart(product);
+    //when shopping
+    const handleRemoveFromCart = () => onRemoveFromCart(product);
+    //when editting
     const handleRemoveItemFromCart = () => onRemoveItemFromCart(product);
     const handleToggleDisableItem = () => onToggleDisableItem(product)
+    const handleEditItemFromCart = () => {
+        setProductById(id);
+        setEditting(true);
+        setOpen(true);
 
+    };
     return (
         <div className={classes.root} style={{margin: "auto", paddingTop:5, paddingBottom:5}}>
             <Grid  item xs={12} sm={10} style={{margin: "auto"}}>
@@ -54,7 +76,7 @@ export default function Product({product, onAddToCart, onRemoveToCart, submittin
                     />
                     <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="body1" component="body1">
-                            {name} {quantity ? '- `${quantity}`': ''}
+                            {name}
                         </Typography>
                         <Typography className={classes.subtitle}>
                             {_.truncate(desc, {length: 30})}
@@ -69,12 +91,15 @@ export default function Product({product, onAddToCart, onRemoveToCart, submittin
                                     <IconButton onClick={handleRemoveItemFromCart}>
                                         <DeleteIcon/>
                                     </IconButton>
+                                    <IconButton onClick={handleEditItemFromCart}>
+                                        <CreateIcon/>
+                                    </IconButton>
                                 </>
                             )}
                             {!editMode && (
                                 <>
                                     <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
-                                        <DeleteIcon/>
+                                        <RemoveIcon/>
                                     </IconButton>
                                     <IconButton disabled={submitting} onClick={handleAddToCart}>
                                         <AddIcon/>
@@ -91,12 +116,15 @@ export default function Product({product, onAddToCart, onRemoveToCart, submittin
                                     <IconButton onClick={handleRemoveItemFromCart}>
                                         <DeleteIcon/>
                                     </IconButton>
+                                    <IconButton onClick={handleEditItemFromCart}>
+                                        <CreateIcon/>
+                                    </IconButton>
                                 </>
                                 )}
                             {!editMode && (
                                 <>
                                     <IconButton disabled={!product.added || submitting} onClick={handleRemoveFromCart}>
-                                        <DeleteIcon/>
+                                        <RemoveIcon/>
                                     </IconButton>
                                     <IconButton disabled={submitting} onClick={handleAddToCart}>
                                         <AddIcon/>

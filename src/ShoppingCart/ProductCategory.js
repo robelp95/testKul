@@ -6,12 +6,17 @@ export default function ProductCategory(props){
     const {
         products,
         onAddToCart,
-        onRemoveToCart,
+        onRemoveFromCart,
         submitting,
         onRemoveItemFromCart,
         onToggleDisableItem,
-        editMode
+        editMode,
+        setProductById,
+        setOpen,
+        setEditting,
     } = props;
+
+
     return (
         <>
             {
@@ -25,11 +30,16 @@ export default function ProductCategory(props){
                                     <Product key={index2}
                                              product={product}
                                              onAddToCart={onAddToCart}
-                                             onRemoveToCart={onRemoveToCart}
+                                             onRemoveFromCart={onRemoveFromCart}
                                              submitting={submitting}
                                              onRemoveItemFromCart={onRemoveItemFromCart}
                                              onToggleDisableItem={onToggleDisableItem}
                                              editMode={editMode}
+
+                                             setProductById={setProductById}
+
+                                             setOpen={setOpen}
+                                             setEditting={setEditting}
                                     />
                                 )
                             )

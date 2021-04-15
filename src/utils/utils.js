@@ -7,7 +7,8 @@ export function generateWhatsappMsg({values, order}) {
     let newMessage = "🛒 *Nuevo pedido via Kulko.App* 🛒" + NEW_LINE + NEW_LINE;
     newMessage += "*Pedido* #" + order.orderNumber + NEW_LINE + NEW_LINE;
     for (let [key, value] of Object.entries(order.orderProducts)) {
-        newMessage+= ('*1x ' + value.name + '* - $' + value.price);
+        console.log(value);
+        newMessage+= ('*' + value.quantity + 'x ' + value.name + '* - $' + value.price);
         newMessage+=NEW_LINE;
     }
     newMessage+= NEW_LINE + "*Total:* $" + order.total + NEW_LINE + NEW_LINE;

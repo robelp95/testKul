@@ -14,7 +14,7 @@ const formSchema = Yup.object().shape({
         comment: Yup.string(),
 });
 
-export const CheckoutForm = ({initialClient, order, setSubmitting})=>{
+export const CheckoutForm = ({initialClient, order, setSubmitting, userData})=>{
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = ['Datos del cliente', 'Resumen de orden'];
 
@@ -69,6 +69,7 @@ export const CheckoutForm = ({initialClient, order, setSubmitting})=>{
                                 errors={errors}
                                 order={order}
                                 isSubmitting={isSubmitting}
+                                userData={userData}
                                 {...props}
                             />
                         </Form>
