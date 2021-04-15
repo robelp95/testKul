@@ -31,6 +31,7 @@ export default function PartialCart(props) {
                     products={products}
                     total={null}
                     onDeleteFromCart={onDeleteFromCart}
+                    isReview={false}
                 />
             </Paper>
         </>
