@@ -224,6 +224,8 @@ const userData = {
         "id":0,
         "products": productList
     },
+    "minDelivery": 100,
+    "deliveryCharge": 100
 };
 const state =
     {

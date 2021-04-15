@@ -25,6 +25,9 @@ export default function Review({userData, client, order}) {
         { name: 'Comentario', detail: client.comment },
         { name: 'Horario de atencion', detail: userData.opening },
     ];
+    const shippingCost = order.total >= userData.minDelivery  ? "Gratis" : userData.coin+''+userData.deliveryCharge;
+
+
 
     const classes = useStyles();
 
@@ -34,15 +37,18 @@ export default function Review({userData, client, order}) {
             <CartItemList
                 products={order.orderProducts}
                 total={order.total}
+                onDeleteFromCart={()=>{}}
+                isReview={true}
             />
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom className={classes.title}>
-                        Nombre Negocio
+                        {userData.name}
                     </Typography>
                     <Typography gutterBottom>Horario atencion: {userData.opening}</Typography>
                     <Typography gutterBottom></Typography>
                     <Typography gutterBottom>{userData.phoneNumber}</Typography>
+                    <Typography gutterBottom>Costo envío: {shippingCost}</Typography>
                 </Grid>
                 <Grid item container direction="column" xs={12} sm={6}>
                     <Typography variant="h6" gutterBottom className={classes.title}>
