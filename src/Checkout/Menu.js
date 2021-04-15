@@ -69,7 +69,7 @@ export default function Menu({productList, editMode, setNotify, userData}) {
         setNotify({isOpen:true, message: 'Item eliminado del carrito', type:'info'});
     }
 
-    const total = _.sum(products.map((product) => parseInt(product.price))) || 0;
+    const total = _.sum(orderProducts.map((product) => parseInt(product.quantity)*parseInt(product.price))) || 0;
     const classes = useCommonStyles();
 
     return (

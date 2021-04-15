@@ -11,21 +11,22 @@ return (
     <>
         <Formik
         initialValues={{
-            businessName: '',
-            businessDescripcion: '',
-            businessUrl: '',
-            schedule: '',
-            minDelivery: '',
+            businessName: 'Kulko app',
+            businessDescripcion: 'Catalogos de pedidos por Whatsapp',
+            businessUrl: 'kulkoapp',
+            schedule: 'de 8 a 20hs',
             logo: '',
-            paymentType:'',
+            paymentType:'Efectivo/Transferencia',
             orderVia: 'whatsapp',
-            name:'',
-            description:'',
-            address: '',
-            phoneNumber: '',
-            coin: '',
-            category:'',
-            country:'',
+            name:'Kulko app',
+            description:'Catalogos de pedidos por Whatsapp',
+            address: 'Calle falsa 123',
+            phoneNumber: '+56915645766',
+            coin: '$',
+            category: 'Desarrollo web',
+            country: 'Chile',
+            minDelivery: '100',
+            deliveryCharge: '200'
 
         }}>
             {

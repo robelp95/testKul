@@ -226,15 +226,48 @@ export default function ClientConfigForm({values, handleChange, errors}){
 
                 </Grid>
             </Grid>
-            <Grid container spacing={6} justify={"center"} style={{marginTop: "10px"}}>
-                <Grid item xs={4} style={{textAlign: "center"}}>
-                    <Button
-                        color="primary"
-                        variant="outlined"
-                        size="large"
-                    >
-                        Guardar Ajustes
-                    </Button>
+            <Grid item xs={12} className={classes.title}>
+                <Typography component="h1" variant="h4" align="center">
+                    Ajustes de envío
+                </Typography>
+            </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="minDelivery"
+                        name="minDelivery"
+                        label="Costo mínimo para envío gratis"
+                        value={values.minDelivery}
+                        error={errors.minDelivery !== undefined}
+                        onChange={handleChange}
+                        placeholder="Ingrese costo mínimo para envío gratis"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="deliveryCharge"
+                        name="deliveryCharge"
+                        label="Costo del envio"
+                        value={values.deliveryCharge}
+                        error={errors.deliveryCharge !== undefined}
+                        onChange={handleChange}
+                        placeholder="Ingrese costo del envio"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid container spacing={6} justify={"center"} style={{marginTop: "10px"}}>
+                    <Grid item xs={4} style={{textAlign: "center"}}>
+                        <Button
+                            color="primary"
+                            variant="outlined"
+                            size="large"
+                        >
+                            Guardar Ajustes
+                        </Button>
+                    </Grid>
                 </Grid>
             </Grid>
         </>

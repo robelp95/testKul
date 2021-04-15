@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 export default function CartItemList(props) {
-    const {products, total, onDeleteFromCart} = props;
+    const {products, total, onDeleteFromCart, isReview} = props;
 
     const classes = useStyles();
 
-    const handleRemoveFromCart = (product) =>onDeleteFromCart(product, 1);
+    const handleRemoveFromCart = (product) =>onDeleteFromCart(product);
 
     return (
         <React.Fragment>
@@ -40,9 +40,12 @@ export default function CartItemList(props) {
                     <ListItem className={classes.listItem} key={index}>
                         <ListItemText primary={product.name + " (x" + product.quantity + ")"} secondary={product.desc} />
                         <Typography variant="body2">{product.price}</Typography>
-                        <IconButton disabled={!product.added} onClick={() => handleRemoveFromCart(product)}>
-                            <DeleteIcon/>
-                        </IconButton>
+                        {!isReview && (
+                            <IconButton disabled={!product.added} onClick={() => handleRemoveFromCart(product)}>
+                                <DeleteIcon/>
+                            </IconButton>
+                        )}
+
                     </ListItem>
                 ))}
                 {total !== null && (<ListItem className={classes.listItem}>
