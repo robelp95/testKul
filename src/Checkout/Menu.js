@@ -84,10 +84,8 @@ export default function Menu({productList, editMode, setNotify, userData, fetchP
         <>
             <MainFeaturedPost
                 post={{
-                    title: user.name,
                     description: user.description,
                     image: user.imagePath ? user.imagePath : 'https://source.unsplash.com/random',
-                    imgText: 'main image description',
                     opening: user.opening,
                     category: user.category,
                     coin:user.coin,
