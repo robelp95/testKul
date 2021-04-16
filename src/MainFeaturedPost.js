@@ -37,30 +37,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainFeaturedPost(props) {
     const classes = useStyles();
-    const { post } = props;
+    const {description, image, opening, address, brandName, open, phoneNumber} = props;
 
     return (
-        <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})`}}>
-            {/* Increase the priority of the hero background image */}
-            {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+        <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${image})`}}>
+            {<img style={{ display: 'none' }} src={image} alt={brandName} />}
             <div className={classes.overlay} />
             <Grid container>
                 <Grid item md={12}>
                     <div className={classes.mainFeaturedPostContent}>
                         <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                            {post.brandName}
+                            {brandName}
                         </Typography>
                         <Typography variant="h5" color="inherit" paragraph>
-                            {post.description}
+                            {description}
                         </Typography>
 
                         <Typography variant="h6" color="inherit" paragraph>
-                            Horario: {post.opening}
+                            Horario: {opening}
+                        </Typography>
+                        <Typography variant="h6" color="inherit" paragraph>
+                            Direccion: {address}
                         </Typography>
                         <Typography variant="h6" color="inherit" paragraph>
 
                             {
-                                post.open ?
+                                open ?
                                     <Chip
                                         label="Negocio Abierto"
                                         color="primary"
@@ -71,7 +73,7 @@ export default function MainFeaturedPost(props) {
                                         color="primary"
                                         style={{backgroundColor:"#f44336"}}
                                     />
-                            } {post.phoneNumber}
+                            } {phoneNumber}
                         </Typography>
                     </div>
                 </Grid>
