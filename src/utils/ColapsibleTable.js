@@ -23,17 +23,18 @@ const useRowStyles = makeStyles({
     },
 });
 
-function createData(name, calories, fat, carbs, protein, price) {
+function createData(name, deliveryType, customerName, customerPhoneNumber, price) {
     return {
         name,
-        calories,
-        fat,
-        carbs,
-        protein,
+        deliveryType,
+        customerName,
+        customerPhoneNumber,
         price,
-        history: [
-            { date: '2020-01-05', customerId: '11091700', amount: 3 },
-            { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
+        products: [
+            { name: 'Frozen yoghurt', amount: 3, total: 134 },
+            { name: 'Ice cream sandwich', amount: 1, total: 205 },
+            { name: 'Eclair', amount: 1, total: 134 },
+            { name: 'Cupcake', amount: 1, total: 134 },
         ],
     };
 }
@@ -54,37 +55,35 @@ function Row(props) {
                 <TableCell component="th" scope="row">
                     {row.name}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+                <TableCell align="right">{row.deliveryType}</TableCell>
+                <TableCell align="right">{row.customerName}</TableCell>
+                <TableCell align="right">{row.customerPhoneNumber}</TableCell>
+                <TableCell align="right">{row.price}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
                             <Typography variant="h6" gutterBottom component="div">
-                                History
+                                Pedido
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Date</TableCell>
-                                        <TableCell>Customer</TableCell>
-                                        <TableCell align="right">Amount</TableCell>
-                                        <TableCell align="right">Total price ($)</TableCell>
+                                        <TableCell>Producto</TableCell>
+                                        <TableCell align="right">Cantidad</TableCell>
+                                        <TableCell align="right">Total ($)</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.history.map((historyRow) => (
-                                        <TableRow key={historyRow.date}>
+                                    {row.products.map((prod) => (
+                                        <TableRow key={prod.name}>
                                             <TableCell component="th" scope="row">
-                                                {historyRow.date}
+                                                {prod.name}
                                             </TableCell>
-                                            <TableCell>{historyRow.customerId}</TableCell>
-                                            <TableCell align="right">{historyRow.amount}</TableCell>
+                                            <TableCell align="right">{prod.amount}</TableCell>
                                             <TableCell align="right">
-                                                {Math.round(historyRow.amount * row.price * 100) / 100}
+                                                {Math.round(prod.amount * row.price * 100) / 100}
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -106,22 +105,20 @@ Row.propTypes = {
         history: PropTypes.arrayOf(
             PropTypes.shape({
                 amount: PropTypes.number.isRequired,
-                customerId: PropTypes.string.isRequired,
-                date: PropTypes.string.isRequired,
+                total: PropTypes.number.isRequired,
+                name: PropTypes.string.isRequired,
             }),
         ).isRequired,
         name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        protein: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired
     }).isRequired,
 };
 
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 3.99),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 4.99),
-    createData('Eclair', 262, 16.0, 24, 6.0, 3.79),
-    createData('Cupcake', 305, 3.7, 67, 4.3, 2.5),
-    createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
+    createData(1, "Delivery", "Anibal", "+56915456543", 165, 3.99),
+    createData(2, "Pickup", "Ana", "+569154565321", 43, 4.99),
+    createData(3, "Pickup", "Ana", "+569154565321", 105, 503),
+    createData(4, "Delivery", "Miguel", "+56915766543", 907, 2.5),
 ];
 
 export default function CollapsibleTable() {
@@ -131,11 +128,11 @@ export default function CollapsibleTable() {
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                        <TableCell>Nro pedido</TableCell>
+                        <TableCell align="right">Tipo de entrega</TableCell>
+                        <TableCell align="right">Cliente</TableCell>
+                        <TableCell align="right">Contacto</TableCell>
+                        <TableCell align="right">Total</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

@@ -1,7 +1,6 @@
 import * as _ from "lodash";
 
 const NEW_LINE = "\n";
-//TODO implement types
 export function generateWhatsappMsg({values, order}) {
 
     const shippingCost = order.total >= order.user.minDelivery  ? "Gratis" : order.user.coin+''+order.user.deliveryCharge;
