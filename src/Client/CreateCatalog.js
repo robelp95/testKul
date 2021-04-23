@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const initProduct = {id: -1, name: "", desc: "", price: "",category: "", added: false, enabled: true};
 
-export default function CreateCatalog({productList, editMode, setNotify, userData, fetchProducts}) {
+export default function CreateCatalog({productList, editMode, setNotify, userData, fetchProducts, fetchUser}) {
 
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(initProduct);

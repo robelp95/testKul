@@ -11,6 +11,7 @@ import Notification from "./ShoppingCart/Notification";
 import netlifyIdentity from 'netlify-identity-widget';
 import {UserContext} from './UserContext';
 import * as _ from 'lodash';
+import PrivateRoute from "./utils/PrivateRoute";
 
 const productList = [
     {
@@ -237,7 +238,6 @@ function App() {
     const [state, setState] = useState({user:null,products:_.take(productList, 3)});
     const value = useMemo(() => ({ state, setState }), [state, setState]);
 
-
     netlifyIdentity.on('logout', () => {
         setState({
             ...state,
@@ -275,6 +275,11 @@ function App() {
         });
     }
 
+    const fetchUser = async () => {
+        setTimeout(() => {}, 400);
+        return userData;
+    }
+
     const fetchProducts = async (user) => {
         setTimeout(() => {}, 200);
         return productList;
@@ -290,38 +295,38 @@ function App() {
 
 
                   <Switch>
-                      <Route
-                          exact from="/home" render={props => <Home page="Landing Page" {...props}/>}
-                      />
-
-                      <Route
-                          exact from="/cliente" render={props => <ClientProfile {...props}/>}
-                      />
-                      <Route
-                          exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}
-                      />
-                      <Route
-                          exact from="/manage-catalog" render={props => <CreateCatalog
-                          productList={state["products"]}
-                          fetchProducts={fetchProducts}
-                          editMode={true}
-                          setNotify={setNotify}
-                          userData={userData}
-                          {...props}/>}
-                      />
+                      <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
+                      <PrivateRoute exact path="/cliente">
+                          <ClientProfile/>
+                      </PrivateRoute>
+                      <PrivateRoute exact path="/ajustes">
+                          <Home page="Ajustes cliente"/>
+                      </PrivateRoute>
+                      <PrivateRoute
+                          exact from="/manage-catalog">
+                          <CreateCatalog
+                              productList={state["products"]}
+                              fetchProducts={fetchProducts}
+                              fetchUser={fetchUser}
+                              editMode={true}
+                              setNotify={setNotify}
+                              userData={userData}
+                          />
+                      </PrivateRoute>
                       <Route
                           exact from="/menu" render={props => <Menu
                           productList={state["products"]}
                           fetchProducts={fetchProducts}
+                          fetchUser={fetchUser}
                           notify={notify}
                           editMode={false}
                           setNotify={setNotify}
                           userData={userData}
                           {...props}/>}
                       />
-                  <Route path="*">
-                      <Redirect to="/home" /> {/* Default route */}
-                  </Route>
+                      <Route path="*">
+                          <Redirect to="/home" /> {/* Default route */}
+                      </Route>
                   </Switch>
               </UserContext.Provider>
           </div>
