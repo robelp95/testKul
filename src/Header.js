@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -148,10 +149,10 @@ const Header = props => {
                         <ListItemIcon><MailIcon/></ListItemIcon>
                         <ListItemText primary="Gestion Cliente" />
                     </ListItem>
-                    {/*<ListItem button key="Gestion Partner" onClick={() => handleMenuClick('/partner')}>*/}
-                    {/*    <ListItemIcon><InboxIcon/></ListItemIcon>*/}
-                    {/*    <ListItemText primary="Gestion Partner" />*/}
-                    {/*</ListItem>*/}
+                    <ListItem button key="Mis Pedidos" onClick={() => handleMenuClick('/mis-pedidos')}>
+                        <ListItemIcon><WhatsAppIcon/></ListItemIcon>
+                        <ListItemText primary="Mis Pedidos" />
+                    </ListItem>
                     <ListItem button key="Ajustes de configuracion" onClick={() => handleMenuClick('/ajustes')}>
                         <ListItemIcon><InboxIcon/></ListItemIcon>
                         <ListItemText primary="Ajustes" />

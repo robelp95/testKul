@@ -22,4 +22,8 @@ export const useCommonStyles = makeStyles((theme) => ({
             padding: theme.spacing(3),
         },
     },
+    title:{
+        marginTop: "5%",
+        marginBottom: "5%"
+    }
 }));

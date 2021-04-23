@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {withRouter} from "react-router-dom";
+import {useCommonStyles} from "../utils/commonStyles";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ClientProfileCatalogs = (props) => {
     const classes = useStyles();
+    const commonClasses = useCommonStyles();
     const { history } = props;
 
     const handleMenuClick = (pageUrl) => {
@@ -33,7 +35,7 @@ const ClientProfileCatalogs = (props) => {
 
     return (
         <Paper className={classes.paper}>
-            <Grid item xs={12} className={classes.title}>
+            <Grid item xs={12} className={commonClasses.title}>
                 <Typography component="h1" variant="h4" align="center">
                     Mis catálogos
                 </Typography>
