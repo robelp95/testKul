@@ -114,7 +114,16 @@ export default function Menu({productList, editMode, setNotify, userData}) {
                     address2: '',
                     comment: ''
                     }}
-                    order={{orderProducts, orderNumber, total}}
+                    order={{
+                        orderProducts,
+                        orderNumber,
+                        total,
+                        user: {
+                            paymentInstruction:user.paymentInstructions,
+                            minDelivery:user.minDelivery,
+                            deliveryCharge: user.deliveryCharge
+                        }
+                    }}
                     setSubmitting={setSubmitting}
                     userData={userData}
                 />

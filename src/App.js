@@ -8,6 +8,8 @@ import Menu from "./Checkout/Menu";
 import ClientProfile from "./Client/ClientProfile";
 import CreateCatalog from "./Client/CreateCatalog";
 import Notification from "./ShoppingCart/Notification";
+import ClientOrders from "./Client/ClientOrders";
+import Copyright from "./utils/Copyright";
 
 
 const productList = [
@@ -246,7 +248,7 @@ function App() {
                   <Route exact from="/" render={props => <Home page="Landing Page" {...props}/>}/>
                   <Route exact from="/login" render={props => <Home page="Login" {...props}/>}/>
                   <Route exact from="/cliente" render={props => <ClientProfile {...props}/>}/>
-                  <Route exact from="/ajustes" render={props => <Home page="Ajustes cliente" {...props}/>}/>
+                  <Route exact from="/mis-pedidos" render={props => <ClientOrders {...props}/>}/>
                   <Route exact from="/manage-catalog" render={props => <CreateCatalog
                       productList={state["products"]}
                       editMode={true}
@@ -265,6 +267,7 @@ function App() {
                   </Route>
               </Switch>
           </div>
+          <Copyright/>
       </div>
   )
 }

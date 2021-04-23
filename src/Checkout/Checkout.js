@@ -7,22 +7,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import Review from './Review';
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="#">
-                Kulko.app
-            </Link>{' '}
-            {new Date().getFullYear()}
-        </Typography>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -132,7 +119,6 @@ export default function Checkout(props) {
                         )}
                     </React.Fragment>
                 </Paper>
-                <Copyright />
             </main>
         </React.Fragment>
     );
