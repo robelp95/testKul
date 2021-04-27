@@ -23,9 +23,10 @@ const useRowStyles = makeStyles({
     },
 });
 
-function createData(name, deliveryType, customerName, customerPhoneNumber, price) {
+function createData(name, date, deliveryType, customerName, customerPhoneNumber, price) {
     return {
         name,
+        date,
         deliveryType,
         customerName,
         customerPhoneNumber,
@@ -54,6 +55,9 @@ function Row(props) {
                 </TableCell>
                 <TableCell component="th" scope="row">
                     {row.name}
+                </TableCell>
+                <TableCell component="th" scope="row">
+                    {row.date}
                 </TableCell>
                 <TableCell align="right">{row.deliveryType}</TableCell>
                 <TableCell align="right">{row.customerName}</TableCell>
@@ -115,10 +119,10 @@ Row.propTypes = {
 };
 
 const rows = [
-    createData(1, "Delivery", "Anibal", "+56915456543", 165, 3.99),
-    createData(2, "Pickup", "Ana", "+569154565321", 43, 4.99),
-    createData(3, "Pickup", "Ana", "+569154565321", 105, 503),
-    createData(4, "Delivery", "Miguel", "+56915766543", 907, 2.5),
+    createData(1,"20/12/2019", "Delivery", "Anibal", "+56915456543", 165, 3.99),
+    createData(2, "08/04/2020","Pickup", "Ana", "+569154565321", 43, 4.99),
+    createData(3, "11/10/2020", "Pickup", "Ana", "+569154565321", 105, 503),
+    createData(4, "21/01/2021", "Delivery", "Miguel", "+56915766543", 907, 2.5),
 ];
 
 export default function CollapsibleTable() {
@@ -127,8 +131,9 @@ export default function CollapsibleTable() {
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
-                        <TableCell />
+                        <TableCell/>
                         <TableCell>Nro pedido</TableCell>
+                        <TableCell>Fecha</TableCell>
                         <TableCell align="right">Tipo de entrega</TableCell>
                         <TableCell align="right">Cliente</TableCell>
                         <TableCell align="right">Contacto</TableCell>
