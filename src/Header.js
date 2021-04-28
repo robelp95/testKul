@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import clsx from 'clsx';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,6 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Button from "@material-ui/core/Button";
 import {withRouter} from 'react-router-dom';
+import {UserContext} from "./UserContext";
 
 const drawerWidth = 240;
 
@@ -85,7 +86,9 @@ const Header = props => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
-    const { history, handleLogin} = props;
+    const {state} = useContext(UserContext);
+
+    const { history, handleLogin, handleLogout} = props;
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -100,6 +103,7 @@ const Header = props => {
     }
 
     return (
+
         <div className={classes.root}>
             <CssBaseline />
             <AppBar
@@ -110,59 +114,69 @@ const Header = props => {
             >
 
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    {
+                        state.user && (
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={handleDrawerOpen}
+                                edge="start"
+                                className={clsx(classes.menuButton, open && classes.hide)}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                        )
+                    }
+
                     <Typography variant="h6" noWrap style={{flexGrow:1}} > {/* flexGrow empuja el contenido a la derecha*/}
                         Kulko.app
                     </Typography>
                     <div>
-                        <Button color="inherit" onClick={handleLogin }>Login clientes</Button>
+                    {
+                        !state.user ?
+                            (<Button color="inherit" onClick={handleLogin }>Login clientes</Button>) :
+                            (<Button color="inherit" onClick={handleLogout }>Logout</Button>)
+                    }
                     </div>
 
                 </Toolbar>
             </AppBar>
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    <ListItem button key="Gestion Cliente" onClick={() => handleMenuClick('/cliente')}>
-                        <ListItemIcon><MailIcon/></ListItemIcon>
-                        <ListItemText primary="Gestion Cliente" />
-                    </ListItem>
-                    {/*<ListItem button key="Gestion Partner" onClick={() => handleMenuClick('/partner')}>*/}
-                    {/*    <ListItemIcon><InboxIcon/></ListItemIcon>*/}
-                    {/*    <ListItemText primary="Gestion Partner" />*/}
-                    {/*</ListItem>*/}
-                    <ListItem button key="Ajustes de configuracion" onClick={() => handleMenuClick('/ajustes')}>
-                        <ListItemIcon><InboxIcon/></ListItemIcon>
-                        <ListItemText primary="Ajustes" />
-                    </ListItem>
-                    <ListItem button key="Menu ejemplo" onClick={() => handleMenuClick('/menu')}>
-                        <ListItemIcon><InboxIcon/></ListItemIcon>
-                        <ListItemText primary="Menu" />
-                    </ListItem>
-                </List>
-                <Divider />
-            </Drawer>
+            {state.user &&
+            (
+                <Drawer
+                    className={classes.drawer}
+                    variant="persistent"
+                    anchor="left"
+                    open={open}
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    <div className={classes.drawerHeader}>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <List>
+                        <ListItem button key="Gestion Cliente" onClick={() => handleMenuClick('/cliente')}>
+                            <ListItemIcon><MailIcon/></ListItemIcon>
+                            <ListItemText primary="Gestion Cliente" />
+                        </ListItem>
+                        <ListItem button key="Ajustes de configuracion" onClick={() => handleMenuClick('/ajustes')}>
+                            <ListItemIcon><InboxIcon/></ListItemIcon>
+                            <ListItemText primary="Ajustes" />
+                        </ListItem>
+                        <ListItem button key="Menu ejemplo" onClick={() => handleMenuClick('/menu')}>
+                            <ListItemIcon><InboxIcon/></ListItemIcon>
+                            <ListItemText primary="Menu" />
+                        </ListItem>
+                    </List>
+                    <Divider />
+                </Drawer>
+            )
+            }
+
         </div>
     );
 }

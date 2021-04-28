@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Route, Redirect} from "react-router";
+import {Redirect, Route} from "react-router";
 import {UserContext} from "../UserContext";
 
 //TODO FIRST OF ALL

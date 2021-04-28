@@ -274,6 +274,9 @@ function App() {
             }});
         });
     }
+    const handleLogout = () => {
+        netlifyIdentity.logout();
+    }
 
     const fetchUser = async () => {
         setTimeout(() => {}, 400);
@@ -287,13 +290,17 @@ function App() {
 
   return (
       <div>
-          <Header handleLogin={handleLogin}/>
+
+          <UserContext.Provider value={value}>
+            <Header
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+            />
+          </UserContext.Provider>
           <Toolbar/>
           <Notification notify={notify} setNotify={setNotify}/>
           <div>
               <UserContext.Provider value={value}>
-
-
                   <Switch>
                       <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
                       <PrivateRoute exact path="/cliente">
