@@ -30,11 +30,11 @@ export default function CreateCatalog({productList, editMode, setNotify, userDat
     const [categories, setCategories] = useState(productCategories);
     const [open, setOpen] = React.useState(false);
 
-    const { user } = useContext(UserContext);
+    const { state } = useContext(UserContext);
 
 
     useEffect(async () => {
-        const prods = await fetchProducts(user.id);
+        const prods = await fetchProducts(state.user.id);
         setProducts(prods);
     }, []);
 
