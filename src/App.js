@@ -12,6 +12,8 @@ import netlifyIdentity from 'netlify-identity-widget';
 import {UserContext} from './UserContext';
 import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
+import axios from "axios";
+import {API_HEADERS, CREATE_USER_ENDPOINT, GET_USER_BY_MAIL_ENDPOINT, NEW_USER} from "./utils/Contants";
 
 const productList = [
     {
@@ -233,59 +235,78 @@ const userData = {
 
 netlifyIdentity.init({locale: 'es'});
 
-function App() {
+const  App = () => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
-    const [state, setState] = useState({user:null,products:_.take(productList, 3)});
+    const [state, setState] = useState({
+        user: null,
+        products:_.take(productList, 3)
+    });
     const value = useMemo(() => ({ state, setState }), [state, setState]);
-
     netlifyIdentity.on('logout', () => {
         setState({
             ...state,
             user: null
         });
-        //TODO redirect to homepage
     });
 
-    useEffect(() => {
+    const updateUserData = (user, data) => {
+        setState({
+            ...state,
+            user:{
+                id: data.id,
+                email: user.email,
+                username: user.user_metadata.full_name,
+                Address: data.Address,
+                brandName: data.brandName,
+                category: data.category,
+                deliveryCharge: data.deliveryCharge,
+                description: data.description,
+                image:data.image,
+                minDelivery:data.minDelivery,
+                name:data.name,
+                open:data.open,
+                opening:data.opening,
+                orderVia: data.orderVia,
+                paykuId:data.paykuId,
+                paymentInstructions:data.paymentInstructions,
+                phoneNumber: data.phoneNumber,
+                status: data.status
+            }
+        });
+    }
+    useEffect(async () => {
         const user = netlifyIdentity.currentUser();
         if (user !== null){
-            setState({
-                ...state,
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    createdAt: user.created_at,
-                    username: user.user_metadata.full_name
-                }});
+            await fetchOrCreateuserData(user);
         }
 
     }, [])
 
+    async function fetchOrCreateuserData(user) {
+        let response;
+        let data;
+        try {
+            const response = await axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email);
+            const data = await response.data;
+            updateUserData(user, data);
+        }catch (e) {
+            let initData = NEW_USER;
+            initData.email = user.email;
+            initData.username = user.user_metadata.full_name;
+            response = await axios.post(CREATE_USER_ENDPOINT, initData, API_HEADERS);
+            data = await response.data;
+            updateUserData(user, data);
+        }
+    }
+
     const handleLogin = () => {
         netlifyIdentity.open();
-        netlifyIdentity.on('login', user => {
-            setState({
-                ...state,
-                user: {
-                id: user.id,
-                    email: user.email,
-                    createdAt: user.created_at,
-                    username: user.user_metadata.full_name
-            }});
+        netlifyIdentity.on('login', async user => {
+            await fetchOrCreateuserData(user);
         });
     }
     const handleLogout = () => {
         netlifyIdentity.logout();
-    }
-
-    const fetchUser = async () => {
-        setTimeout(() => {}, 400);
-        return userData;
-    }
-
-    const fetchProducts = async (user) => {
-        setTimeout(() => {}, 200);
-        return productList;
     }
 
   return (
@@ -313,8 +334,8 @@ function App() {
                           exact from="/manage-catalog">
                           <CreateCatalog
                               productList={state["products"]}
-                              fetchProducts={fetchProducts}
-                              fetchUser={fetchUser}
+                              fetchProducts={() => {}}
+                              fetchUser={() => {}}
                               editMode={true}
                               setNotify={setNotify}
                               userData={userData}
@@ -323,8 +344,8 @@ function App() {
                       <Route
                           exact from="/menu" render={props => <Menu
                           productList={state["products"]}
-                          fetchProducts={fetchProducts}
-                          fetchUser={fetchUser}
+                          fetchProducts={() => {}}
+                          fetchUser={() => {}}
                           notify={notify}
                           editMode={false}
                           setNotify={setNotify}
