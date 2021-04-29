@@ -64,9 +64,9 @@ export default function ProductDialog(props) {
                 <TextField
                     autoFocus
                     margin="dense"
-                    name="desc"
+                    name="description"
                     label="Descripcion"
-                    value={product ? product.desc : ''}
+                    value={product ? product.description : ''}
                     type="text"
                     fullWidth
                     onChange={handleInputChange}

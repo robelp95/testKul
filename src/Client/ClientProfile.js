@@ -1,32 +1,33 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Form, Formik} from "formik";
 import Paper from "@material-ui/core/Paper";
 import ClientConfigForm from "./ClientConfigForm";
 import ClientProfileCatalogs from "./ClientProfileCatalogs";
 import {useCommonStyles} from "../utils/commonStyles";
+import {UserContext} from "../UserContext";
 
 function ClientProfileConfig(){
     const classes = useCommonStyles();
+    const { state } = useContext(UserContext);
 return (
     <>
         <Formik
         initialValues={{
-            businessName: 'Kulko app',
-            businessDescripcion: 'Catalogos de pedidos por Whatsapp',
+            brandName: state.user.brandName,
+            description: state.user.description,
             businessUrl: 'kulkoapp',
-            schedule: 'de 8 a 20hs',
+            schedule: state.user.opening,
             logo: '',
-            paymentType:'Efectivo/Transferencia',
+            paymentInstructions: state.user.paymentInstructions,
             orderVia: 'whatsapp',
-            name:'Kulko app',
-            description:'Catalogos de pedidos por Whatsapp',
-            address: 'Calle falsa 123',
-            phoneNumber: '+56915645766',
-            coin: '$',
-            category: 'Desarrollo web',
-            country: 'Chile',
-            minDelivery: '100',
-            deliveryCharge: '200'
+            name: state.user.name,
+            address: state.user.Address,
+            phoneNumber: state.user.phoneNumber,
+            coin: state.user.coin,
+            category: state.user.category,
+            country: state.user.country,
+            minDelivery: state.user.minDelivery,
+            deliveryCharge: state.user.deliveryCharge
 
         }}>
             {

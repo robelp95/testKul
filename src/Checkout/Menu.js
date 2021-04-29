@@ -19,13 +19,12 @@ export default function Menu({productList, editMode, setNotify, userData, fetchP
     const [products, setProducts] = useState(productList);
     const [submitting, setSubmitting] = useState(false);
     const [orderProducts, setOrderProducts] = useState([]);
-    // const [user] = useState(userData);
 
-    const { user } = useContext(UserContext);
+
+    const { state } = useContext(UserContext);
 
     useEffect(async () => {
-        const prods = await fetchProducts(user.id);
-        setProducts(prods);
+        setProducts(state.user.menu.products);
     }, []);
 
     const onAddToCart = (product) => {
@@ -84,16 +83,16 @@ export default function Menu({productList, editMode, setNotify, userData, fetchP
         <>
             <MainFeaturedPost
                 post={{
-                    description: user.description,
-                    image: user.imagePath ? user.imagePath : 'https://source.unsplash.com/random',
-                    opening: user.opening,
-                    category: user.category,
-                    coin:user.coin,
-                    address: user.address,
-                    brandName: user.brandName,
-                    open: user.open,
-                    paymentInstructions: user.paymentInstructions,
-                    phoneNumber: user.phoneNumber
+                    description: state.user.description,
+                    image: state.user.imagePath ? state.user.imagePath : 'https://source.unsplash.com/random',
+                    opening: state.user.opening,
+                    category: state.user.category,
+                    coin:state.user.coin,
+                    address: state.user.address,
+                    brandName: state.user.brandName,
+                    open: state.user.open,
+                    paymentInstructions: state.user.paymentInstructions,
+                    phoneNumber: state.user.phoneNumber
                 }}
             />
 

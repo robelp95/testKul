@@ -38,8 +38,8 @@ export default function ClientConfigForm({values, handleChange, errors}){
                         id="nombreNegocio"
                         name="nombreNegocio"
                         label="Nombre del Negocio/Marca"
-                        value={values.businessName}
-                        error={errors.businessName !== undefined}
+                        value={values.brandName}
+                        error={errors.brandName !== undefined}
                         onChange={handleChange}
                         placeholder="Ingrese el nombre del negocio/marca"
                         fullWidth
@@ -48,11 +48,11 @@ export default function ClientConfigForm({values, handleChange, errors}){
                 <Grid item xs={12}>
                     <TextField
                         required
-                        id="descripcion"
-                        name="descripcion"
+                        id="description"
+                        name="description"
                         label="Descripcion"
-                        value={values.businessDescripcion}
-                        error={errors.businessDescripcion !== undefined}
+                        value={values.description}
+                        error={errors.description !== undefined}
                         onChange={handleChange}
                         placeholder="Ingrese una descripción corta sobre el negocio"
                         fullWidth
@@ -89,8 +89,8 @@ export default function ClientConfigForm({values, handleChange, errors}){
                         id="phoneNumber"
                         name="phoneNumber"
                         label="Recibir ordenes en este número"
-                        value={values.address}
-                        error={errors.address !== undefined}
+                        value={values.phoneNumber}
+                        error={errors.phoneNumber !== undefined}
                         onChange={handleChange}
                         placeholder="Ingrese su número sin el código del país"
                         fullWidth
@@ -114,11 +114,11 @@ export default function ClientConfigForm({values, handleChange, errors}){
                 <Grid item xs={12}>
                     <TextField
                         required
-                        id="paymentType"
-                        name="paymentType"
+                        id="paymentInstructions"
+                        name="paymentInstructions"
                         label="Instrucciones de pago"
-                        value={values.paymentType}
-                        error={errors.paymentType !== undefined}
+                        value={values.paymentInstructions}
+                        error={errors.paymentInstructions !== undefined}
                         onChange={handleChange}
                         placeholder="Ingrese instrucciones de pago (Efectivo/Transferencia/Medio de Pago)"
                         fullWidth
@@ -175,7 +175,7 @@ export default function ClientConfigForm({values, handleChange, errors}){
                         ]}
                         name="coin"
                         handleChange={handleChange}
-                        selectValue={values.coin}
+                        selectValue={values.coin.id}
                         error={errors.coin}
                     />
 
@@ -220,7 +220,7 @@ export default function ClientConfigForm({values, handleChange, errors}){
                         ]}
                         name="category"
                         handleChange={handleChange}
-                        selectValue={values.category}
+                        selectValue={values.category.id}
                         error={errors.category}
                     />
 

@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CreateCatalogBody from "./CreateCatalogBody";
 import {UserContext} from "../UserContext";
+import axios from "axios";
+import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT} from "../utils/Contants";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,28 +22,49 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const initProduct = {id: -1, name: "", desc: "", price: "",category: "", added: false, enabled: true};
+const initProduct = {name: "", description: "", price: "",category: "", added: false, enabled: true};
 
-export default function CreateCatalog({productList, editMode, setNotify, userData, fetchProducts, fetchUser}) {
+export default function CreateCatalog({editMode, setNotify, setState}) {
 
     const [products, setProducts] = useState([]);
     const [product, setProduct] = useState(initProduct);
-    const productCategories = getCategoriesFromProducts(products);
-    const [categories, setCategories] = useState(productCategories);
+    const [categories, setCategories] = useState([]);
     const [open, setOpen] = React.useState(false);
 
     const { state } = useContext(UserContext);
 
 
     useEffect(async () => {
-        const prods = await fetchProducts(state.user.id);
-        setProducts(prods);
+        setProducts(state.user.menu.products);
+        setCategories(getCategoriesFromProducts(state.user.menu.products));
     }, []);
 
     const initialiceProduct = () => {
         setProduct(initProduct);
     }
 
+    //TODO implement post data handler
+    const postData = async (menu) => {
+        const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id + '/menu',
+            menu, API_HEADERS);
+        const json = await response.json();
+        return json;
+    }
+    const handleSaveCart = async () => {
+
+        products.forEach(p => {
+            delete p.added;
+            delete p.image;
+        });
+        const prods = products ?  products.map(p => ({...p})) : [];
+        const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id + '/menu', {id: state.user.menu.id, products: prods}, API_HEADERS);
+        const data = await response.data;
+        setState({...state, user:{
+            ...state.user,
+                menu: data
+            }})
+        setNotify({isOpen:true, message: 'Carrito actualizado', type:'success'});
+    }
     const addProduct = (prod) => {
         let newProductos = _.union(products, [prod]);
         setProducts(newProductos);
@@ -102,7 +125,7 @@ export default function CreateCatalog({productList, editMode, setNotify, userDat
                     <div className={altClasses.root}>
                         <Button
                             variant={"outlined"}
-                            onClick={() => setNotify({isOpen:true, message: 'Carrito actualizado', type:'success'})}
+                            onClick={handleSaveCart}
                         >
                             Guardar carrito
                         </Button>

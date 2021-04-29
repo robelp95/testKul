@@ -38,7 +38,7 @@ export default function CartItemList(props) {
                 ) : ''}
                 {products.map((product, index) => (
                     <ListItem className={classes.listItem} key={index}>
-                        <ListItemText primary={product.name + " (x" + product.quantity + ")"} secondary={product.desc} />
+                        <ListItemText primary={product.name + " (x" + product.quantity + ")"} secondary={product.description} />
                         <Typography variant="body2">{product.price}</Typography>
                         {!isReview && (
                             <IconButton disabled={!product.added} onClick={() => handleRemoveFromCart(product)}>

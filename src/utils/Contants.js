@@ -1,5 +1,6 @@
 export const GET_USER_BY_MAIL_ENDPOINT = 'http://localhost/api/v1/users/';
 export const CREATE_USER_ENDPOINT = 'http://localhost/api/v1/users';
+export const UPDATE_USER_MENU_ENDPOINT = 'http://localhost/api/v1/users/';
 
 export const NEW_USER = {
     "address": "Ingrese una direccion",

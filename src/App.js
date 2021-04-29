@@ -259,6 +259,7 @@ const  App = () => {
                 Address: data.Address,
                 brandName: data.brandName,
                 category: data.category,
+                coin: data.userCoin,
                 deliveryCharge: data.deliveryCharge,
                 description: data.description,
                 image:data.image,
@@ -270,7 +271,8 @@ const  App = () => {
                 paykuId:data.paykuId,
                 paymentInstructions:data.paymentInstructions,
                 phoneNumber: data.phoneNumber,
-                status: data.status
+                status: data.status,
+                menu: data.Menu
             }
         });
     }
@@ -333,12 +335,9 @@ const  App = () => {
                       <PrivateRoute
                           exact from="/manage-catalog">
                           <CreateCatalog
-                              productList={state["products"]}
-                              fetchProducts={() => {}}
-                              fetchUser={() => {}}
                               editMode={true}
                               setNotify={setNotify}
-                              userData={userData}
+                              setState={setState}
                           />
                       </PrivateRoute>
                       <Route
