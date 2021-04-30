@@ -4,6 +4,8 @@ const NEW_LINE = "\n";
 
 export function generateWhatsappMsg({values, order}) {
 
+    const clientPhoneNumber = "5491161347712";
+
     let newMessage = "🛒 *Nuevo pedido via Kulko.App* 🛒" + NEW_LINE + NEW_LINE;
     newMessage += "*Pedido* #" + order.orderNumber + NEW_LINE + NEW_LINE;
     for (let [key, value] of Object.entries(order.orderProducts)) {
@@ -21,7 +23,7 @@ export function generateWhatsappMsg({values, order}) {
         newMessage+= "*Comentario:* " + values.comment + NEW_LINE;
     }
     let wspmsg = encodeURIComponent(newMessage);
-    let message = "https://api.whatsapp.com/send?phone=5491161347712&text=" + wspmsg;
+    let message = "https://api.whatsapp.com/send?phone=" + clientPhoneNumber + "&text=" + wspmsg;
     return message;
 }
 

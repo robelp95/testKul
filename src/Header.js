@@ -163,10 +163,6 @@ const Header = props => {
                             <ListItemIcon><MailIcon/></ListItemIcon>
                             <ListItemText primary="Gestion Cliente" />
                         </ListItem>
-                        <ListItem button key="Ajustes de configuracion" onClick={() => handleMenuClick('/ajustes')}>
-                            <ListItemIcon><InboxIcon/></ListItemIcon>
-                            <ListItemText primary="Ajustes" />
-                        </ListItem>
                         <ListItem button key="Menu ejemplo" onClick={() => handleMenuClick('/menu')}>
                             <ListItemIcon><InboxIcon/></ListItemIcon>
                             <ListItemText primary="Menu" />

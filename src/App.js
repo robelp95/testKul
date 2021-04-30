@@ -329,9 +329,6 @@ const  App = () => {
                       <PrivateRoute exact path="/cliente">
                           <ClientProfile/>
                       </PrivateRoute>
-                      <PrivateRoute exact path="/ajustes">
-                          <Home page="Ajustes cliente"/>
-                      </PrivateRoute>
                       <PrivateRoute
                           exact from="/manage-catalog">
                           <CreateCatalog
