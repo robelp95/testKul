@@ -163,7 +163,7 @@ const Header = props => {
                             <ListItemIcon><MailIcon/></ListItemIcon>
                             <ListItemText primary="Gestion Cliente" />
                         </ListItem>
-                        <ListItem button key="Menu ejemplo" onClick={() => handleMenuClick('/menu')}>
+                        <ListItem button key="Menu ejemplo" onClick={() => handleMenuClick('/' + state.user.brandName)}>
                             <ListItemIcon><InboxIcon/></ListItemIcon>
                             <ListItemText primary="Menu" />
                         </ListItem>

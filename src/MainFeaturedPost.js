@@ -4,6 +4,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Chip from "@material-ui/core/Chip";
+import PropTypes from 'prop-types';
+
 
 const useStyles = makeStyles((theme) => ({
     mainFeaturedPost: {
@@ -37,10 +39,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainFeaturedPost(props) {
     const classes = useStyles();
-    const {description, image, opening, address, brandName, open, phoneNumber} = props;
+    const {description, image, opening, address, brandName, open, phoneNumber} = props.post;
+    console.log(description);
 
     return (
-        <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${image})`}}>
+        <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${image}), url(https://source.unsplash.com/random)`}}>
             {<img style={{ display: 'none' }} src={image} alt={brandName} />}
             <div className={classes.overlay} />
             <Grid container>
@@ -82,6 +85,6 @@ export default function MainFeaturedPost(props) {
     );
 }
 
-// MainFeaturedPost.propTypes = {
-//     post: PropTypes.object,
-// };
+MainFeaturedPost.propTypes = {
+    post: PropTypes.object,
+};

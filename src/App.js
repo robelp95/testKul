@@ -338,7 +338,7 @@ const  App = () => {
                           />
                       </PrivateRoute>
                       <Route
-                          exact from="/menu" render={props => <Menu
+                          exact from="/:name" render={props => <Menu
                           productList={state["products"]}
                           notify={notify}
                           editMode={false}
