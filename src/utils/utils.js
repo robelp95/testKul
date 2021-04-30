@@ -3,6 +3,7 @@ import * as _ from "lodash";
 const NEW_LINE = "\n";
 export function generateWhatsappMsg({values, order}) {
 
+    const clientPhoneNumber = "5491161347712";
     const shippingCost = order.total >= order.user.minDelivery  ? "Gratis" : order.user.coin+''+order.user.deliveryCharge;
     let newMessage = "🛒 *Nuevo pedido via Kulko.App* 🛒" + NEW_LINE + NEW_LINE;
     newMessage += "*Pedido* #" + order.orderNumber + NEW_LINE + NEW_LINE;
@@ -24,7 +25,7 @@ export function generateWhatsappMsg({values, order}) {
         newMessage+= NEW_LINE + "*Comentario:* " + values.comment + NEW_LINE;
     }
     let wspmsg = encodeURIComponent(newMessage);
-    let message = "https://api.whatsapp.com/send?phone=5491161347712&text=" + wspmsg;
+    let message = "https://api.whatsapp.com/send?phone=" + clientPhoneNumber + "&text=" + wspmsg;
     return message;
 }
 

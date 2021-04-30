@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import Header from "./Header";
 import {Redirect, Route} from "react-router-dom";
 import {Switch} from 'react-router';
@@ -10,7 +10,12 @@ import CreateCatalog from "./Client/CreateCatalog";
 import Notification from "./ShoppingCart/Notification";
 import ClientOrders from "./Client/ClientOrders";
 import Copyright from "./utils/Copyright";
-
+import netlifyIdentity from 'netlify-identity-widget';
+import {UserContext} from './Context/UserContext';
+import * as _ from 'lodash';
+import PrivateRoute from "./utils/PrivateRoute";
+import axios from "axios";
+import {API_HEADERS, CREATE_USER_ENDPOINT, GET_USER_BY_MAIL_ENDPOINT, NEW_USER} from "./utils/Contants";
 
 const productList = [
     {
@@ -229,42 +234,129 @@ const userData = {
     "minDelivery": 100,
     "deliveryCharge": 100
 };
-const state =
-    {
-        "user" :userData,
-        "products": productList
 
-    };
-function App() {
+netlifyIdentity.init({locale: 'es'});
+
+const  App = () => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
+    const [state, setState] = useState({
+        user: null,
+        products:_.take(productList, 3)
+    });
+    const value = useMemo(() => ({ state, setState }), [state, setState]);
+    netlifyIdentity.on('logout', () => {
+        setState({
+            ...state,
+            user: null
+        });
+    });
+
+    const updateUserData = (setState, state, user, data) => {
+        setState({
+            ...state,
+            user:{
+                id: data.id,
+                email: user.email,
+                username: user.user_metadata.full_name,
+                address: data.address,
+                brandName: data.brandName,
+                category: data.category,
+                coin: data.userCoin,
+                deliveryCharge: data.deliveryCharge,
+                description: data.description,
+                image:data.image,
+                minDelivery:data.minDelivery,
+                name:data.name,
+                open:data.open,
+                opening:data.opening,
+                orderVia: data.orderVia,
+                paykuId:data.paykuId,
+                paymentInstructions:data.paymentInstructions,
+                phoneNumber: data.phoneNumber,
+                status: data.status,
+                menu: data.Menu
+            }
+        });
+    }
+    useEffect(async () => {
+        const user = netlifyIdentity.currentUser();
+        if (user !== null){
+            await fetchOrCreateuserData(user);
+        }
+
+    }, [])
+
+    async function fetchOrCreateuserData(user) {
+        let response;
+        let data;
+        try {
+            const response = await axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email);
+            const data = await response.data;
+            updateUserData(setState, state, user, data);
+        }catch (e) {
+            let initData = NEW_USER;
+            initData.email = user.email;
+            initData.username = user.user_metadata.full_name;
+            response = await axios.post(CREATE_USER_ENDPOINT, initData, API_HEADERS);
+            data = await response.data;
+            updateUserData(setState, state, user, data);
+        }
+    }
+
+    const handleLogin = () => {
+        netlifyIdentity.open();
+        netlifyIdentity.on('login', async user => {
+            await fetchOrCreateuserData(user);
+        });
+    }
+    const handleLogout = () => {
+        netlifyIdentity.logout();
+    }
 
   return (
       <div>
-          <Header />
+
+          <UserContext.Provider value={value}>
+            <Header
+                handleLogin={handleLogin}
+                handleLogout={handleLogout}
+            />
+          </UserContext.Provider>
           <Toolbar/>
           <Notification notify={notify} setNotify={setNotify}/>
           <div>
-              <Switch>
-                  <Route exact from="/login" render={props => <Home page="Login" {...props}/>}/>
-                  <Route exact from="/cliente" render={props => <ClientProfile {...props}/>}/>
-                  <Route exact from="/mis-pedidos" render={props => <ClientOrders {...props}/>}/>
-                  <Route exact from="/manage-catalog" render={props => <CreateCatalog
-                      productList={state["products"]}
-                      editMode={true}
-                      setNotify={setNotify}
-                      userData={userData}
-                      {...props}/>}/>
-                  <Route exact from="/menu" render={props => <Menu
-                      productList={state["products"]}
-                      notify={notify}
-                      editMode={false}
-                      setNotify={setNotify}
-                      userData={userData}
-                      {...props}/>}/>
-                  <Route path="*">
-                      <Redirect to="/menu" /> {/* Default route */}
-                  </Route>
-              </Switch>
+              <UserContext.Provider value={value}>
+                  <Switch>
+                      <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
+                      <PrivateRoute exact from="/mis-pedidos">
+                          <ClientOrders/>
+                      </PrivateRoute>
+
+                      <PrivateRoute exact path="/cliente">
+                          <ClientProfile updateUserData={updateUserData} setState={setState}/>
+                      </PrivateRoute>
+                      <PrivateRoute
+                          exact from="/manage-catalog">
+                          <CreateCatalog
+                              editMode={true}
+                              setNotify={setNotify}
+                              setState={setState}
+                          />
+                      </PrivateRoute>
+                      <Route
+                          exact from="/:name" render={props => <Menu
+                          productList={state["products"]}
+                          notify={notify}
+                          editMode={false}
+                          setNotify={setNotify}
+                          userData={userData}
+                          {...props}/>}
+                      />
+                      <Route path="*">
+                          <Redirect to="/home" />
+                      </Route>
+                  </Switch>
+              </UserContext.Provider>
           </div>
           <Copyright/>
       </div>

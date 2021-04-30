@@ -1,6 +1,6 @@
 import MainFeaturedPost from "../MainFeaturedPost";
 import {CheckoutForm} from "./CheckoutForm";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {nanoid} from 'nanoid';
 import * as _ from 'lodash';
 import PartialCart from "../ShoppingCart/PartialCart";
@@ -9,16 +9,48 @@ import ScrollToCheckout from "../ScrollToCheckout";
 import Fab from "@material-ui/core/Fab";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useCommonStyles} from "../utils/commonStyles";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import {API_HEADERS, GET_MENU_BY_BRANDNAME_ENDPOINT,} from "../utils/Contants";
+import axios from "axios";
+import {Redirect, useParams} from "react-router";
+import PropTypes from "prop-types";
 
 
-export default function Menu({productList, editMode, setNotify, userData}) {
-
+export default function Menu({editMode, setNotify}) {
 
     const [orderNumber] = useState(nanoid());
-    const [products] = useState(productList);
+    const [products, setProducts] = useState([]);
     const [submitting, setSubmitting] = useState(false);
     const [orderProducts, setOrderProducts] = useState([]);
-    const [user] = useState(userData);
+    const [state, setState] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const { name } = useParams();
+
+    const fetchMenu = async (name) => {
+
+        let data = null;
+        try {
+            const response = await axios.get(GET_MENU_BY_BRANDNAME_ENDPOINT + name, API_HEADERS);
+            data = await response.data;
+        }catch (e) {
+            setLoading(false);
+        }
+        return data;
+    }
+
+    useEffect(() => {
+        if (state !== null) {
+            setProducts(state.Menu.products);
+            setLoading(false);
+
+        }
+    }, [state])
+
+    useEffect(async () => {
+        const menu = await fetchMenu(name);
+        setState(menu);
+    }, [loading]);
 
     const onAddToCart = (product) => {
         product.added = true;
@@ -74,66 +106,77 @@ export default function Menu({productList, editMode, setNotify, userData}) {
 
     return (
         <>
-            <MainFeaturedPost
-                post={{
-                    title: user.name,
-                    description: user.description,
-                    image: user.imagePath ? user.imagePath : 'https://source.unsplash.com/random',
-                    imgText: 'main image description',
-                    opening: user.opening,
-                    category: user.category,
-                    coin:user.coin,
-                    address: user.address,
-                    brandName: user.brandName,
-                    open: user.open,
-                    paymentInstructions: user.paymentInstructions,
-                    phoneNumber: user.phoneNumber
+            {!loading && state === null ? (<Redirect
+                to={{
+                    pathname: "/home",
+                    state: { from: '/menu' }
                 }}
-            />
+            />):
+            loading ? <div style={{textAlign: "center"}} className={classes.layout}><CircularProgress /></div>:
+                (
+                <>
+                    <MainFeaturedPost
+                        post={{
+                            description: state.description,
+                            image: state.image ? state.image : 'https://source.unsplash.com/random',
+                            opening: state.opening,
+                            category: state.category,
+                            coin: state.coin,
+                            address: state.address,
+                            brandName: state.brandName,
+                            open: state.open,
+                            paymentInstructions: state.paymentInstructions,
+                            phoneNumber: state.phoneNumber
+                        }}
+                    />
 
-            <div className={classes.layout}>
-                <ScrollableTabsButtonAuto
+                    <div className={classes.layout}>
+                    <ScrollableTabsButtonAuto
                     products ={products}
                     onAddToCart={onAddToCart}
                     onRemoveFromCart={onRemoveFromCart}
                     submitting={submitting}
                     editMode={editMode}
                     setProductById={() => {}}
-                />
-               <PartialCart
-                   products={orderProducts}
-                   onDeleteFromCart={onDeleteFromCart}
-               />
-                <CheckoutForm
-                    initialClient={{
-                    firstName : '',
-                    lastName: '',
-                    phoneNumber: '',
-                    deliveryType: '',
-                    address1: '',
-                    address2: '',
-                    comment: ''
-                    }}
-                    order={{
-                        orderProducts,
-                        orderNumber,
-                        total,
-                        user: {
-                            paymentInstruction:user.paymentInstructions,
-                            minDelivery:user.minDelivery,
-                            deliveryCharge: user.deliveryCharge
-                        }
-                    }}
-                    setSubmitting={setSubmitting}
-                    userData={userData}
-                />
+                    />
+                    <PartialCart
+                    products={orderProducts}
+                    onDeleteFromCart={onDeleteFromCart}
+                    />
+                    <CheckoutForm
+                        initialClient={{
+                        firstName : '',
+                        lastName: '',
+                        phoneNumber: '',
+                        deliveryType: '',
+                        address1: '',
+                        address2: '',
+                        comment: ''
+                        }}
+                        order={{orderProducts, orderNumber, total, user:{
+                                minDelivery: state.minDelivery,
+                                coin: state.userCoin.description,
+                                deliveryCharge: state.deliveryCharge,
+                                paymentInstruction: state.paymentInstruction
+                            }}}
+                        setSubmitting={setSubmitting}
+                        userData={state}
+                    />
 
-                <ScrollToCheckout>
+                    <ScrollToCheckout>
                     <Fab color="primary" size="medium" aria-label="scroll back to top">
-                        <ShoppingCartIcon />
+                    <ShoppingCartIcon />
                     </Fab>
-                </ScrollToCheckout>
-            </div>
+                    </ScrollToCheckout>
+                    </div>
+                </>
+                )
+            }
         </>
     );
 }
+
+Menu.propTypes = {
+    editMode: PropTypes.bool,
+    setNotify: PropTypes.func,
+};

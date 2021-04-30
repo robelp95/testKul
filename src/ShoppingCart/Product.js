@@ -50,7 +50,7 @@ export default function Product(
     }
     ) {
 
-    const {id, name, desc, price, quantity} = product;
+    const {id, name, description, price, quantity} = product;
     const classes = useStyles();
 
     const handleAddToCart = () => onAddToCart(product, 1);
@@ -79,7 +79,7 @@ export default function Product(
                             {name}
                         </Typography>
                         <Typography className={classes.subtitle}>
-                            {_.truncate(desc, {length: 30})}
+                            {_.truncate(description, {length: 30})}
                         </Typography>
                         <Typography>
                             ${price}
