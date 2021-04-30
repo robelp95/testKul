@@ -19,7 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Button from "@material-ui/core/Button";
 import {withRouter} from 'react-router-dom';
-import {UserContext} from "./UserContext";
+import {UserContext} from "./Context/UserContext";
 
 const drawerWidth = 240;
 

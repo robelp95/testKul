@@ -6,7 +6,7 @@ import EmptyCartMessage from "../ShoppingCart/EmptyCartMessage";
 import Button from "@material-ui/core/Button";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import CreateCatalogBody from "./CreateCatalogBody";
-import {UserContext} from "../UserContext";
+import {UserContext} from "../Context/UserContext";
 import axios from "axios";
 import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT} from "../utils/Contants";
 

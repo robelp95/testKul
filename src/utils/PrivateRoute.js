@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {Redirect, Route} from "react-router";
-import {UserContext} from "../UserContext";
+import {UserContext} from "../Context/UserContext";
 
 //TODO FIRST OF ALL
 //TODO get user from context on every load

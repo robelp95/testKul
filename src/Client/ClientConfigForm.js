@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -20,9 +20,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ClientConfigForm({values, handleChange, errors}){
+export default function ClientConfigForm({values, handleChange, errors, loading, dirty}){
 
     const classes = useStyles();
+    const [formIsValid, setFormIsValid] = useState(dirty);
+
+    useEffect(() => {
+        if (dirty) setFormIsValid(Object.keys(errors).length === 0)
+    }, [errors, values])
 
     return (
         <>
@@ -35,13 +40,11 @@ export default function ClientConfigForm({values, handleChange, errors}){
                 <Grid item xs={12}>
                     <TextField
                         required
-                        id="nombreNegocio"
-                        name="nombreNegocio"
-                        label="Nombre del Negocio/Marca"
-                        value={values.brandName}
-                        error={errors.brandName !== undefined}
-                        onChange={handleChange}
-                        placeholder="Ingrese el nombre del negocio/marca"
+                        id="email"
+                        name="email"
+                        label="Email cliente"
+                        value={values.email}
+                        disabled={true}
                         fullWidth
                     />
                 </Grid>
@@ -61,11 +64,11 @@ export default function ClientConfigForm({values, handleChange, errors}){
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
-                        id="businessUrl"
-                        name="businessUrl"
+                        id="brandName"
+                        name="brandName"
                         label="Kulko.app/NombreDelNegocio"
-                        value={values.businessUrl}
-                        error={errors.businessUrl !== undefined}
+                        value={values.brandName}
+                        error={errors.brandName !== undefined}
                         placeholder="Ingrese nombre del negocio"
                         onChange={handleChange}
                         fullWidth
@@ -74,11 +77,11 @@ export default function ClientConfigForm({values, handleChange, errors}){
                 <Grid item xs={12} sm={6}>
                     <TextField
                         required
-                        id="schedule"
-                        name="schedule"
+                        id="opening"
+                        name="opening"
                         label="Horario de apertura"
-                        value={values.schedule}
-                        error={errors.schedule !== undefined}
+                        value={values.opening}
+                        error={errors.opening !== undefined}
                         onChange={handleChange}
                         fullWidth
                     />
@@ -100,14 +103,12 @@ export default function ClientConfigForm({values, handleChange, errors}){
                     <FormSelect
                         label="Pais"
                         items={[
-                            {value:"0", desc: "Argentina(54)"},
-                            {value:"1", desc: "Brasil(55)"},
-                            {value:"2", desc: "Chile(56)"},
+                            {value:"0", desc: "Chile(56)"},
                         ]}
                         name="country"
                         handleChange={handleChange}
-                        selectValue={values.country}
-                        error={errors.country}
+                        selectValue={0}
+                        disabled={true}
                     />
 
                 </Grid>
@@ -264,6 +265,8 @@ export default function ClientConfigForm({values, handleChange, errors}){
                             color="primary"
                             variant="outlined"
                             size="large"
+                            type="submit"
+                            disabled={!formIsValid || loading}
                         >
                             Guardar Ajustes
                         </Button>

@@ -9,7 +9,7 @@ import ClientProfile from "./Client/ClientProfile";
 import CreateCatalog from "./Client/CreateCatalog";
 import Notification from "./ShoppingCart/Notification";
 import netlifyIdentity from 'netlify-identity-widget';
-import {UserContext} from './UserContext';
+import {UserContext} from './Context/UserContext';
 import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
@@ -249,14 +249,14 @@ const  App = () => {
         });
     });
 
-    const updateUserData = (user, data) => {
+    const updateUserData = (setState, state, user, data) => {
         setState({
             ...state,
             user:{
                 id: data.id,
                 email: user.email,
                 username: user.user_metadata.full_name,
-                Address: data.Address,
+                address: data.address,
                 brandName: data.brandName,
                 category: data.category,
                 coin: data.userCoin,
@@ -290,14 +290,14 @@ const  App = () => {
         try {
             const response = await axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email);
             const data = await response.data;
-            updateUserData(user, data);
+            updateUserData(setState, state, user, data);
         }catch (e) {
             let initData = NEW_USER;
             initData.email = user.email;
             initData.username = user.user_metadata.full_name;
             response = await axios.post(CREATE_USER_ENDPOINT, initData, API_HEADERS);
             data = await response.data;
-            updateUserData(user, data);
+            updateUserData(setState, state, user, data);
         }
     }
 
@@ -327,7 +327,7 @@ const  App = () => {
                   <Switch>
                       <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
                       <PrivateRoute exact path="/cliente">
-                          <ClientProfile/>
+                          <ClientProfile updateUserData={updateUserData} setState={setState}/>
                       </PrivateRoute>
                       <PrivateRoute
                           exact from="/manage-catalog">
@@ -340,8 +340,6 @@ const  App = () => {
                       <Route
                           exact from="/menu" render={props => <Menu
                           productList={state["products"]}
-                          fetchProducts={() => {}}
-                          fetchUser={() => {}}
                           notify={notify}
                           editMode={false}
                           setNotify={setNotify}

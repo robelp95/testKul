@@ -9,10 +9,10 @@ import ScrollToCheckout from "../ScrollToCheckout";
 import Fab from "@material-ui/core/Fab";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useCommonStyles} from "../utils/commonStyles";
-import {UserContext} from "../UserContext";
+import {UserContext} from "../Context/UserContext";
 
 
-export default function Menu({productList, editMode, setNotify, userData, fetchProducts}) {
+export default function Menu({productList, editMode, setNotify, userData}) {
 
 
     const [orderNumber] = useState(nanoid());
