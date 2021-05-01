@@ -52,7 +52,7 @@ function getStepContent(step, props) {
 
 export default function Checkout(props) {
     const classes = useStyles();
-    const {steps, activeStep, setActiveStep, errors, order, dirty, userData} = props;
+    const {steps, activeStep, setActiveStep, errors, order, dirty} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
 
     useEffect(() => {

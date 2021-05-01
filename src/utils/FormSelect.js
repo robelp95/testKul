@@ -17,11 +17,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function FormSelect(props){
-    const {label, items, name, handleChange, error, selectValue} = props;
+    const {label, items, name, handleChange, error, selectValue, disabled} = props;
     const classes = useStyles();
     return (
         <Grid item xs={12}>
-            <FormControl required className={classes.formControl}>
+            <FormControl required className={classes.formControl} disabled={disabled ? disabled : false}>
                 <InputLabel id="demo-simple-select-required-label">{label}</InputLabel>
                 <Select
                     labelId="demo-simple-select-required-label"

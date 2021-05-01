@@ -35,7 +35,7 @@ export default function CreateCatalogBody(props) {
     }
 
     const handleProductAction = (product) => {
-        if (product.name !== "" && product.category !== "" && product.price !== "" && product.desc !== ""){
+        if (product.name !== "" && product.category !== "" && product.price !== "" && product.description !== ""){
             if (product.id < 0) {
                 product.id = nanoid();
             }
