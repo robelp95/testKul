@@ -223,6 +223,7 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                         name="category"
                         handleChange={handleChange}
                         selectValue={values.category.id}
+                        disabled={true}
                         error={errors.category}
                     />
 
