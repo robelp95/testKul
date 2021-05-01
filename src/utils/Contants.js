@@ -1,8 +1,8 @@
-export const GET_USER_BY_MAIL_ENDPOINT = 'http://localhost/api/v1/users/';
-export const GET_MENU_BY_BRANDNAME_ENDPOINT = 'http://localhost/api/v1/menu/';
-export const CREATE_USER_ENDPOINT = 'http://localhost/api/v1/users';
-export const UPDATE_USER_MENU_ENDPOINT = 'http://localhost/api/v1/users/';
-export const UPDATE_USER_DATA_ENDPOINT = 'http://localhost/api/v1/users/';
+export const GET_USER_BY_MAIL_ENDPOINT = 'api/users/';
+export const GET_MENU_BY_BRANDNAME_ENDPOINT = 'api/menu/';
+export const CREATE_USER_ENDPOINT = 'api/users';
+export const UPDATE_USER_MENU_ENDPOINT = 'api/users/';
+export const UPDATE_USER_DATA_ENDPOINT = 'api/users/';
 
 export const NEW_USER = {
     "address": "Ingrese una direccion",
