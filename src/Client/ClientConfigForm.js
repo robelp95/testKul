@@ -177,6 +177,7 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                         name="coin"
                         handleChange={handleChange}
                         selectValue={values.coin.id}
+                        disabled={true}
                         error={errors.coin}
                     />
 
