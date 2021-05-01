@@ -8,15 +8,14 @@ export const NEW_USER = {
     "address": "Ingrese una direccion",
     "brandName": "menumenu",
     "categoryId": 1,
-    "description": "Ingrese una description",
-    "phoneNumber": 44444444,
-    "minDelivery": 0,
     "deliveryCharge": 0,
+    "description": "Ingrese una description",
+    "minDelivery": 0,
     "name": "Ingrese un nombre",
     "open": "false",
     "opening": "Ingrese horario de atencion",
     "paymentInstructions": "Ingrese instrucciones de pago",
-    "apiToken": "1234",
+    "phoneNumber": 44444444,
     "base64Image": null
 }
 
