@@ -57,10 +57,10 @@ export default function MainFeaturedPost(props) {
                         <Typography variant="h6" color="inherit" paragraph>
                             Horario: {opening}
                         </Typography>
-                        <Typography variant="h6" color="inherit" paragraph>
+                        <Typography component="h6" variant="h6" color="inherit" paragraph>
                             Direccion: {address}
                         </Typography>
-                        <Typography variant="h6" color="inherit" paragraph>
+                        <Typography component="h6" variant="h6" color="inherit" paragraph>
 
                             {
                                 open ?
