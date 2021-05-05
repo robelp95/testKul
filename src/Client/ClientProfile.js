@@ -6,7 +6,7 @@ import ClientProfileCatalogs from "./ClientProfileCatalogs";
 import {useCommonStyles} from "../utils/commonStyles";
 import {UserContext} from "../Context/UserContext";
 import axios from "axios";
-import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT, USER_DATA} from "../utils/Contants";
+import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT, USER_DATA} from "../Api/Contants";
 import * as Yup from "yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ClientSuscriptionData from "./ClientSuscriptionData";

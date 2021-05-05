@@ -8,7 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import CreateCatalogBody from "./CreateCatalogBody";
 import {UserContext} from "../Context/UserContext";
 import axios from "axios";
-import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT} from "../utils/Contants";
+import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT} from "../Api/Contants";
 
 
 const useStyles = makeStyles((theme) => ({
