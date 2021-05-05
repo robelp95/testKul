@@ -9,6 +9,7 @@ import axios from "axios";
 import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT, USER_DATA} from "../utils/Contants";
 import * as Yup from "yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ClientSuscriptionData from "./ClientSuscriptionData";
 
 const clientSchema = Yup.object().shape({
     address: Yup.string().required(undefined),
@@ -141,9 +142,10 @@ return (
 
 const ClientProfile = (props) => {
     const classes = useCommonStyles();
-    const {updateUserData, setState} = props;
+    const {updateUserData, setState, fetchPaykuPlans} = props;
     return (
         <div className={classes.layout}>
+            <ClientSuscriptionData/>
             <ClientProfileCatalogs/>
             <ClientProfileConfig updateUserData={updateUserData} setState={setState}/>
         </div>

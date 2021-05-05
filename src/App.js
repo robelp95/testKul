@@ -15,7 +15,13 @@ import {UserContext} from './Context/UserContext';
 import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
-import {API_HEADERS, CREATE_USER_ENDPOINT, GET_USER_BY_MAIL_ENDPOINT, NEW_USER} from "./utils/Contants";
+import {
+    API_HEADERS,
+    CREATE_USER_ENDPOINT,
+    GET_USER_BY_MAIL_ENDPOINT,
+    NEW_USER,
+    PAYKU_CONTROLLER_ENDPOINT
+} from "./utils/Contants";
 
 const productList = [
     {
@@ -252,6 +258,9 @@ const  App = () => {
     });
 
     const updateUserData = (setState, state, user, data) => {
+        let activeSuscription= _.find(data.suscription, function (elem) {
+            return elem.status === true;
+        }) || null;
         setState({
             ...state,
             user:{
@@ -274,9 +283,27 @@ const  App = () => {
                 paymentInstructions:data.paymentInstructions,
                 phoneNumber: data.phoneNumber,
                 status: data.status,
-                menu: data.Menu
+                menu: data.Menu,
+                suscription: activeSuscription
             }
         });
+    }
+
+    const updatePaykuPlansData = (setState, state, plans) => {
+        setState({
+            ...state,
+            plans: {plans}
+        });
+    }
+
+    const fetchPaykuPlans = async () => {
+        try {
+            const response = await axios.get(PAYKU_CONTROLLER_ENDPOINT + 'plans');
+            const data = await response.data;
+            updatePaykuPlansData(setState, state, data);
+        }catch (e) {
+            updatePaykuPlansData(setState, state, []);
+        }
     }
     useEffect(async () => {
         const user = netlifyIdentity.currentUser();
@@ -333,7 +360,11 @@ const  App = () => {
                       </PrivateRoute>
 
                       <PrivateRoute exact path="/cliente">
-                          <ClientProfile updateUserData={updateUserData} setState={setState}/>
+                          <ClientProfile
+                              updateUserData={updateUserData}
+                              setState={setState}
+                              fetchPaykuPlans={fetchPaykuPlans}
+                          />
                       </PrivateRoute>
                       <PrivateRoute
                           exact from="/manage-catalog">
