@@ -75,7 +75,7 @@ export default function Product(
                         title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="body1" component="body1">
+                        <Typography gutterBottom variant="body1" component="span">
                             {name}
                         </Typography>
                         <Typography className={classes.subtitle}>
