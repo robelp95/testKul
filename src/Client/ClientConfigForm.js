@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ClientConfigForm({values, handleChange, errors, loading, dirty}){
+export default function ClientConfigForm({values, handleChange, errors, loading, dirty, coins, categories}){
 
     const classes = useStyles();
     const [formIsValid, setFormIsValid] = useState(dirty);
@@ -103,7 +103,7 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                     <FormSelect
                         label="Pais"
                         items={[
-                            {value:"0", desc: "Chile(56)"},
+                            {id:"0", name: "Chile", description: "Chile(56)"},
                         ]}
                         name="country"
                         handleChange={handleChange}
@@ -169,11 +169,7 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                 <Grid item xs={12} sm={6}>
                     <FormSelect
                         label="Moneda"
-                        items={[
-                            {value:"0", desc: "Peso Chileno ($)"},
-                            {value:"1", desc: "Peso Argentino ($)"},
-                            {value:"2", desc: "Real Brasileño (R$)"},
-                        ]}
+                        items={coins}
                         name="coin"
                         handleChange={handleChange}
                         selectValue={values.coin.id}
@@ -185,41 +181,7 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                 <Grid item xs={12} sm={6}>
                     <FormSelect
                         label="Categoria"
-                        items={[
-                            {value:"0", desc: "Apparel"},
-                            {value:"1", desc: "Artisanal / handcrafted goods"},
-                            {value:"2", desc: "Baby care products"},
-                            {value:"3", desc: "Bakery"},
-                            {value:"4", desc: "Bar / club / lounge"},
-                            {value:"5", desc: "Beauty &amp; cosmetics"},
-                            {value:"6", desc: "Cafe / coffee shop"},
-                            {value:"7", desc: "Caterer"},
-                            {value:"8", desc: "Consumer electronics"},
-                            {value:"9", desc: "Delivery only restaurant"},
-                            {value:"10", desc: "Fashion accessories"},
-                            {value:"11", desc: "Fitness &amp; sports"},
-                            {value:"12", desc: "Flowers / greetings and gifts"},
-                            {value:"13", desc: "Food &amp; beverages"},
-                            {value:"14", desc: "Gadgets and accessories"},
-                            {value:"15", desc: "Hawker center stall"},
-                            {value:"16", desc: "Health and wellness"},
-                            {value:"17", desc: "Home decor"},
-                            {value:"18", desc: "Home goods / appliances and utility"},
-                            {value:"19", desc: "Hotels and Hostels"},
-                            {value:"20", desc: "Ice-cream parlour"},
-                            {value:"21", desc: "Jewelry and watches"},
-                            {value:"22", desc: "Life hack products"},
-                            {value:"23", desc: "Marketing agency"},
-                            {value:"24", desc: "Pet products"},
-                            {value:"25", desc: "Pop-up event stall"},
-                            {value:"26", desc: "Pre order and catering"},
-                            {value:"27", desc: "Restaurant"},
-                            {value:"28", desc: "Street food cart"},
-                            {value:"29", desc: "Takeaway"},
-                            {value:"30", desc: "Toys &amp; children products"},
-                            {value:"31", desc: "Video games / consoles / and accessory"},
-                            {value:"32", desc: "Web Development agency"},
-                        ]}
+                        items={categories}
                         name="category"
                         handleChange={handleChange}
                         selectValue={values.category.id}

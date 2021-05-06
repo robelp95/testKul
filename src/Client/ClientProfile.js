@@ -5,10 +5,9 @@ import ClientConfigForm from "./ClientConfigForm";
 import ClientProfileCatalogs from "./ClientProfileCatalogs";
 import {useCommonStyles} from "../utils/commonStyles";
 import {UserContext} from "../Context/UserContext";
-import axios from "axios";
-import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT, USER_DATA} from "../utils/Contants";
 import * as Yup from "yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ClientSuscriptionData from "./ClientSuscriptionData";
 
 const clientSchema = Yup.object().shape({
     address: Yup.string().required(undefined),
@@ -28,61 +27,13 @@ const clientSchema = Yup.object().shape({
 function ClientProfileConfig(props){
     const classes = useCommonStyles();
     const { state } = useContext(UserContext);
-    const {updateUserData, setState} = props;
-    const [loading, setLoading] = useState(false);
-    const postData = async (values) => {
+    const {updateUserData, loading, setLoading} = props;
 
-        /**
-         * @type{
-         * address: string,
-         * brandName: string,
-         * base64Image: string|null,
-         * categoryId: number,
-         * description: string,
-         * deliveryCharge: number,
-         * email: string,
-         * minDelivery: number
-         * name: string,
-         * orderViaId: number,
-         * open: boolean,
-         * opening: string,
-         * paymentInstructions: string,
-         * phoneNumber: number,
-         * username: string
-         * }}
-         */
-        let user = USER_DATA;
-        user.address = values.address;
-        user.brandName = values.brandName;
-        user.base64Image = null;
-        user.categoryId = values.category.id;
-        user.description = values.description;
-        user.deliveryCharge = parseInt(values.deliveryCharge);
-        user.email = values.email;
-        user.minDelivery = parseInt(values.minDelivery);
-        user.name = values.name;
-        user.open = values.open;
-        user.opening = values.opening;
-        user.orderViaId = state.user.orderVia.id;
-        user.paymentInstructions = values.paymentInstructions;
-        user.phoneNumber = values.phoneNumber;
-        user.username = state.user.username;
-
-        try {
-            const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id,
-                user, API_HEADERS);
-            setLoading(false)
-            return response.data;
-        }catch (e) {}
-        setLoading(false);
-    }
 
     const onSubmit= async (values) => {
         setLoading(true);
-        const data = await postData(values);
-        if (data){
-            updateUserData(setState, state, state.user, data);
-        }
+        await updateUserData(values);
+        setLoading(false);
     }
 
 return (
@@ -100,7 +51,7 @@ return (
             orderVia: 'whatsapp',
             name: state.user.name,
             phoneNumber: state.user.phoneNumber,
-            coin: state.user.coin,
+            coin: state.user.userCoin,
             category: state.user.category,
             country: state.user.country,
             minDelivery: state.user.minDelivery,
@@ -118,7 +69,6 @@ return (
                     } = props;
                     return (
                         <>
-                            {loading && <CircularProgress />}
                             <Form>
                                 <Paper className={classes.paper}>
                                     <ClientConfigForm
@@ -126,6 +76,8 @@ return (
                                         handleChange={handleChange}
                                         errors={errors}
                                         loading={loading}
+                                        coins={state.coins}
+                                        categories={state.categories}
                                         {...props}
                                     />
                                 </Paper>
@@ -141,11 +93,23 @@ return (
 
 const ClientProfile = (props) => {
     const classes = useCommonStyles();
-    const {updateUserData, setState} = props;
+    const {updateUserData, setState, setNotify} = props;
+    const [loading, setLoading] = useState(false);
     return (
         <div className={classes.layout}>
-            <ClientProfileCatalogs/>
-            <ClientProfileConfig updateUserData={updateUserData} setState={setState}/>
+            {loading && (<div style={{textAlign: "center"}} className={classes.layout}><CircularProgress/></div>)}
+            <ClientSuscriptionData
+                setNotify={setNotify}
+                setLoading={setLoading}
+                loading={loading}
+            />
+            <ClientProfileCatalogs />
+            <ClientProfileConfig
+                updateUserData={updateUserData}
+                setState={setState}
+                loading={loading}
+                setLoading={setLoading}
+            />
         </div>
     )
 }

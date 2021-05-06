@@ -10,7 +10,7 @@ import Fab from "@material-ui/core/Fab";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import {useCommonStyles} from "../utils/commonStyles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {API_HEADERS, GET_MENU_BY_BRANDNAME_ENDPOINT,} from "../utils/Contants";
+import {GET_MENU_BY_BRANDNAME_ENDPOINT,} from "../Api/Contants";
 import axios from "axios";
 import {Redirect, useParams} from "react-router";
 import PropTypes from "prop-types";
@@ -27,30 +27,24 @@ export default function Menu({editMode, setNotify}) {
 
     const { name } = useParams();
 
+    function useNull() {
+        return null;
+    }
     const fetchMenu = async (name) => {
-
-        let data = null;
-        try {
-            const response = await axios.get(GET_MENU_BY_BRANDNAME_ENDPOINT + name, API_HEADERS);
-            data = await response.data;
-        }catch (e) {
-            setLoading(false);
-        }
-        return data;
+        const response = await axios.get(GET_MENU_BY_BRANDNAME_ENDPOINT + name).catch(useNull);
+        return response.data;
     }
 
-    useEffect(() => {
-        if (state !== null) {
-            setProducts(state.Menu.products);
-            setLoading(false);
-
-        }
-    }, [state])
-
     useEffect(async () => {
-        const menu = await fetchMenu(name);
-        setState(menu);
-    }, [loading]);
+        try {
+            const data = await fetchMenu(name);
+            setState(data);
+            setProducts(data.menu.products);
+        }catch (e) {
+            console.log(e, 'err');
+        }
+        setLoading(false);
+    }, []);
 
     const onAddToCart = (product) => {
         product.added = true;

@@ -3,10 +3,19 @@ export const GET_MENU_BY_BRANDNAME_ENDPOINT = 'api/menu/';
 export const CREATE_USER_ENDPOINT = 'api/users';
 export const UPDATE_USER_MENU_ENDPOINT = 'api/users/';
 export const UPDATE_USER_DATA_ENDPOINT = 'api/users/';
+export const PAYKU_CONTROLLER_ENDPOINT = 'api/payku/';
+export const CATEGORY_CONTROLLER_ENDPOINT = 'api/categories';
+export const COIN_CONTROLLER_ENDPOINT = 'api/coins';
+
+export const NEW_SUSCRIPTION = {
+    clientId: null,
+    planId: null
+}
+
 
 export const NEW_USER = {
     "address": "Ingrese una direccion",
-    "brandName": "menumenu",
+    "brandName": null,
     "categoryId": 1,
     "deliveryCharge": 0,
     "description": "Ingrese una description",
