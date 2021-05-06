@@ -29,61 +29,10 @@ function ClientProfileConfig(props){
     const { state } = useContext(UserContext);
     const {updateUserData} = props;
     const [loading, setLoading] = useState(false);
-    const postData = async (values) => {
-
-        /**
-         * @type{
-         * address: string,
-         * brandName: string,
-         * base64Image: string|null,
-         * categoryId: number,
-         * description: string,
-         * deliveryCharge: number,
-         * email: string,
-         * minDelivery: number
-         * name: string,
-         * orderViaId: number,
-         * open: boolean,
-         * opening: string,
-         * paymentInstructions: string,
-         * phoneNumber: number,
-         * username: string
-         * }}
-         */
-        // let user = USER_DATA;
-        // user.address = values.address;
-        // user.brandName = values.brandName;
-        // user.base64Image = null;
-        // user.categoryId = values.category.id;
-        // user.description = values.description;
-        // user.deliveryCharge = parseInt(values.deliveryCharge);
-        // user.email = values.email;
-        // user.minDelivery = parseInt(values.minDelivery);
-        // user.name = values.name;
-        // user.open = values.open;
-        // user.opening = values.opening;
-        // user.orderViaId = state.user.orderVia.id;
-        // user.paymentInstructions = values.paymentInstructions;
-        // user.phoneNumber = values.phoneNumber;
-        // user.username = state.user.username;
-
-        // try {
-        //     const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id,
-        //         user, API_HEADERS);
-        //     setLoading(false)
-        //     return response.data;
-        // }catch (e) {}
-        // setLoading(false);
-    }
 
     const onSubmit= async (values) => {
         console.log(values, 'values');
         await updateUserData(values);
-        // setLoading(true);
-        // const data = await postData(values);
-        // if (data){
-        //     updateUserData(setState, state, state.user, data);
-        // }
     }
 
 return (
