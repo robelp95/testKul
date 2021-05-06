@@ -7,6 +7,9 @@ import {withRouter} from "react-router-dom";
 import {useCommonStyles} from "../utils/commonStyles";
 import {UserContext} from "../Context/UserContext";
 import Chip from "@material-ui/core/Chip";
+import Button from "@material-ui/core/Button";
+import {API_HEADERS, NEW_SUSCRIPTION, UPDATE_USER_DATA_ENDPOINT} from "../Api/Contants";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -28,14 +31,24 @@ const useStyles = makeStyles((theme) => ({
 const ClientProfileCatalogs = (props) => {
     const classes = useStyles();
     const commonClasses = useCommonStyles();
-    const { history } = props;
+    const { history , setNotify, setLoading} = props;
     const { state } = useContext(UserContext);
 
-    const handleMenuClick = (pageUrl) => {
-        history.push(pageUrl);
+    const triggerSuscription = async (p) => {
+        setLoading(true);
+        let suscription = NEW_SUSCRIPTION;
+        suscription.planId = p.paykuId;
+        suscription.clientId = state.user.paykuId;
+        try {
+            const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id + '/suscriptions', suscription, API_HEADERS);
+            setLoading(false);
+            setNotify({isOpen:true, message: 'Suscripcion exitosa, revise email para continuar', type:'info'});
+        }catch (e) {
+            setLoading(false);
+            setNotify({isOpen:true, message: 'No se pudo realizar la suscripcion', type:'error'});
+        }
+
     }
-    useEffect(async () => {
-    }, [])
 
     return (
         <Paper className={classes.paper}>
@@ -67,13 +80,26 @@ const ClientProfileCatalogs = (props) => {
                      {state.user.suscription &&('Plan actual: ' +  state.user.suscription.plan.name)}
                 </Typography>
             </Grid>
-            {/*{state.plans.map((p) => (*/}
-            {/*    <Grid item xs={3} align="center">*/}
-            {/*        <Button variant="outlined" color="primary">*/}
-            {/*            {p.name}*/}
-            {/*        </Button>*/}
-            {/*    </Grid>*/}
-            {/*))}*/}
+            {state.plans.map((p) =>
+                (
+                    state.user.suscription ?
+                        (p.paykuId !== state.user.suscription.plan.paykuId &&
+                            (<Grid item xs={3} align="center">
+                                <Button variant="outlined" color="primary" onClick={() => triggerSuscription(p)}>
+                                    {p.name}
+                                </Button>
+                            </Grid>)) :
+
+                        (<Grid item xs={3} align="center">
+                            <Button variant="outlined" color="primary" onClick={() => triggerSuscription(p)}>
+                                {p.name}
+                            </Button>
+                        </Grid>)
+                )
+
+
+
+            )}
         </Paper>
     )
 }

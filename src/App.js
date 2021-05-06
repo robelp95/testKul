@@ -109,6 +109,7 @@ const  App = () => {
         activeSuscription = userData && _.find(userData.data.suscription, function (elem) {
             return elem.status === true;
         }) || null;
+
         userData.data.suscription = activeSuscription;
         setState({
             user: userData && userData.data,
@@ -165,6 +166,7 @@ const  App = () => {
                           <ClientProfile
                               updateUserData={updateUserData}
                               setState={setState}
+                              setNotify={setNotify}
                           />
                       </PrivateRoute>
                       <PrivateRoute

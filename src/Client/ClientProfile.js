@@ -27,12 +27,13 @@ const clientSchema = Yup.object().shape({
 function ClientProfileConfig(props){
     const classes = useCommonStyles();
     const { state } = useContext(UserContext);
-    const {updateUserData} = props;
-    const [loading, setLoading] = useState(false);
+    const {updateUserData, loading, setLoading} = props;
+
 
     const onSubmit= async (values) => {
-        console.log(values, 'values');
+        setLoading(true);
         await updateUserData(values);
+        setLoading(false);
     }
 
 return (
@@ -68,7 +69,6 @@ return (
                     } = props;
                     return (
                         <>
-                            {loading && <CircularProgress />}
                             <Form>
                                 <Paper className={classes.paper}>
                                     <ClientConfigForm
@@ -91,12 +91,23 @@ return (
 
 const ClientProfile = (props) => {
     const classes = useCommonStyles();
-    const {updateUserData, setState} = props;
+    const {updateUserData, setState, setNotify} = props;
+    const [loading, setLoading] = useState(false);
     return (
         <div className={classes.layout}>
-            <ClientSuscriptionData/>
-            <ClientProfileCatalogs/>
-            <ClientProfileConfig updateUserData={updateUserData} setState={setState}/>
+            {loading && (<div style={{textAlign: "center"}} className={classes.layout}><CircularProgress/></div>)}
+            <ClientSuscriptionData
+                setNotify={setNotify}
+                setLoading={setLoading}
+                loading={loading}
+            />
+            <ClientProfileCatalogs />
+            <ClientProfileConfig
+                updateUserData={updateUserData}
+                setState={setState}
+                loading={loading}
+                setLoading={setLoading}
+            />
         </div>
     )
 }

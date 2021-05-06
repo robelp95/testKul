@@ -12,8 +12,8 @@ export const PAYKU_CONTROLLER_ENDPOINT = 'http://localhost:80/api/v1/payku/';
 // export const PAYKU_CONTROLLER_ENDPOINT = 'api/payku/';
 
 export const NEW_SUSCRIPTION = {
-    "clientId": null,
-    "planId": null
+    clientId: null,
+    planId: null
 }
 
 
