@@ -34,7 +34,7 @@ export default function FormSelect(props){
                 >
                     {
                         items.map( (item, index) => (
-                            <MenuItem key={index} name={name} value={item.value}>{item.desc}</MenuItem>
+                            <MenuItem key={index} name={item.name} value={item.id}>{item.description}</MenuItem>
                         ))
                     }
                 </Select>

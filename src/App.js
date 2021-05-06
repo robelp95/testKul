@@ -17,6 +17,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
 import {
     API_HEADERS,
+    CATEGORY_CONTROLLER_ENDPOINT,
+    COIN_CONTROLLER_ENDPOINT,
     CREATE_USER_ENDPOINT,
     GET_USER_BY_MAIL_ENDPOINT,
     NEW_USER,
@@ -95,8 +97,10 @@ const  App = () => {
 
     const fetchInitData = async (user)=>{
         let activeSuscription = null;
-        let [plans, userData] = await axios.all([
+        let [plans, coins, categories, userData] = await axios.all([
             axios.get(PAYKU_CONTROLLER_ENDPOINT + 'plans').catch(useNull),
+            axios.get(COIN_CONTROLLER_ENDPOINT).catch(useNull),
+            axios.get(CATEGORY_CONTROLLER_ENDPOINT).catch(useNull),
             axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email).catch(useNull)
         ]);
         if(!userData) {
@@ -114,6 +118,8 @@ const  App = () => {
         setState({
             user: userData && userData.data,
             plans: plans && plans.data,
+            coins: coins && coins.data,
+            categories: categories && categories.data
         });
     }
 

@@ -76,6 +76,8 @@ return (
                                         handleChange={handleChange}
                                         errors={errors}
                                         loading={loading}
+                                        coins={state.coins}
+                                        categories={state.categories}
                                         {...props}
                                     />
                                 </Paper>
