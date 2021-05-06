@@ -5,8 +5,6 @@ import ClientConfigForm from "./ClientConfigForm";
 import ClientProfileCatalogs from "./ClientProfileCatalogs";
 import {useCommonStyles} from "../utils/commonStyles";
 import {UserContext} from "../Context/UserContext";
-import axios from "axios";
-import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT, USER_DATA} from "../Api/Contants";
 import * as Yup from "yup";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import ClientSuscriptionData from "./ClientSuscriptionData";
@@ -29,7 +27,7 @@ const clientSchema = Yup.object().shape({
 function ClientProfileConfig(props){
     const classes = useCommonStyles();
     const { state } = useContext(UserContext);
-    const {updateUserData, setState} = props;
+    const {updateUserData} = props;
     const [loading, setLoading] = useState(false);
     const postData = async (values) => {
 
@@ -52,38 +50,40 @@ function ClientProfileConfig(props){
          * username: string
          * }}
          */
-        let user = USER_DATA;
-        user.address = values.address;
-        user.brandName = values.brandName;
-        user.base64Image = null;
-        user.categoryId = values.category.id;
-        user.description = values.description;
-        user.deliveryCharge = parseInt(values.deliveryCharge);
-        user.email = values.email;
-        user.minDelivery = parseInt(values.minDelivery);
-        user.name = values.name;
-        user.open = values.open;
-        user.opening = values.opening;
-        user.orderViaId = state.user.orderVia.id;
-        user.paymentInstructions = values.paymentInstructions;
-        user.phoneNumber = values.phoneNumber;
-        user.username = state.user.username;
+        // let user = USER_DATA;
+        // user.address = values.address;
+        // user.brandName = values.brandName;
+        // user.base64Image = null;
+        // user.categoryId = values.category.id;
+        // user.description = values.description;
+        // user.deliveryCharge = parseInt(values.deliveryCharge);
+        // user.email = values.email;
+        // user.minDelivery = parseInt(values.minDelivery);
+        // user.name = values.name;
+        // user.open = values.open;
+        // user.opening = values.opening;
+        // user.orderViaId = state.user.orderVia.id;
+        // user.paymentInstructions = values.paymentInstructions;
+        // user.phoneNumber = values.phoneNumber;
+        // user.username = state.user.username;
 
-        try {
-            const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id,
-                user, API_HEADERS);
-            setLoading(false)
-            return response.data;
-        }catch (e) {}
-        setLoading(false);
+        // try {
+        //     const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id,
+        //         user, API_HEADERS);
+        //     setLoading(false)
+        //     return response.data;
+        // }catch (e) {}
+        // setLoading(false);
     }
 
     const onSubmit= async (values) => {
-        setLoading(true);
-        const data = await postData(values);
-        if (data){
-            updateUserData(setState, state, state.user, data);
-        }
+        console.log(values, 'values');
+        await updateUserData(values);
+        // setLoading(true);
+        // const data = await postData(values);
+        // if (data){
+        //     updateUserData(setState, state, state.user, data);
+        // }
     }
 
 return (
@@ -101,7 +101,7 @@ return (
             orderVia: 'whatsapp',
             name: state.user.name,
             phoneNumber: state.user.phoneNumber,
-            coin: state.user.coin,
+            coin: state.user.userCoin,
             category: state.user.category,
             country: state.user.country,
             minDelivery: state.user.minDelivery,
@@ -142,7 +142,7 @@ return (
 
 const ClientProfile = (props) => {
     const classes = useCommonStyles();
-    const {updateUserData, setState, fetchPaykuPlans} = props;
+    const {updateUserData, setState} = props;
     return (
         <div className={classes.layout}>
             <ClientSuscriptionData/>
