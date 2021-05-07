@@ -45,11 +45,12 @@ const  App = () => {
     }
 
     const updateUserData = async (user) => {
+
         let updatedUser = USER_DATA;
         updatedUser.address = user.address;
         updatedUser.brandName = user.brandName;
         updatedUser.base64Image = null;
-        updatedUser.categoryId = user.category.id;
+        updatedUser.categoryId = user.categoryId != null ? user.categoryId : user.category.id;
         updatedUser.description = user.description;
         updatedUser.deliveryCharge = parseInt(user.deliveryCharge);
         updatedUser.email = user.email;
@@ -73,6 +74,7 @@ const  App = () => {
                 newUser.brandName = data.brandName;
                 newUser.base64Image = data.base64Image;
                 newUser.categoryId = data.categoryId;
+                newUser.category = data.category;
                 newUser.description = data.description;
                 newUser.deliveryCharge = data.deliveryCharge;
                 newUser.email = data.email;

@@ -13,7 +13,7 @@ const clientSchema = Yup.object().shape({
     address: Yup.string().required(undefined),
     brandName: Yup.string().matches(/^[a-zA-Z0-9]{3,255}$/).required(undefined),
     base64Image: Yup.string(),
-    category: Yup.object().shape({id: Yup.string().required(undefined)}),
+    categoryId: Yup.number(),
     description: Yup.string().required(undefined),
     deliveryCharge: Yup.number().required(undefined),
     minDelivery: Yup.number().required(undefined),
@@ -53,6 +53,7 @@ return (
             phoneNumber: state.user.phoneNumber,
             coin: state.user.userCoin,
             category: state.user.category,
+            categoryId: state.user.categoryId,
             country: state.user.country,
             minDelivery: state.user.minDelivery,
             deliveryCharge: state.user.deliveryCharge
