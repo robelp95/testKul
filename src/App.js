@@ -89,6 +89,10 @@ const  App = () => {
                     ...state,
                     user: newUser
                 });
+                setNotify({isOpen:true, message: 'Perfil actualizado correctamente', type:'success'});
+
+            }else{
+                setNotify({isOpen:true, message: 'No se pudo actualizar el perfil', type:'error'});
             }
         }catch (e) {
             console.log(e, 'err');
