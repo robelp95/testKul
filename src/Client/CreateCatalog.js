@@ -43,13 +43,6 @@ export default function CreateCatalog({editMode, setNotify, setState}) {
         setProduct(initProduct);
     }
 
-    //TODO implement post data handler
-    const postData = async (menu) => {
-        const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id + '/menu',
-            menu, API_HEADERS);
-        const json = await response.json();
-        return json;
-    }
     const handleSaveCart = async () => {
 
         products.forEach(p => {

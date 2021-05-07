@@ -26,6 +26,7 @@ export default function EmptyCartMessage() {
                         Parece que tu carrito está vacío
                     </Typography>
                     <Typography>Para comenzar, creá una categoría para poder agregar productos.</Typography>
+                    <Typography>Una vez que agregues productos, quedará habilitado para su uso.</Typography>
                 </Paper>
             </Grid>
         </Grid>
