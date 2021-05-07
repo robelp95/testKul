@@ -7,7 +7,7 @@ import {generateWhatsappMsg} from "../utils/utils";
 const formSchema = Yup.object().shape({
         firstName: Yup.string().required(undefined),
         lastName: Yup.string().required(undefined),
-        phoneNumber: Yup.string().matches(/^[0-9]{8,8}$/).required(undefined),
+        phoneNumber: Yup.string().matches(/^[0-9]{8,10}$/).required(undefined),
         deliveryType: Yup.string().matches(/(pickup|delivery)/, { excludeEmptyString: true }).required(),
         address1: Yup.string(),
         address2: Yup.string(),

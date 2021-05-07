@@ -126,12 +126,12 @@ export default function Menu({editMode, setNotify}) {
 
                     <div className={classes.layout}>
                     <ScrollableTabsButtonAuto
-                    products ={products}
-                    onAddToCart={onAddToCart}
-                    onRemoveFromCart={onRemoveFromCart}
-                    submitting={submitting}
-                    editMode={editMode}
-                    setProductById={() => {}}
+                        products ={products}
+                        onAddToCart={onAddToCart}
+                        onRemoveFromCart={onRemoveFromCart}
+                        submitting={submitting}
+                        editMode={editMode}
+                        setProductById={() => {}}
                     />
                     <PartialCart
                     products={orderProducts}

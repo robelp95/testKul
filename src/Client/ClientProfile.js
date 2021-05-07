@@ -21,7 +21,7 @@ const clientSchema = Yup.object().shape({
     open: Yup.boolean().required(undefined),
     opening: Yup.string().required(undefined),
     paymentInstructions: Yup.string().required(undefined),
-    phoneNumber: Yup.string().matches(/^[0-9]{8}$/).required(undefined),
+    phoneNumber: Yup.string().matches(/^[0-9]{8,10}$/).required(undefined),
 });
 
 function ClientProfileConfig(props){
