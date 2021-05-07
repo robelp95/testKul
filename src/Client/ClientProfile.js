@@ -11,7 +11,7 @@ import ClientSuscriptionData from "./ClientSuscriptionData";
 
 const clientSchema = Yup.object().shape({
     address: Yup.string().required(undefined),
-    brandName: Yup.string().required(undefined),
+    brandName: Yup.string().matches(/^[a-zA-Z0-9]{3,255}$/).required(undefined),
     base64Image: Yup.string(),
     category: Yup.object().shape({id: Yup.string().required(undefined)}),
     description: Yup.string().required(undefined),
