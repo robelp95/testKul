@@ -9,7 +9,16 @@ import MenuItem from "@material-ui/core/MenuItem";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import * as Yup from "yup";
+
+const formSchema = Yup.object().shape({
+    name: Yup.string().required(undefined),
+    description: Yup.string().required(undefined),
+    price: Yup.string().matches(/^[0-9]{1,8}$/).required(undefined),
+    category: Yup.string().required(undefined),
+});
+
 
 export default function ProductDialog(props) {
 
@@ -24,6 +33,13 @@ export default function ProductDialog(props) {
         initialiceProduct
     } = props;
 
+    useEffect(() => {
+        if (open){
+            formSchema.isValid(product).then(valid => setFormIsValid(valid));
+        }
+    });
+
+    const [formIsValid, setFormIsValid] = useState(false);
 
     const handleClose = () => {
         initialiceProduct();
@@ -56,7 +72,7 @@ export default function ProductDialog(props) {
                     margin="dense"
                     name="name"
                     label="Nombre"
-                    value={product ? product.name : 'asd'}
+                    value={product ? product.name : ''}
                     type="text"
                     fullWidth
                     onChange={handleInputChange}
@@ -100,7 +116,7 @@ export default function ProductDialog(props) {
                 <Button onClick={handleClose} color="primary">
                     Cancelar
                 </Button>
-                <Button onClick={productAction} color="primary">
+                <Button onClick={productAction} color="primary" disabled={!formIsValid}>
                     {actionLabel}
                 </Button>
             </DialogActions>

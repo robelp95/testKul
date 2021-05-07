@@ -43,6 +43,7 @@ export default function CartButtonsWithDialog(
     };
 
     const handleCloseCategories = () => {
+        setNewCategory("");
         setOpenCategories(false);
     };
 
@@ -106,7 +107,7 @@ export default function CartButtonsWithDialog(
                     <Button onClick={handleCloseCategories} color="primary">
                         Cancelar
                     </Button>
-                    <Button onClick={handleAddCategory} color="primary">
+                    <Button onClick={handleAddCategory} color="primary" disabled={newCategory.length < 4}>
                         Agregar
                     </Button>
                 </DialogActions>
