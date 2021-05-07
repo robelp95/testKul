@@ -151,7 +151,8 @@ export default function Menu({editMode, setNotify}) {
                                 minDelivery: state.minDelivery,
                                 coin: state.userCoin.description,
                                 deliveryCharge: state.deliveryCharge,
-                                paymentInstructions: state.paymentInstructions
+                                paymentInstructions: state.paymentInstructions,
+                                phoneNumber: state.phoneNumber
                             }}}
                         setSubmitting={setSubmitting}
                         userData={state}

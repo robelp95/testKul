@@ -3,7 +3,7 @@ import * as _ from "lodash";
 const NEW_LINE = "\n";
 export function generateWhatsappMsg({values, order}) {
 
-    const clientPhoneNumber = "5491161347712";
+    const clientPhoneNumber = "569" + order.user.phoneNumber;
     const shippingCost = order.total >= order.user.minDelivery  ? "Gratis" : order.user.coin+''+order.user.deliveryCharge;
     let newMessage = "🛒 *Nuevo pedido via Kulko.App* 🛒" + NEW_LINE + NEW_LINE;
     newMessage += "*Pedido* #" + order.orderNumber + NEW_LINE + NEW_LINE;
