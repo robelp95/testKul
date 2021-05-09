@@ -26,6 +26,7 @@ import {
     UPDATE_USER_DATA_ENDPOINT,
     USER_DATA
 } from "./Api/Contants";
+import {useNull} from "./utils/utils";
 
 netlifyIdentity.init({locale: 'es'});
 
@@ -40,9 +41,7 @@ const  App = () => {
         });
     });
 
-    function useNull() {
-        return null;
-    }
+
 
     const updateUserData = async (user) => {
 

@@ -34,3 +34,7 @@ export function getCategoriesFromProducts(products) {
     let cat = _.map(products, p=>{return p.category});
     return _.uniqWith(cat,_.isEqual);
 }
+
+export function useNull() {
+    return null;
+}

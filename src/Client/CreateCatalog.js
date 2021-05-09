@@ -49,7 +49,9 @@ export default function CreateCatalog({editMode, setNotify, setState}) {
             delete p.added;
             delete p.image;
         });
+        console.log(products, 'pre');
         const prods = products ?  products.map(p => ({...p})) : [];
+        console.log(prods, 'post');
         const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id + '/menu', {id: state.user.menu.id, products: prods}, API_HEADERS);
         const data = await response.data;
         setState({...state, user:{
