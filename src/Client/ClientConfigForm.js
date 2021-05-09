@@ -29,6 +29,7 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
         if (dirty) setFormIsValid(Object.keys(errors).length === 0)
     }, [errors, values])
 
+
     return (
         <>
             <Grid item xs={12} className={classes.title}>
@@ -44,7 +45,6 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                         name="email"
                         label="Email cliente"
                         value={values.email}
-                        disabled={true}
                         fullWidth
                     />
                 </Grid>
@@ -182,11 +182,10 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                     <FormSelect
                         label="Categoria"
                         items={categories}
-                        name="category"
+                        name="categoryId"
                         handleChange={handleChange}
-                        selectValue={values.category.id}
-                        disabled={true}
-                        error={errors.category}
+                        selectValue={values.categoryId ? values.categoryId : values.category.id}
+                        error={errors.categoryId}
                     />
 
                 </Grid>

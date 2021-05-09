@@ -1,22 +1,51 @@
-import React from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useCommonStyles} from "../utils/commonStyles";
 import ColapsibleTable from "../utils/ColapsibleTable";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import axios from "axios";
+import {USERS_ENDPOINT} from "../Api/Contants";
+import {useNull} from "../utils/utils";
+import {UserContext} from "../Context/UserContext";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default function ClientOrders(props) {
 
     const classes = useCommonStyles();
+    const [loading, setLoading] = useState(true);
+    const [orders, setOrders] = useState([]);
+
+    const {state} = useContext(UserContext);
+
+    useEffect(() => {
+
+        try {
+            async function fetchOrders() {
+                const response  = await axios.get(USERS_ENDPOINT + '/' + parseInt(state.user.id) + '/orders').catch(useNull)
+                setOrders(response.data);
+                setLoading(false);
+                return response;
+            }
+            fetchOrders();
+        }catch (e) {
+            console.log(e);
+        }
+        
+    }, [])
+
     return (
         <>
-            <div className={classes.layout}>
-                <Grid item xs={12} className={classes.title}>
-                    <Typography component="h1" variant="h4" align="center">
-                        Mis pedidos
-                    </Typography>
-                </Grid>
-                <ColapsibleTable/>
-            </div>
+            {loading ?
+                <div style={{textAlign: "center"}} className={classes.layout}><CircularProgress/></div>
+                :
+                (<div className={classes.layout}>
+                    <Grid item xs={12} className={classes.title}>
+                        <Typography component="h1" variant="h4" align="center">
+                            Mis pedidos
+                        </Typography>
+                    </Grid>
+                    <ColapsibleTable orders={orders}/>
+                </div>)}
 
         </>
 

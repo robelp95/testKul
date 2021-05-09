@@ -12,8 +12,8 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
 import Hidden from "@material-ui/core/Hidden";
-import * as _ from 'lodash';
 import FormSwitch from "../utils/FormSwitch";
+import PopOver from "../utils/PopOver";
 
 const useStyles = makeStyles({
     root: {
@@ -78,9 +78,7 @@ export default function Product(
                         <Typography gutterBottom variant="body1" component="span">
                             {name}
                         </Typography>
-                        <Typography className={classes.subtitle}>
-                            {_.truncate(description, {length: 30})}
-                        </Typography>
+                        <PopOver description={description}/>
                         <Typography>
                             ${price}
                         </Typography>

@@ -23,7 +23,7 @@ const useRowStyles = makeStyles({
     },
 });
 
-function createData(name, date, deliveryType, customerName, customerPhoneNumber, price) {
+function createData(name, date, deliveryType, customerName, customerPhoneNumber, price, products) {
     return {
         name,
         date,
@@ -31,12 +31,7 @@ function createData(name, date, deliveryType, customerName, customerPhoneNumber,
         customerName,
         customerPhoneNumber,
         price,
-        products: [
-            { name: 'Frozen yoghurt', amount: 3, total: 134 },
-            { name: 'Ice cream sandwich', amount: 1, total: 205 },
-            { name: 'Eclair', amount: 1, total: 134 },
-            { name: 'Cupcake', amount: 1, total: 134 },
-        ],
+        products
     };
 }
 
@@ -45,6 +40,10 @@ function Row(props) {
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
 
+    function parseDate(date) {
+        let t = date.split(/[- :]/);
+        return (t[2] + '/' + (t[1]-1) + '/' + t[0]);
+    }
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
@@ -54,15 +53,15 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {row.name}
+                   <strong>#{row.orderNumber}</strong>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {row.date}
+                    {parseDate(row.createdAt) }
                 </TableCell>
-                <TableCell align="right">{row.deliveryType}</TableCell>
-                <TableCell align="right">{row.customerName}</TableCell>
-                <TableCell align="right">{row.customerPhoneNumber}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
+                <TableCell align="right">{row.type}</TableCell>
+                <TableCell align="right">{row.client}</TableCell>
+                <TableCell align="right">{row.contact}</TableCell>
+                <TableCell align="right">{row.total}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -80,14 +79,14 @@ function Row(props) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.products.map((prod) => (
-                                        <TableRow key={prod.name}>
+                                    {row.products.map((prod, index) =>(
+                                        <TableRow key={index}>
                                             <TableCell component="th" scope="row">
                                                 {prod.name}
                                             </TableCell>
-                                            <TableCell align="right">{prod.amount}</TableCell>
+                                            <TableCell align="right">{prod.quantity}</TableCell>
                                             <TableCell align="right">
-                                                {Math.round(prod.amount * row.price * 100) / 100}
+                                                {parseInt(prod.price) * parseInt(prod.quantity)}
                                             </TableCell>
                                         </TableRow>
                                     ))}
@@ -125,14 +124,15 @@ const rows = [
     createData(4, "21/01/2021", "Delivery", "Miguel", "+56915766543", 907, 2.5),
 ];
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable(props) {
+    const {orders} = props;
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead>
                     <TableRow>
                         <TableCell/>
-                        <TableCell>Nro pedido</TableCell>
+                        <TableCell>Código pedido</TableCell>
                         <TableCell>Fecha</TableCell>
                         <TableCell align="right">Tipo de entrega</TableCell>
                         <TableCell align="right">Cliente</TableCell>
@@ -141,8 +141,8 @@ export default function CollapsibleTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map((row) => (
-                        <Row key={row.name} row={row} />
+                    {orders.map((row, index) => (
+                        <Row key={row.index} row={row} />
                     ))}
                 </TableBody>
             </Table>

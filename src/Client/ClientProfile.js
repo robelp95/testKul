@@ -11,9 +11,9 @@ import ClientSuscriptionData from "./ClientSuscriptionData";
 
 const clientSchema = Yup.object().shape({
     address: Yup.string().required(undefined),
-    brandName: Yup.string().required(undefined),
+    brandName: Yup.string().matches(/^[a-zA-Z0-9]{3,255}$/).required(undefined),
     base64Image: Yup.string(),
-    category: Yup.object().shape({id: Yup.string().required(undefined)}),
+    categoryId: Yup.number(),
     description: Yup.string().required(undefined),
     deliveryCharge: Yup.number().required(undefined),
     minDelivery: Yup.number().required(undefined),
@@ -21,7 +21,7 @@ const clientSchema = Yup.object().shape({
     open: Yup.boolean().required(undefined),
     opening: Yup.string().required(undefined),
     paymentInstructions: Yup.string().required(undefined),
-    phoneNumber: Yup.string().matches(/^[0-9]{8}$/).required(undefined),
+    phoneNumber: Yup.string().matches(/^[0-9]{8,10}$/).required(undefined),
 });
 
 function ClientProfileConfig(props){
@@ -53,6 +53,7 @@ return (
             phoneNumber: state.user.phoneNumber,
             coin: state.user.userCoin,
             category: state.user.category,
+            categoryId: state.user.categoryId,
             country: state.user.country,
             minDelivery: state.user.minDelivery,
             deliveryCharge: state.user.deliveryCharge

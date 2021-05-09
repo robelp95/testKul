@@ -26,6 +26,7 @@ import {
     UPDATE_USER_DATA_ENDPOINT,
     USER_DATA
 } from "./Api/Contants";
+import {useNull} from "./utils/utils";
 
 netlifyIdentity.init({locale: 'es'});
 
@@ -40,16 +41,15 @@ const  App = () => {
         });
     });
 
-    function useNull() {
-        return null;
-    }
+
 
     const updateUserData = async (user) => {
+
         let updatedUser = USER_DATA;
         updatedUser.address = user.address;
         updatedUser.brandName = user.brandName;
         updatedUser.base64Image = null;
-        updatedUser.categoryId = user.category.id;
+        updatedUser.categoryId = user.categoryId != null ? user.categoryId : user.category.id;
         updatedUser.description = user.description;
         updatedUser.deliveryCharge = parseInt(user.deliveryCharge);
         updatedUser.email = user.email;
@@ -73,6 +73,7 @@ const  App = () => {
                 newUser.brandName = data.brandName;
                 newUser.base64Image = data.base64Image;
                 newUser.categoryId = data.categoryId;
+                newUser.category = data.category;
                 newUser.description = data.description;
                 newUser.deliveryCharge = data.deliveryCharge;
                 newUser.email = data.email;
@@ -89,6 +90,10 @@ const  App = () => {
                     ...state,
                     user: newUser
                 });
+                setNotify({isOpen:true, message: 'Perfil actualizado correctamente', type:'success'});
+
+            }else{
+                setNotify({isOpen:true, message: 'No se pudo actualizar el perfil', type:'error'});
             }
         }catch (e) {
             console.log(e, 'err');
@@ -127,7 +132,6 @@ const  App = () => {
         const user = netlifyIdentity.currentUser();
         if (user !== null){
             try {
-
                 await fetchInitData(user);
             } catch (err) {
                 console.log(err.message, 'err');

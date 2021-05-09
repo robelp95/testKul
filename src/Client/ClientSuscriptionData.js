@@ -76,6 +76,31 @@ const ClientProfileCatalogs = (props) => {
                 </Typography>
             </Grid>
             <Grid item xs={12} className={commonClasses.title}>
+                <Typography component="h1" variant="h4" align="center">
+                        Estado del menu
+                </Typography>
+            </Grid>
+            <Grid item xs={12} className={commonClasses.title}>
+                <Typography component="p" variant="h6" color="inherit" align="center" paragraph>
+                    {
+                        state.user.suscription && state.user.menu && state.user.menu.products.length > 0 ?
+                            (
+                                <Chip
+                                    label="Menu habilitado"
+                                    color="primary"
+                                    style={{backgroundColor:"#4caf50"}}
+                                />
+                            ):
+                            (
+                                <Chip
+                                    label="Menu deshabilitado"
+                                    color="primary"
+                                    style={{backgroundColor:"#f44336"}}
+                                />
+                            )
+                    }
+                </Typography>
+
                 <Typography component="p" variant="h6" color="inherit" align="center" paragraph>
                      {state.user.suscription &&('Plan actual: ' +  state.user.suscription.plan.name)}
                 </Typography>

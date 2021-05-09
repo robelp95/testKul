@@ -39,6 +39,7 @@ export default function Menu({editMode, setNotify}) {
         try {
             const data = await fetchMenu(name);
             setState(data);
+            console.log(data);
             setProducts(data.menu.products);
         }catch (e) {
             console.log(e, 'err');
@@ -126,12 +127,12 @@ export default function Menu({editMode, setNotify}) {
 
                     <div className={classes.layout}>
                     <ScrollableTabsButtonAuto
-                    products ={products}
-                    onAddToCart={onAddToCart}
-                    onRemoveFromCart={onRemoveFromCart}
-                    submitting={submitting}
-                    editMode={editMode}
-                    setProductById={() => {}}
+                        products ={products}
+                        onAddToCart={onAddToCart}
+                        onRemoveFromCart={onRemoveFromCart}
+                        submitting={submitting}
+                        editMode={editMode}
+                        setProductById={() => {}}
                     />
                     <PartialCart
                     products={orderProducts}
@@ -148,10 +149,12 @@ export default function Menu({editMode, setNotify}) {
                         comment: ''
                         }}
                         order={{orderProducts, orderNumber, total, user:{
+                                id: state.id,
                                 minDelivery: state.minDelivery,
                                 coin: state.userCoin.description,
                                 deliveryCharge: state.deliveryCharge,
-                                paymentInstruction: state.paymentInstruction
+                                paymentInstructions: state.paymentInstructions,
+                                phoneNumber: state.phoneNumber
                             }}}
                         setSubmitting={setSubmitting}
                         userData={state}

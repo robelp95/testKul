@@ -10,6 +10,7 @@ import WhatsAppIcon from '@material-ui/icons/WhatsApp';
 import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import Review from './Review';
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -52,7 +53,7 @@ function getStepContent(step, props) {
 
 export default function Checkout(props) {
     const classes = useStyles();
-    const {steps, activeStep, setActiveStep, errors, order, dirty} = props;
+    const {steps, activeStep, setActiveStep, errors, order, dirty, loading} = props;
     const [formIsValid, setFormIsValid] = useState(dirty);
 
     useEffect(() => {
@@ -65,8 +66,9 @@ export default function Checkout(props) {
     return (
         <React.Fragment>
             <CssBaseline />
-
             <main id="back-to-top-anchor" >
+                {loading &&
+                    <div style={{textAlign: "center"}} className={classes.layout}><CircularProgress/></div>}
                 <Paper className={classes.paper}>
                     <Typography component="h1" variant="h4" align="center">
                         Mi pedido
@@ -107,7 +109,7 @@ export default function Checkout(props) {
                                         color="primary"
                                         className={classes.button}
                                         type="submit"
-                                        disabled={!formIsValid}
+                                        disabled={!formIsValid || loading}
                                         startIcon={activeStep === steps.length -1 ? <WhatsAppIcon/> : ''}
                                     >
                                         {

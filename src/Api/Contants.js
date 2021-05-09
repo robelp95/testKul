@@ -1,4 +1,5 @@
 export const GET_USER_BY_MAIL_ENDPOINT = 'api/users/';
+export const USERS_ENDPOINT = 'api/users';
 export const GET_MENU_BY_BRANDNAME_ENDPOINT = 'api/menu/';
 export const CREATE_USER_ENDPOINT = 'api/users';
 export const UPDATE_USER_MENU_ENDPOINT = 'api/users/';
@@ -48,4 +49,20 @@ export const USER_DATA = {
 export const API_HEADERS ={
     'Content-Type': 'application/json',
     'Authorization': 'Bearer '
+}
+
+export const NEW_ORDER_PROD = {
+    "name": null,
+    "quantity": null,
+    "price": null,
+    "total": null
+}
+export const NEW_ORDER = {
+    "client": null,
+    "contact": null,
+    "total": null,
+    "type": null,
+    "orderNumber": null,
+    "products": null
+
 }

@@ -3,7 +3,7 @@ import * as _ from "lodash";
 const NEW_LINE = "\n";
 export function generateWhatsappMsg({values, order}) {
 
-    const clientPhoneNumber = "5491161347712";
+    const clientPhoneNumber = "569" + order.user.phoneNumber;
     const shippingCost = order.total >= order.user.minDelivery  ? "Gratis" : order.user.coin+''+order.user.deliveryCharge;
     let newMessage = "🛒 *Nuevo pedido via Kulko.App* 🛒" + NEW_LINE + NEW_LINE;
     newMessage += "*Pedido* #" + order.orderNumber + NEW_LINE + NEW_LINE;
@@ -12,7 +12,7 @@ export function generateWhatsappMsg({values, order}) {
         newMessage+=NEW_LINE;
     }
     newMessage+= NEW_LINE + "*Total:* $" + order.total + NEW_LINE;
-    newMessage+= "*Forma de pago:* " + order.user.paymentInstruction + NEW_LINE;
+    newMessage+= "*Forma de pago:* " + order.user.paymentInstructions + NEW_LINE;
     newMessage+= "*Tipo de entrega:* " + values.deliveryType + NEW_LINE + NEW_LINE;
     newMessage+= "*Datos del cliente:* " + values.firstName + " " + values.lastName + NEW_LINE;
     newMessage+= "*Contacto:* " + "+56 9 " + values.phoneNumber + NEW_LINE + NEW_LINE;
@@ -33,4 +33,8 @@ export function generateWhatsappMsg({values, order}) {
 export function getCategoriesFromProducts(products) {
     let cat = _.map(products, p=>{return p.category});
     return _.uniqWith(cat,_.isEqual);
+}
+
+export function useNull() {
+    return null;
 }
