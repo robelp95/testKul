@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Form, Formik} from "formik";
 import Checkout from "./Checkout";
 import * as Yup from 'yup';
@@ -19,6 +19,7 @@ const formSchema = Yup.object().shape({
 export const CheckoutForm = ({initialClient, order, setSubmitting, userData})=>{
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = ['Datos del cliente', 'Resumen de orden'];
+    const [loading, setLoading] = useState(false);
 
     const isLastStep = () => {
         return activeStep === steps.length - 1;
@@ -26,8 +27,8 @@ export const CheckoutForm = ({initialClient, order, setSubmitting, userData})=>{
 
     const createOrder = async (order) => {
 
+        setLoading(true);
         try {
-            console.log(order);
             const data = NEW_ORDER;
             let name = order.values.firstName + " " + order.values.lastName
             data.client = name;
@@ -42,10 +43,10 @@ export const CheckoutForm = ({initialClient, order, setSubmitting, userData})=>{
             const newOrder = await axios
                 .post(USERS_ENDPOINT + '/' + parseInt(order.order.user.id) + '/orders', data)
                 .catch(useNull);
-            console.log(newOrder);
         }catch (e) {
             console.log(e);
         }
+        setLoading(false);
 
     }
 
@@ -98,6 +99,7 @@ export const CheckoutForm = ({initialClient, order, setSubmitting, userData})=>{
                                 order={order}
                                 isSubmitting={isSubmitting}
                                 userData={userData}
+                                loading={loading}
                                 {...props}
                             />
                         </Form>

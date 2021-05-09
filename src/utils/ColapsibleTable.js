@@ -53,7 +53,7 @@ function Row(props) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {row.id}
+                   <strong>#{row.orderNumber}</strong>
                 </TableCell>
                 <TableCell component="th" scope="row">
                     {parseDate(row.createdAt) }
@@ -132,7 +132,7 @@ export default function CollapsibleTable(props) {
                 <TableHead>
                     <TableRow>
                         <TableCell/>
-                        <TableCell>Nro pedido</TableCell>
+                        <TableCell>Código pedido</TableCell>
                         <TableCell>Fecha</TableCell>
                         <TableCell align="right">Tipo de entrega</TableCell>
                         <TableCell align="right">Cliente</TableCell>
