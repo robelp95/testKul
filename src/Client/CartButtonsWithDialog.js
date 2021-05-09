@@ -28,6 +28,7 @@ export default function CartButtonsWithDialog(
         setCategories,
         setOpen,
         setEditting,
+        productCount
     }
     ) {
     const [openCategories, setOpenCategories] = React.useState(false);
@@ -73,7 +74,8 @@ export default function CartButtonsWithDialog(
                         variant="contained"
                         startIcon={<AddIcon/>}
                         onClick={handleClickOpen}
-                        disabled={!categories.length > 0}
+
+                        disabled={!categories.length > 0 || productCount > 49}
                     >
                         Nuevo Producto
                     </Button>
@@ -81,6 +83,7 @@ export default function CartButtonsWithDialog(
                         color="primary"
                         variant="contained"
                         startIcon={<AddIcon/>}
+                        disabled={categories.length>4}
                         onClick={handleClickOpenCategories}
                     >
                         Nueva categoria

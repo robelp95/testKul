@@ -69,6 +69,7 @@ export default function CreateCatalogBody(props) {
             <CartButtonsWithDialog
                 categories={categories}
                 setCategories={setCategories}
+                productCount={products.length}
                 setOpen={setOpen}
                 setEditting={setEditting}
             />
