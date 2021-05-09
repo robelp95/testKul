@@ -132,7 +132,6 @@ const  App = () => {
         const user = netlifyIdentity.currentUser();
         if (user !== null){
             try {
-
                 await fetchInitData(user);
             } catch (err) {
                 console.log(err.message, 'err');

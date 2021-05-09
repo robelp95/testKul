@@ -39,6 +39,7 @@ export default function Menu({editMode, setNotify}) {
         try {
             const data = await fetchMenu(name);
             setState(data);
+            console.log(data);
             setProducts(data.menu.products);
         }catch (e) {
             console.log(e, 'err');
@@ -148,6 +149,7 @@ export default function Menu({editMode, setNotify}) {
                         comment: ''
                         }}
                         order={{orderProducts, orderNumber, total, user:{
+                                id: state.id,
                                 minDelivery: state.minDelivery,
                                 coin: state.userCoin.description,
                                 deliveryCharge: state.deliveryCharge,
