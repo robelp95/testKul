@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import {USERS_ENDPOINT} from "../Api/Contants";
-import {useNull} from "../utils/utils";
+import {getHeaders, useNull} from "../utils/utils";
 import {UserContext} from "../Context/UserContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -21,7 +21,8 @@ export default function ClientOrders(props) {
 
         try {
             async function fetchOrders() {
-                const response  = await axios.get(USERS_ENDPOINT + '/' + parseInt(state.user.id) + '/orders').catch(useNull)
+                const headers = {headers: getHeaders(state.user.token)};
+                const response  = await axios.get(USERS_ENDPOINT + '/' + parseInt(state.user.id) + '/orders', headers).catch(useNull)
                 setOrders(response.data);
                 setLoading(false);
                 return response;

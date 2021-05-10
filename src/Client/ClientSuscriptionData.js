@@ -8,8 +8,9 @@ import {useCommonStyles} from "../utils/commonStyles";
 import {UserContext} from "../Context/UserContext";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
-import {API_HEADERS, NEW_SUSCRIPTION, UPDATE_USER_DATA_ENDPOINT} from "../Api/Contants";
+import {NEW_SUSCRIPTION, UPDATE_USER_DATA_ENDPOINT} from "../Api/Contants";
 import axios from "axios";
+import {getHeaders} from "../utils/utils";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -40,7 +41,8 @@ const ClientProfileCatalogs = (props) => {
         suscription.planId = p.paykuId;
         suscription.clientId = state.user.paykuId;
         try {
-            const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id + '/suscriptions', suscription, API_HEADERS);
+            const headers = {headers: getHeaders(state.user.token)};
+            const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id + '/suscriptions', suscription, headers);
             setLoading(false);
             setNotify({isOpen:true, message: 'Suscripcion exitosa, revise email para continuar', type:'info'});
         }catch (e) {

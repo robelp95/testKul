@@ -38,3 +38,10 @@ export function getCategoriesFromProducts(products) {
 export function useNull() {
     return null;
 }
+
+export function getHeaders(token) {
+    return {
+        'Content-Type': 'application/json',
+        'X-AUTH-TOKEN': 'Bearer ' + token
+    }
+}
