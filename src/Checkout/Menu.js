@@ -39,7 +39,6 @@ export default function Menu({editMode, setNotify}) {
         try {
             const data = await fetchMenu(name);
             setState(data);
-            console.log(data);
             setProducts(data.menu.products);
         }catch (e) {
             console.log(e, 'err');

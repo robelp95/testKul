@@ -27,6 +27,7 @@ import {
 } from "./Api/Contants";
 import {getHeaders, useNull} from "./utils/utils";
 
+
 netlifyIdentity.init({locale: 'es'});
 
 const  App = () => {
