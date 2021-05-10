@@ -16,7 +16,6 @@ import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
 import {
-    API_HEADERS,
     CATEGORY_CONTROLLER_ENDPOINT,
     COIN_CONTROLLER_ENDPOINT,
     CREATE_USER_ENDPOINT,
@@ -26,7 +25,7 @@ import {
     UPDATE_USER_DATA_ENDPOINT,
     USER_DATA
 } from "./Api/Contants";
-import {useNull} from "./utils/utils";
+import {getHeaders, useNull} from "./utils/utils";
 
 netlifyIdentity.init({locale: 'es'});
 
@@ -40,8 +39,6 @@ const  App = () => {
             user: null
         });
     });
-
-
 
     const updateUserData = async (user) => {
 
@@ -63,8 +60,9 @@ const  App = () => {
         updatedUser.username = state.user.username;
 
         try {
+            const headers = {headers: getHeaders(state.user.token)};
             const userData = await axios
-                .post(UPDATE_USER_DATA_ENDPOINT + parseInt(state.user.id), updatedUser)
+                .post(UPDATE_USER_DATA_ENDPOINT + parseInt(state.user.id), updatedUser, headers)
                 .catch(useNull);
             if (userData){
                 const data = userData.data;
@@ -102,24 +100,26 @@ const  App = () => {
 
     const fetchInitData = async (user)=>{
         let activeSuscription = null;
+        const headers = {headers: getHeaders(user.token.access_token)};
         let [plans, coins, categories, userData] = await axios.all([
-            axios.get(PAYKU_CONTROLLER_ENDPOINT + 'plans').catch(useNull),
-            axios.get(COIN_CONTROLLER_ENDPOINT).catch(useNull),
-            axios.get(CATEGORY_CONTROLLER_ENDPOINT).catch(useNull),
-            axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email).catch(useNull)
+            axios.get(PAYKU_CONTROLLER_ENDPOINT + 'plans', headers).catch(useNull),
+            axios.get(COIN_CONTROLLER_ENDPOINT, headers).catch(useNull),
+            axios.get(CATEGORY_CONTROLLER_ENDPOINT, headers).catch(useNull),
+            axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email, headers).catch(useNull)
         ]);
         if(!userData) {
             let initData = NEW_USER;
             initData.email = user.email;
             initData.username = user.user_metadata.full_name;
             initData.brandName = user.user_metadata.full_name;
-            userData = await axios.post(CREATE_USER_ENDPOINT, initData, API_HEADERS);
+            userData = await axios.post(CREATE_USER_ENDPOINT, initData, headers);
         }
         activeSuscription = userData && _.find(userData.data.suscription, function (elem) {
             return elem.status === true;
         }) || null;
 
         userData.data.suscription = activeSuscription;
+        userData.data.token = user.token.access_token;
         setState({
             user: userData && userData.data,
             plans: plans && plans.data,

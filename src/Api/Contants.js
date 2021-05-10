@@ -46,17 +46,7 @@ export const USER_DATA = {
     "orderViaId": null,
     "base64Image": null
 }
-export const API_HEADERS ={
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer '
-}
 
-export const NEW_ORDER_PROD = {
-    "name": null,
-    "quantity": null,
-    "price": null,
-    "total": null
-}
 export const NEW_ORDER = {
     "client": null,
     "contact": null,

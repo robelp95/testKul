@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import * as _ from 'lodash';
-import {getCategoriesFromProducts} from "../utils/utils";
+import {getCategoriesFromProducts, getHeaders} from "../utils/utils";
 import {useCommonStyles} from "../utils/commonStyles";
 import EmptyCartMessage from "../ShoppingCart/EmptyCartMessage";
 import Button from "@material-ui/core/Button";
@@ -8,7 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import CreateCatalogBody from "./CreateCatalogBody";
 import {UserContext} from "../Context/UserContext";
 import axios from "axios";
-import {API_HEADERS, UPDATE_USER_MENU_ENDPOINT} from "../Api/Contants";
+import {UPDATE_USER_MENU_ENDPOINT} from "../Api/Contants";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,10 +49,9 @@ export default function CreateCatalog({editMode, setNotify, setState}) {
             delete p.added;
             delete p.image;
         });
-        console.log(products, 'pre');
         const prods = products ?  products.map(p => ({...p})) : [];
-        console.log(prods, 'post');
-        const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id + '/menu', {id: state.user.menu.id, products: prods}, API_HEADERS);
+        const headers = {headers: getHeaders(state.user.token)};
+        const response = await axios.post(UPDATE_USER_MENU_ENDPOINT + state.user.id + '/menu', {id: state.user.menu.id, products: prods}, headers);
         const data = await response.data;
         setState({...state, user:{
             ...state.user,
