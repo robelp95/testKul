@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import {NEW_SUSCRIPTION, UPDATE_USER_DATA_ENDPOINT} from "../Api/Contants";
 import axios from "axios";
 import {getHeaders} from "../utils/utils";
+import * as _ from "lodash";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,6 +35,10 @@ const ClientProfileCatalogs = (props) => {
     const commonClasses = useCommonStyles();
     const { history , setNotify, setLoading} = props;
     const { state } = useContext(UserContext);
+
+    const productsEnabled = _.filter(state.user.menu.products, (e) => {
+        return e.enabled;
+    });
 
     const triggerSuscription = async (p) => {
         setLoading(true);
@@ -85,7 +90,7 @@ const ClientProfileCatalogs = (props) => {
             <Grid item xs={12} className={commonClasses.title}>
                 <Typography component="p" variant="h6" color="inherit" align="center" paragraph>
                     {
-                        state.user.suscription && state.user.menu && state.user.menu.products.length > 0 ?
+                        state.user.suscription && state.user.menu && productsEnabled.length > 0 ?
                             (
                                 <Chip
                                     label="Menu habilitado"
