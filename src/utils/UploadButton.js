@@ -14,8 +14,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function UploadButtons() {
+export default function UploadButtons(props) {
     const classes = useStyles();
+    const {name, handleFileUpload} = props;
 
     return (
         <div className={classes.root}>
@@ -23,8 +24,9 @@ export default function UploadButtons() {
                 accept="image/*"
                 className={classes.input}
                 id="contained-button-file"
-                multiple
                 type="file"
+                onChange={handleFileUpload}
+                name={name}
             />
             <label htmlFor="contained-button-file">
                 <Button
@@ -37,12 +39,6 @@ export default function UploadButtons() {
                     Cargar Logo
                 </Button>
             </label>
-            {/*<input accept="image/*" className={classes.input} id="icon-button-file" type="file" />*/}
-            {/*<label htmlFor="icon-button-file">*/}
-            {/*    <IconButton color="primary" aria-label="upload picture" component="span">*/}
-            {/*        <PhotoCamera />*/}
-            {/*    </IconButton>*/}
-            {/*</label>*/}
         </div>
     );
 }

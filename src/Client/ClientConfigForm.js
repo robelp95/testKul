@@ -20,7 +20,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ClientConfigForm({values, handleChange, errors, loading, dirty, coins, categories}){
+export default function ClientConfigForm({
+                                             values,
+                                             handleChange,
+                                             errors,
+                                             loading,
+                                             dirty,
+                                             coins,
+                                             categories,
+                                             handleFileUpload}){
 
     const classes = useStyles();
     const [formIsValid, setFormIsValid] = useState(dirty);
@@ -138,7 +146,12 @@ export default function ClientConfigForm({values, handleChange, errors, loading,
                     </Field>
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <UploadButton/>
+                    <>
+                        <img
+                            src={values.image ? values.image : "https://via.placeholder.com/50"}
+                            style={{width:"50px", height: "50px"}}/>
+                        <UploadButton name="userImage" handleFileUpload={handleFileUpload}/>
+                    </>
                 </Grid>
             </Grid>
             <Grid container spacing={3}>
