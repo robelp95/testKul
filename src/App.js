@@ -26,6 +26,8 @@ import {
     USER_DATA
 } from "./Api/Contants";
 import {getHeaders, useNull} from "./utils/utils";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import {useCommonStyles} from "./utils/commonStyles";
 
 
 netlifyIdentity.init({locale: 'es'});
@@ -34,6 +36,7 @@ const  App = () => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
     const [state, setState] = useState({user: null});
     const value = useMemo(() => ({ state, setState }), [state, setState]);
+    const [loading, setLoading] = useState(false);
     netlifyIdentity.on('logout', () => {
         setState({
             ...state,
@@ -43,10 +46,11 @@ const  App = () => {
 
     const updateUserData = async (user) => {
 
+
         let updatedUser = USER_DATA;
         updatedUser.address = user.address;
         updatedUser.brandName = user.brandName;
-        updatedUser.base64Image = null;
+        updatedUser.base64Image = user.base64Image;
         updatedUser.categoryId = user.categoryId != null ? user.categoryId : user.category.id;
         updatedUser.description = user.description;
         updatedUser.deliveryCharge = parseInt(user.deliveryCharge);
@@ -100,6 +104,7 @@ const  App = () => {
     }
 
     const fetchInitData = async (user)=>{
+        setLoading(true);
         let activeSuscription = null;
         const headers = {headers: getHeaders(user.token.access_token)};
         let [plans, coins, categories, userData] = await axios.all([
@@ -127,6 +132,7 @@ const  App = () => {
             coins: coins && coins.data,
             categories: categories && categories.data
         });
+        setLoading(false);
     }
 
     useEffect(async () => {
@@ -135,6 +141,8 @@ const  App = () => {
             try {
                 await fetchInitData(user);
             } catch (err) {
+                setLoading(false);
+                handleLogout();
                 console.log(err.message, 'err');
             }
         }
@@ -146,6 +154,8 @@ const  App = () => {
             try {
                 await fetchInitData(user);
             }catch (e) {
+                setLoading(false);
+                handleLogout();
                 console.log(e);
             }
         });
@@ -153,6 +163,8 @@ const  App = () => {
     const handleLogout = () => {
         netlifyIdentity.logout();
     }
+
+    const classes= useCommonStyles();
 
   return (
       <div>
@@ -166,40 +178,46 @@ const  App = () => {
           <Toolbar/>
           <Notification notify={notify} setNotify={setNotify}/>
           <div>
-              <UserContext.Provider value={value}>
-                  <Switch>
-                      <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
-                      <PrivateRoute exact from="/mis-pedidos">
-                          <ClientOrders/>
-                      </PrivateRoute>
+              {loading ?
+                <div style={{textAlign: "center"}} className={classes.layout}><CircularProgress/></div> :
+                  (
+                      <UserContext.Provider value={value}>
+                          <Switch>
+                              <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
+                              <PrivateRoute exact from="/mis-pedidos">
+                                  <ClientOrders/>
+                              </PrivateRoute>
 
-                      <PrivateRoute exact path="/cliente">
-                          <ClientProfile
-                              updateUserData={updateUserData}
-                              setState={setState}
-                              setNotify={setNotify}
-                          />
-                      </PrivateRoute>
-                      <PrivateRoute
-                          exact from="/manage-catalog">
-                          <CreateCatalog
-                              editMode={true}
-                              setNotify={setNotify}
-                              setState={setState}
-                          />
-                      </PrivateRoute>
-                      <Route
-                          exact from="/:name" render={props => <Menu
-                          notify={notify}
-                          editMode={false}
-                          setNotify={setNotify}
-                          {...props}/>}
-                      />
-                      <Route path="*">
-                          <Redirect to="/home" />
-                      </Route>
-                  </Switch>
-              </UserContext.Provider>
+                              <PrivateRoute exact path="/cliente">
+                                  <ClientProfile
+                                      updateUserData={updateUserData}
+                                      setState={setState}
+                                      setNotify={setNotify}
+                                  />
+                              </PrivateRoute>
+                              <PrivateRoute
+                                  exact from="/manage-catalog">
+                                  <CreateCatalog
+                                      editMode={true}
+                                      setNotify={setNotify}
+                                      setState={setState}
+                                  />
+                              </PrivateRoute>
+                              <Route
+                                  exact from="/:name" render={props => <Menu
+                                  notify={notify}
+                                  editMode={false}
+                                  setNotify={setNotify}
+                                  {...props}/>}
+                              />
+                              <Route path="*">
+                                  <Redirect to="/home" />
+                              </Route>
+                          </Switch>
+                      </UserContext.Provider>
+                  )
+              }
+
           </div>
           <Copyright/>
       </div>

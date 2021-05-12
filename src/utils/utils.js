@@ -42,6 +42,6 @@ export function useNull() {
 export function getHeaders(token) {
     return {
         'Content-Type': 'application/json',
-        'X-AUTH-TOKEN': 'Bearer ' + token
+        'X-AUTH-TOKEN': token
     }
 }

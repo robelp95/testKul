@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const initProduct = {name: "", description: "", price: "",category: "", added: false, enabled: true};
+const initProduct = {name: "", description: "", price: "",category: "", added: false, enabled: true, base64Image: null};
 
 export default function CreateCatalog({editMode, setNotify, setState}) {
 
@@ -38,6 +38,11 @@ export default function CreateCatalog({editMode, setNotify, setState}) {
         setProducts(state.user.menu.products);
         setCategories(getCategoriesFromProducts(state.user.menu.products));
     }, []);
+
+    useEffect(() => {
+        setProducts(state.user.menu.products);
+        setCategories(getCategoriesFromProducts(state.user.menu.products));
+    }, [state]);
 
     const initialiceProduct = () => {
         setProduct(initProduct);

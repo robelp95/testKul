@@ -11,6 +11,8 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import React, {useEffect, useState} from "react";
 import * as Yup from "yup";
+import UploadButton from "../utils/UploadButton";
+import convertToBase64 from "../utils/convertToBase64";
 
 const formSchema = Yup.object().shape({
     name: Yup.string().required(undefined),
@@ -45,6 +47,11 @@ export default function ProductDialog(props) {
         initialiceProduct();
         setOpen(false);
     };
+
+    const handleFileUpload = async (file) => {
+        let base64 = await convertToBase64(file);
+        product.base64Image= base64;
+    }
 
     const productAction = () => {
         handleProductAction(product);
@@ -110,6 +117,12 @@ export default function ProductDialog(props) {
                             ))
                         }
                     </Select>
+                </FormControl>
+                <FormControl required style={{width:"100%"}}>
+                    <img
+                        src={product.image ? product.image : "https://via.placeholder.com/50"}
+                        style={{width:"50px", height: "50px"}}/>
+                    <UploadButton name="userImage" handleFileUpload={handleFileUpload}/>
                 </FormControl>
             </DialogContent>
             <DialogActions>
