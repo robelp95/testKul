@@ -1,7 +1,7 @@
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {withRouter} from "react-router-dom";
 import {useCommonStyles} from "../utils/commonStyles";
@@ -12,6 +12,7 @@ import {NEW_SUSCRIPTION, UPDATE_USER_DATA_ENDPOINT} from "../Api/Contants";
 import axios from "axios";
 import {getHeaders} from "../utils/utils";
 import * as _ from "lodash";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,6 +35,8 @@ const ClientProfileCatalogs = (props) => {
     const classes = useStyles();
     const commonClasses = useCommonStyles();
     const { history , setNotify, setLoading} = props;
+
+    const [url, setUrl] = useState(null);
     const { state } = useContext(UserContext);
 
     const productsEnabled = _.filter(state.user.menu.products, (e) => {
@@ -48,6 +51,7 @@ const ClientProfileCatalogs = (props) => {
         try {
             const headers = {headers: getHeaders(state.user.token)};
             const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id + '/suscriptions', suscription, headers);
+            setUrl(response.data.suscription.pop().url || null);
             setLoading(false);
             setNotify({isOpen:true, message: 'Suscripcion exitosa, revise email para continuar', type:'info'});
         }catch (e) {
@@ -107,6 +111,14 @@ const ClientProfileCatalogs = (props) => {
                             )
                     }
                 </Typography>
+                {url &&
+                (
+                    <Typography component="p" variant="h6" color="inherit" align="center" paragraph>
+                        <Link href={url} target="_blank">
+                            Completar suscripción
+                        </Link>
+                    </Typography>
+                )}
 
                 <Typography component="p" variant="h6" color="inherit" align="center" paragraph>
                      {state.user.suscription &&('Plan actual: ' +  state.user.suscription.plan.name)}
