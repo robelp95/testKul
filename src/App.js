@@ -80,6 +80,7 @@ const  App = () => {
                 newUser.description = data.description;
                 newUser.deliveryCharge = data.deliveryCharge;
                 newUser.email = data.email;
+                newUser.image = data.image;
                 newUser.minDelivery = data.minDelivery;
                 newUser.name = data.name;
                 newUser.open = data.open;
