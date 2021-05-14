@@ -106,6 +106,7 @@ const  App = () => {
 
     const fetchInitData = async (user)=>{
         setLoading(true);
+        netlifyIdentity.close();
         let activeSuscription = null;
         const headers = {headers: getHeaders(user.token.access_token)};
         let [plans, coins, categories, userData] = await axios.all([
