@@ -8,6 +8,7 @@ import {USERS_ENDPOINT} from "../Api/Contants";
 import {getHeaders, useNull} from "../utils/utils";
 import {UserContext} from "../Context/UserContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import {Hidden} from "@material-ui/core";
 
 export default function ClientOrders(props) {
 
@@ -45,6 +46,15 @@ export default function ClientOrders(props) {
                             Mis pedidos
                         </Typography>
                     </Grid>
+
+                    <Hidden smUp>
+                        <Grid item xs={12} className={classes.title}>
+                            <Typography component="p" variant="p" align="center">
+                                Deslice para ver todos los campos
+                            </Typography>
+                        </Grid>
+                    </Hidden>
+
                     <ColapsibleTable orders={orders}/>
                 </div>)}
 

@@ -26,7 +26,7 @@ const clientSchema = Yup.object().shape({
 const ClientProfileConfig = (props) => {
     const classes = useCommonStyles();
     const { state } = useContext(UserContext);
-    const [file, setFile] = useState(state.user.image);
+    const [file, setFile] = useState();
     const {updateUserData, loading, setLoading} = props;
 
 

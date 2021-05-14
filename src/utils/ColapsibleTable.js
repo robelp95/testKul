@@ -117,13 +117,6 @@ Row.propTypes = {
     }).isRequired,
 };
 
-const rows = [
-    createData(1,"20/12/2019", "Delivery", "Anibal", "+56915456543", 165, 3.99),
-    createData(2, "08/04/2020","Pickup", "Ana", "+569154565321", 43, 4.99),
-    createData(3, "11/10/2020", "Pickup", "Ana", "+569154565321", 105, 503),
-    createData(4, "21/01/2021", "Delivery", "Miguel", "+56915766543", 907, 2.5),
-];
-
 export default function CollapsibleTable(props) {
     const {orders} = props;
     return (

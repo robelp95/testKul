@@ -80,6 +80,7 @@ const  App = () => {
                 newUser.description = data.description;
                 newUser.deliveryCharge = data.deliveryCharge;
                 newUser.email = data.email;
+                newUser.image = data.image;
                 newUser.minDelivery = data.minDelivery;
                 newUser.name = data.name;
                 newUser.open = data.open;
@@ -116,8 +117,9 @@ const  App = () => {
         if(!userData) {
             let initData = NEW_USER;
             initData.email = user.email;
-            initData.username = user.user_metadata.full_name;
-            initData.brandName = user.user_metadata.full_name;
+            const username = user.user_metadata.full_name.replace(/[^a-zA-Z0-9]/g,'a');
+            initData.username = username;
+            initData.brandName = username;
             userData = await axios.post(CREATE_USER_ENDPOINT, initData, headers);
         }
         activeSuscription = userData && _.find(userData.data.suscription, function (elem) {
