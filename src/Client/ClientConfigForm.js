@@ -252,7 +252,7 @@ export default function ClientConfigForm({
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography component="p" variant="p" style={{color: "#0000008a"}} align="center">
+                    <Typography component="p" variant="inherit" style={{color: "#0000008a"}} align="center">
                         Los campos con * son obligatorios
                     </Typography>
                 </Grid>
