@@ -117,7 +117,7 @@ const  App = () => {
         if(!userData) {
             let initData = NEW_USER;
             initData.email = user.email;
-            const username = user.user_metadata.full_name.replace(/\s/g,'')
+            const username = user.user_metadata.full_name.replace(/[^a-zA-Z0-9]/g,'a');
             initData.username = username;
             initData.brandName = username;
             userData = await axios.post(CREATE_USER_ENDPOINT, initData, headers);
