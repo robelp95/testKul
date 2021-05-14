@@ -12,7 +12,7 @@ import FormSelect from "../utils/FormSelect";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 import Switch from "@material-ui/core/Switch";
-import FormHelperText from "@material-ui/core/FormHelperText";
+
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -250,6 +250,11 @@ export default function ClientConfigForm({
                         placeholder="Ingrese costo del envio"
                         fullWidth
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography component="p" variant="p" style={{color: "#0000008a"}} align="center">
+                        Los campos con * son obligatorios
+                    </Typography>
                 </Grid>
                 <Grid container spacing={6} justify={"center"} style={{marginTop: "10px"}}>
                     <Grid item xs={4} style={{textAlign: "center"}}>
