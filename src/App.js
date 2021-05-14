@@ -116,8 +116,9 @@ const  App = () => {
         if(!userData) {
             let initData = NEW_USER;
             initData.email = user.email;
-            initData.username = user.user_metadata.full_name;
-            initData.brandName = user.user_metadata.full_name;
+            const username = user.user_metadata.full_name.replace(/\s/g,'')
+            initData.username = username;
+            initData.brandName = username;
             userData = await axios.post(CREATE_USER_ENDPOINT, initData, headers);
         }
         activeSuscription = userData && _.find(userData.data.suscription, function (elem) {

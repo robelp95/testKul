@@ -9,9 +9,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import UploadButton from "../utils/UploadButton";
 import FormSelect from "../utils/FormSelect";
-
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
+import Switch from "@material-ui/core/Switch";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles((theme) => ({
     title: {
@@ -133,7 +134,7 @@ export default function ClientConfigForm({
                         fullWidth
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={4}>
                     <Field component={RadioGroup} name="orderVia">
                         <FormLabel component="legend">Recibir ordenes por</FormLabel>
                         <FormControlLabel
@@ -145,7 +146,22 @@ export default function ClientConfigForm({
                         />
                     </Field>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={4}>
+                    <Field component={RadioGroup} name="orderVia">
+                        <FormLabel component="legend">Negocio abierto</FormLabel>
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={values.open}
+                                    onChange={handleChange}
+                                    name="open"
+                                    color="primary"
+                                />
+                            }
+                        />
+                    </Field>
+                </Grid>
+                <Grid item xs={12} sm={4}>
                     <>
                         <img
                             src={values.image ? values.image : "https://via.placeholder.com/50"}
