@@ -2,7 +2,6 @@ import React, {useEffect, useMemo, useState} from "react";
 import Header from "./Header";
 import {Redirect, Route} from "react-router-dom";
 import {Switch} from 'react-router';
-import Home from "./Home";
 import Toolbar from "@material-ui/core/Toolbar";
 import Menu from "./Checkout/Menu";
 import ClientProfile from "./Client/ClientProfile";
@@ -28,11 +27,12 @@ import {
 import {getHeaders, useNull} from "./utils/utils";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {useCommonStyles} from "./utils/commonStyles";
+import Home from "./Home";
 
 
 netlifyIdentity.init({locale: 'es'});
 
-const  App = () => {
+const App = () => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
     const [state, setState] = useState({user: null});
     const value = useMemo(() => ({ state, setState }), [state, setState]);
@@ -186,12 +186,13 @@ const  App = () => {
                   (
                       <UserContext.Provider value={value}>
                           <Switch>
-                              <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
-                              <PrivateRoute exact from="/mis-pedidos">
+                              <Route exact from="/app" render={props => <Home page="Landing Page" {...props}/>}/>
+                              {/*<Route exact from="/home" render={() => <LandingPage/>}/>*/}
+                              <PrivateRoute exact from="/app/mis-pedidos">
                                   <ClientOrders/>
                               </PrivateRoute>
 
-                              <PrivateRoute exact path="/cliente">
+                              <PrivateRoute exact path="/app/cliente">
                                   <ClientProfile
                                       updateUserData={updateUserData}
                                       setState={setState}
@@ -199,7 +200,7 @@ const  App = () => {
                                   />
                               </PrivateRoute>
                               <PrivateRoute
-                                  exact from="/manage-catalog">
+                                  exact from="/app/manage-catalog">
                                   <CreateCatalog
                                       editMode={true}
                                       setNotify={setNotify}
@@ -214,7 +215,7 @@ const  App = () => {
                                   {...props}/>}
                               />
                               <Route path="*">
-                                  <Redirect to="/home" />
+                                  <Redirect to="/" />
                               </Route>
                           </Switch>
                       </UserContext.Provider>

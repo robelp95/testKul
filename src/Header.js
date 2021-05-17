@@ -21,6 +21,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import Button from "@material-ui/core/Button";
 import {withRouter} from 'react-router-dom';
 import {UserContext} from "./Context/UserContext";
+import {useRouteMatch} from "react-router";
 
 const drawerWidth = 240;
 
@@ -91,6 +92,8 @@ const Header = props => {
 
     const { history, handleLogin, handleLogout} = props;
 
+    let { path, url } = useRouteMatch();
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -160,15 +163,15 @@ const Header = props => {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button key="Gestion Cliente" onClick={() => handleMenuClick('/cliente')}>
+                        <ListItem button key="Gestion Cliente" onClick={() => handleMenuClick(`${url}/cliente`)}>
                             <ListItemIcon><MailIcon/></ListItemIcon>
                             <ListItemText primary="Gestion Cliente" />
                         </ListItem>
-                        <ListItem button key="Mis Pedidos" onClick={() => handleMenuClick('/mis-pedidos')}>
+                        <ListItem button key="Mis Pedidos" onClick={() => handleMenuClick(`${url}/mis-pedidos`)}>
                             <ListItemIcon><WhatsAppIcon/></ListItemIcon>
                             <ListItemText primary="Mis Pedidos" />
                         </ListItem>
-                        <ListItem button key="Mi Menu" onClick={() => handleMenuClick('/' + state.user.brandName)}>
+                        <ListItem button key="Mi Menu" onClick={() => handleMenuClick(`${url}/` + state.user.brandName)}>
                             <ListItemIcon><InboxIcon/></ListItemIcon>
                             <ListItemText primary="Menu" />
                         </ListItem>
