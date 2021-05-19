@@ -149,7 +149,6 @@ export const LandingPage = (props) => {
 
         </section>
 
-
         <section id="productos" className="services-area pt-120">
             <div className="container">
                 <div className="row justify-content-center">
@@ -276,8 +275,6 @@ export const LandingPage = (props) => {
 
         </section>
 
-
-
         <section id="features" className="services-area pt-120">
             <div className="container">
                 <div className="row justify-content-center">
@@ -293,7 +290,7 @@ export const LandingPage = (props) => {
                 </div>
 
                 <div className="row justify-content-center">
-                    <div className="col-lg-4 col-md-7 col-sm-8">
+                    <div className="col-lg-3 col-md-7 col-sm-8">
                         <div className="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s"
                              data-wow-delay="0.2s">
                             <div className="services-icon">
@@ -302,10 +299,11 @@ export const LandingPage = (props) => {
                                         <i className="lni lni-baloon"></i>
                             </div>
                             <div className="services-content mt-30">
-                                <h4 className="services-title"><a href="#">MENSUAL</a></h4>
+                                <h4 className="services-title"><a href="#">Pruebalo</a></h4>
                                 <p>$7.990 Neto</p>
                                 <hr/>
                                 <ul style={{textAlign: "left"}}>
+                                    <li>Por 10 dias</li>
                                     <li>Hasta 50 Productos</li>
                                     <li>Hasta 5 Categorías</li>
                                     <li>Recibir pedido por WhatsApp</li>
@@ -317,7 +315,34 @@ export const LandingPage = (props) => {
                         </div>
 
                     </div>
-                    <div className="col-lg-4 col-md-7 col-sm-8">
+
+                    <div className="col-lg-3 col-md-7 col-sm-8">
+                        <div className="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s"
+                             data-wow-delay="0.2s">
+                            <div className="services-icon">
+                                <img className="shape" src="assets/images/services-shape.svg" alt="shape"/>
+                                <img className="shape-1" src="assets/images/services-shape-1.svg" alt="shape"/>
+                                <i className="lni lni-baloon"></i>
+                            </div>
+                            <div className="services-content mt-30">
+                                <h4 className="services-title"><a href="#">MENSUAL</a></h4>
+                                <p>$7.990 Neto</p>
+                                <hr/>
+                                <ul style={{textAlign: "left"}}>
+                                    <li>Por 1 mes</li>
+                                    <li>Hasta 50 Productos</li>
+                                    <li>Hasta 5 Categorías</li>
+                                    <li>Recibir pedido por WhatsApp</li>
+                                    <li>Utilice su propio dominio *</li>
+                                    <li>Tu propio número de WhatsApp</li>
+                                </ul>
+                                <hr/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="col-lg-3 col-md-7 col-sm-8">
                         <div className="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s"
                              data-wow-delay="0.5s">
                             <div className="services-icon">
@@ -330,6 +355,33 @@ export const LandingPage = (props) => {
                                 <p>$59.990 Neto</p>
                                 <hr/>
                                 <ul style={{textAlign: "left"}}>
+                                    <li>Por 1 año</li>
+                                    <li>Hasta 50 Productos</li>
+                                    <li>Hasta 5 Categorías</li>
+                                    <li>Recibir pedido por WhatsApp</li>
+                                    <li>Utilice su propio dominio *</li>
+                                    <li>Tu propio número de WhatsApp</li>
+                                </ul>
+                                <hr/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div className="col-lg-3 col-md-7 col-sm-8">
+                        <div className="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s"
+                             data-wow-delay="0.5s">
+                            <div className="services-icon">
+                                <img className="shape" src="assets/images/services-shape.svg" alt="shape"/>
+                                <img className="shape-1" src="assets/images/services-shape-2.svg" alt="shape"/>
+                                <i className="lni lni-cog"></i>
+                            </div>
+                            <div className="services-content mt-30">
+                                <h4 className="services-title"><a href="#">APOYANOS</a></h4>
+                                <p>$59.990 Neto</p>
+                                <hr/>
+                                <ul style={{textAlign: "left"}}>
+                                    <li>Por 5 años</li>
                                     <li>Hasta 50 Productos</li>
                                     <li>Hasta 5 Categorías</li>
                                     <li>Recibir pedido por WhatsApp</li>
@@ -343,13 +395,11 @@ export const LandingPage = (props) => {
                     </div>
                 </div>
 
+
+
             </div>
 
         </section>
-
-
-
-
 
         <section id="about" className="about-area pt-70">
             <div className="container">
@@ -386,10 +436,6 @@ export const LandingPage = (props) => {
             </div>
         </section>
 
-
-
-
-
         <section className="about-area pt-70">
             <div className="about-shape-2">
                 <img src="assets/images/about-shape-2.svg" alt="shape"/>
@@ -424,9 +470,6 @@ export const LandingPage = (props) => {
             </div>
 
         </section>
-
-
-
 
         <section className="about-area pt-70">
             <div className="container">
@@ -465,13 +508,6 @@ export const LandingPage = (props) => {
                 <img src="assets/images/about-shape-1.svg" alt="shape"/>
             </div>
         </section>
-
-
-
-
-
-
-
 
         <section id="facts" className="video-counter pt-70">
             <div className="container">
@@ -596,9 +632,6 @@ export const LandingPage = (props) => {
             </div>
         </div>
 
-
-
-
         <footer id="footer" className="footer-area pt-120">
             <div className="container pt-100">
                 <div className="footer-widget pb-100 pt-40">
@@ -670,6 +703,9 @@ export const LandingPage = (props) => {
 
             <div id="particles-2"></div>
         </footer>
+
+
+        <a href="#" className="widget-messenger"><i className="lni lni-facebook-messenger"></i></a>
         <a href="#" className="back-to-top"><i className="lni lni-chevron-up"></i></a>
             <section>
                 <div className="container">

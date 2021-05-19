@@ -87,6 +87,17 @@ $(function () {
     });
 
 
+    //Animate the scroll to yop
+    $('.widget-messenger').on('click', function (event) {
+        event.preventDefault();
+        window.open(
+            'https://m.me/103650298545571\n',
+            '_blank' // <- This is what makes it open in a new window.
+        );
+
+    });
+
+
     //=====  WOW active
 
     new WOW().init();
