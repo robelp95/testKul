@@ -149,7 +149,6 @@ export const LandingPage = (props) => {
 
         </section>
 
-
         <section id="productos" className="services-area pt-120">
             <div className="container">
                 <div className="row justify-content-center">
@@ -275,8 +274,6 @@ export const LandingPage = (props) => {
             </div>
 
         </section>
-
-
 
         <section id="features" className="services-area pt-120">
             <div className="container">
@@ -439,10 +436,6 @@ export const LandingPage = (props) => {
             </div>
         </section>
 
-
-
-
-
         <section className="about-area pt-70">
             <div className="about-shape-2">
                 <img src="assets/images/about-shape-2.svg" alt="shape"/>
@@ -477,9 +470,6 @@ export const LandingPage = (props) => {
             </div>
 
         </section>
-
-
-
 
         <section className="about-area pt-70">
             <div className="container">
@@ -518,13 +508,6 @@ export const LandingPage = (props) => {
                 <img src="assets/images/about-shape-1.svg" alt="shape"/>
             </div>
         </section>
-
-
-
-
-
-
-
 
         <section id="facts" className="video-counter pt-70">
             <div className="container">
@@ -649,9 +632,6 @@ export const LandingPage = (props) => {
             </div>
         </div>
 
-
-
-
         <footer id="footer" className="footer-area pt-120">
             <div className="container pt-100">
                 <div className="footer-widget pb-100 pt-40">
@@ -723,6 +703,9 @@ export const LandingPage = (props) => {
 
             <div id="particles-2"></div>
         </footer>
+
+
+        <a href="#" className="widget-messenger"><i className="lni lni-facebook-messenger"></i></a>
         <a href="#" className="back-to-top"><i className="lni lni-chevron-up"></i></a>
             <section>
                 <div className="container">

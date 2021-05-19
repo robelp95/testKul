@@ -1362,3 +1362,20 @@ p {
   display: none; }
   .back-to-top:hover {
     color: #fff; }
+
+/*===== BACK TO TOP =====*/
+.widget-messenger {
+  font-size: 50px;
+  color: #b94f78;
+  position: fixed;
+  right: 80px;
+  bottom: 20px;
+  width: auto;
+  height: auto;
+  line-height: 40px;
+  border-radius: 5px;
+  text-align: center;
+  z-index: 99;
+}
+.back-to-top:hover {
+  color: #fff; }
