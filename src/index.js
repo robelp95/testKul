@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import {Switch} from 'react-router';
 import {LandingPage} from "./LandingPage/LandingPage";
+import Menu from "./Checkout/Menu";
 
 const theme = createMuiTheme({
     palette: {
@@ -25,13 +26,7 @@ ReactDOM.render(
               <Route exact path="/">
                   <LandingPage/>
               </Route>
-              <Route path="/app">
-                  <MuiThemeProvider theme={theme}>
-                      <App />
-                  </MuiThemeProvider>
-              </Route>
-
-              <Route path="/:menu">
+              <Route path="/:app">
                   <MuiThemeProvider theme={theme}>
                       <App />
                   </MuiThemeProvider>

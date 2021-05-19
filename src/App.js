@@ -14,7 +14,7 @@ import {UserContext} from './Context/UserContext';
 import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
-import {withRouter} from 'react-router-dom';
+import {withRouter, useRouteMatch} from 'react-router-dom';
 
 import {
     CATEGORY_CONTROLLER_ENDPOINT,
@@ -172,7 +172,7 @@ const App = (props) => {
 
     const classes= useCommonStyles();
 
-  return (
+    return (
       <div>
 
           <UserContext.Provider value={value}>
@@ -210,11 +210,11 @@ const App = (props) => {
                                   />
                               </PrivateRoute>
                               <Route
-                                  exact from="/app/:name" render={props => <Menu
+                                  exact from="/:name" render={() => <Menu
                                   notify={notify}
                                   editMode={false}
                                   setNotify={setNotify}
-                                  {...props}/>}
+                              />}
                               />
                               <Route path="*">
                                   <Redirect to="/app" />

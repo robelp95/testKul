@@ -163,15 +163,15 @@ const Header = props => {
                     </div>
                     <Divider />
                     <List>
-                        <ListItem button key="Gestion Cliente" onClick={() => handleMenuClick(`${url}/cliente`)}>
+                        <ListItem button key="Gestion Cliente" onClick={() => handleMenuClick('/app/cliente')}>
                             <ListItemIcon><MailIcon/></ListItemIcon>
                             <ListItemText primary="Gestion Cliente" />
                         </ListItem>
-                        <ListItem button key="Mis Pedidos" onClick={() => handleMenuClick(`${url}/mis-pedidos`)}>
+                        <ListItem button key="Mis Pedidos" onClick={() => handleMenuClick('/app/mis-pedidos')}>
                             <ListItemIcon><WhatsAppIcon/></ListItemIcon>
                             <ListItemText primary="Mis Pedidos" />
                         </ListItem>
-                        <ListItem button key="Mi Menu" onClick={() => handleMenuClick(`${url}/` + state.user.brandName)}>
+                        <ListItem button key="Mi Menu" onClick={() => handleMenuClick('/' + state.user.brandName)}>
                             <ListItemIcon><InboxIcon/></ListItemIcon>
                             <ListItemText primary="Menu" />
                         </ListItem>

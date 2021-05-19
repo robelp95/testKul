@@ -26,7 +26,6 @@ export default function Menu({editMode, setNotify}) {
     const [loading, setLoading] = useState(true);
 
     const { name } = useParams();
-
     function useNull() {
         return null;
     }
