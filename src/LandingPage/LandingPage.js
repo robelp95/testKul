@@ -50,6 +50,9 @@ export const LandingPage = (props) => {
                                             <a className="page-scroll" href="#home">Inicio</a>
                                         </li>
                                         <li className="nav-item">
+                                            <a className="page-scroll" href="#tablero">Funcionalidades</a>
+                                        </li>
+                                        <li className="nav-item">
                                             <a className="page-scroll" href="#features">Precios</a>
                                         </li>
                                         <li className="nav-item">
@@ -57,9 +60,6 @@ export const LandingPage = (props) => {
                                         </li>
                                         <li className="nav-item">
                                             <a className="page-scroll" href="#facts">Soluciones</a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a className="page-scroll" href="#team">Funcionalidades</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -92,44 +92,54 @@ export const LandingPage = (props) => {
                                     URL de tienda personalizada <br/> No se requiere pasarela de pago</p>
                                 <p className="text wow fadeInUp" data-wow-duration="1.3s"
                                    data-wow-delay="0.8s"> Comisiones Cero | Cancelar en cualquier momento</p>
-                                <a href="#" className="main-btn wow fadeInUp" data-wow-duration="1.3s"
-                                   data-wow-delay="1.1s">Ver Demo</a>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
-                                 data-wow-delay="1.4s">
-                                <img src="assets/images/header-hero.png" alt="hero" />
                             </div>
 
                         </div>
                     </div>
 
                 </div>
-
                 <div id="particles-1" className="particles"></div>
+                <div className="brand-area">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div
+                                    className="brand-logo d-flex align-items-center justify-content-center justify-content-md-between">
+                                    <div className="single-logo mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                                        <img src="assets/images/Purple.png" width="50px" alt="brand"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
 
         </header>
 
 
 
-
-
-        <div className="brand-area pt-90">
+        <section id="tablero" className="services-area pt-120">
             <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div
-                            className="brand-logo d-flex align-items-center justify-content-center justify-content-md-between">
-                            <div className="single-logo mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
-                                <img src="assets/images/Purple.png" width="50px" alt="brand"/>
-                            </div>
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Tu tablero</h3>
+                            <p>Tan simple que te enamoras de él</p>
 
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/app/client_config_2.png" alt="hero" />
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -137,12 +147,109 @@ export const LandingPage = (props) => {
 
             </div>
 
-        </div>
+        </section>
 
 
+        <section id="productos" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Gestion de producto</h3>
+                            <p>Administra sus productos, descripción y precios</p>
 
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/app/client_products_1.png" alt="client_products_1" />
+                                    </div>
 
-        <section id="features" className="services-area pt-120">
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/app/client_products_2.png" alt="client_products_2" />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/app/client_products_3.png" alt="client_products_3" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalogos" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Gestion de catálogos</h3>
+                            <p>Clasifique sus productos para ayudar a sus compradores a encontrarlos fácilmente.</p>
+
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/app/catalog.png" alt="catalog" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="tienda" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Configuración de la tienda</h3>
+                            <p>Configure el enlace de su tienda, la moneda, las instrucciones de pago y
+                                las tarifas de envío.</p>
+
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/app/client_config_2.png" alt="client_config_2" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="speed" className="services-area pt-120">
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-lg-10">
@@ -198,15 +305,14 @@ export const LandingPage = (props) => {
                                 <h4 className="services-title"><a href="#">MENSUAL</a></h4>
                                 <p>$7.990 Neto</p>
                                 <hr/>
-                                    <ul style={{textAlign: "left"}}>
-                                        <li>Hasta 25 Productos por Categorías</li>
-                                        <li>Hasta 5 Categorías</li>
-                                        <li>Recibir pedido por WhatsApp</li>
-                                        <li>Utilice su propio dominio *</li>
-                                        <li>Tu propio número de WhatsApp</li>
-                                    </ul>
-                                    <hr/>
-                                    <a href="#">Inscribirse</a>
+                                <ul style={{textAlign: "left"}}>
+                                    <li>Hasta 50 Productos</li>
+                                    <li>Hasta 5 Categorías</li>
+                                    <li>Recibir pedido por WhatsApp</li>
+                                    <li>Utilice su propio dominio *</li>
+                                    <li>Tu propio número de WhatsApp</li>
+                                </ul>
+                                <hr/>
                             </div>
                         </div>
 
@@ -224,14 +330,13 @@ export const LandingPage = (props) => {
                                 <p>$59.990 Neto</p>
                                 <hr/>
                                 <ul style={{textAlign: "left"}}>
-                                    <li>Hasta 30 Productos por Categorías</li>
-                                    <li>Hasta 10 Categorías</li>
+                                    <li>Hasta 50 Productos</li>
+                                    <li>Hasta 5 Categorías</li>
                                     <li>Recibir pedido por WhatsApp</li>
                                     <li>Utilice su propio dominio *</li>
                                     <li>Tu propio número de WhatsApp</li>
                                 </ul>
-                                    <hr/>
-                                    <a href="#">Inscribirse</a>
+                                <hr/>
                             </div>
                         </div>
 
@@ -495,27 +600,8 @@ export const LandingPage = (props) => {
 
 
         <footer id="footer" className="footer-area pt-120">
-            <div className="container">
-                <div className="subscribe-area wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
-                    <div className="row">
-                        <div className="col-lg-6">
-                            <div className="subscribe-content mt-45">
-                                <h2 className="subscribe-title">¡Subscribete a nuestras ofertas!</h2>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="subscribe-form mt-50">
-                                <form action="#">
-                                    <input type="text" placeholder="Correo electrónico"/>
-                                    <button className="main-btn">SUBSCRIBETE</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div className="footer-widget pb-100">
+            <div className="container pt-100">
+                <div className="footer-widget pb-100 pt-40">
                     <div className="row">
                         <div className="col-lg-4 col-md-6 col-sm-8">
                             <div className="footer-about mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
