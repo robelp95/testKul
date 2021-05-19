@@ -104,7 +104,7 @@ export default function Menu({editMode, setNotify}) {
         <>
             {!loading && state === null ? (<Redirect
                 to={{
-                    pathname: "/",
+                    pathname: "/app",
                     state: { from: '/app/menu' }
                 }}
             />):

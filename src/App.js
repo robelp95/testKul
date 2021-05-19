@@ -208,14 +208,14 @@ const App = () => {
                                   />
                               </PrivateRoute>
                               <Route
-                                  exact from="/:name" render={props => <Menu
+                                  exact from="/app/:name" render={props => <Menu
                                   notify={notify}
                                   editMode={false}
                                   setNotify={setNotify}
                                   {...props}/>}
                               />
                               <Route path="*">
-                                  <Redirect to="/" />
+                                  <Redirect to="/app" />
                               </Route>
                           </Switch>
                       </UserContext.Provider>

@@ -1,12 +1,7 @@
 import React from "react";
-import {useRouteMatch} from "react-router";
 import {useHistory, withRouter} from 'react-router-dom';
 
 export const LandingPage = (props) => {
-
-    let { path, url } = useRouteMatch();
-    console.log(path, 'path');
-    console.log(url, 'url');
     let history = useHistory();
     const handleNavigateToApp = () => {
         history.push("/app");
