@@ -33,7 +33,7 @@ export const LandingPage = (props) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <nav className="navbar navbar-expand-lg">
-                                <a className="navbar-brand" href="index.html">
+                                <a className="navbar-brand" href="/">
                                     <img src="assets/images/White.png" width="111px" alt="Logo" />
                                 </a>
                                 <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -261,7 +261,7 @@ export const LandingPage = (props) => {
                             <p className="text">Una herramienta fácil y sencilla, con un resultado poderoso. En pocos
                                 minutos tendrás tu carta digital con todo lo necesario para mostrar tus platos y
                                 servicios a tus clientes.</p>
-                            <a href="#" className="main-btn">¡QUIERO COMENZAR!</a>
+                            <span className="main-btn" onClick={handleNavigateToApp}>!QUIERO COMENZAR!</span>
                         </div>
 
                     </div>
@@ -303,7 +303,7 @@ export const LandingPage = (props) => {
                             <p className="text">Toma el control de tu tiempo, comisiones y ventas. Comienza a ofrecer
                                 pedidos online en un abrir y cerrar de ojos. NO TENEMOS LETRAS CHICAS Y NO COBRAMOS
                                 COMISIONES. Obtén el 100% de las ganancias de tus ventas.</p>
-                            <a href="#" className="main-btn">¡EMPEZAR AHORA!</a>
+                            <span className="main-btn" onClick={handleNavigateToApp}>!EMPEZAR AHORA!</span>
                         </div>
 
                     </div>
