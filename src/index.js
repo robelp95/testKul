@@ -4,8 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import {BrowserRouter as Router} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+import {Switch} from 'react-router';
+import {LandingPage} from "./LandingPage/LandingPage";
 
 const theme = createMuiTheme({
     palette: {
@@ -19,9 +21,23 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <React.StrictMode>
       <Router>
-          <MuiThemeProvider theme={theme}>
-          <App />
-          </MuiThemeProvider>
+          <Switch>
+              <Route exact path="/">
+                  <LandingPage/>
+              </Route>
+              <Route path="/app">
+                  <MuiThemeProvider theme={theme}>
+                      <App />
+                  </MuiThemeProvider>
+              </Route>
+
+              <Route path="/:menu">
+                  <MuiThemeProvider theme={theme}>
+                      <App />
+                  </MuiThemeProvider>
+              </Route>
+          </Switch>
+
       </Router>
   </React.StrictMode>,
   document.getElementById('root')

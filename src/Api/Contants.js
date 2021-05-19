@@ -22,7 +22,7 @@ export const NEW_USER = {
     "description": "Ingrese una description",
     "minDelivery": 0,
     "name": "Ingrese un nombre",
-    "open": "false",
+    "open": true,
     "opening": "Ingrese horario de atencion",
     "paymentInstructions": "Ingrese instrucciones de pago",
     "phoneNumber": 44444444,
