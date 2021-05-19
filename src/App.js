@@ -14,6 +14,8 @@ import {UserContext} from './Context/UserContext';
 import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
+import {withRouter} from 'react-router-dom';
+
 import {
     CATEGORY_CONTROLLER_ENDPOINT,
     COIN_CONTROLLER_ENDPOINT,
@@ -32,11 +34,13 @@ import Home from "./Home";
 
 netlifyIdentity.init({locale: 'es'});
 
-const App = () => {
+const App = (props) => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
     const [state, setState] = useState({user: null});
     const value = useMemo(() => ({ state, setState }), [state, setState]);
     const [loading, setLoading] = useState(false);
+
+    const {history} = props;
     netlifyIdentity.on('logout', () => {
         setState({
             ...state,
@@ -45,8 +49,6 @@ const App = () => {
     });
 
     const updateUserData = async (user) => {
-
-
         let updatedUser = USER_DATA;
         updatedUser.address = user.address;
         updatedUser.brandName = user.brandName;
@@ -136,6 +138,7 @@ const App = () => {
             categories: categories && categories.data
         });
         setLoading(false);
+        history.push('/app/cliente');
     }
 
     useEffect(async () => {
@@ -187,7 +190,6 @@ const App = () => {
                       <UserContext.Provider value={value}>
                           <Switch>
                               <Route exact from="/app" render={props => <Home page="Landing Page" {...props}/>}/>
-                              {/*<Route exact from="/home" render={() => <LandingPage/>}/>*/}
                               <PrivateRoute exact from="/app/mis-pedidos">
                                   <ClientOrders/>
                               </PrivateRoute>
@@ -228,4 +230,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default withRouter(App);
