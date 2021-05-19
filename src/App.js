@@ -2,7 +2,6 @@ import React, {useEffect, useMemo, useState} from "react";
 import Header from "./Header";
 import {Redirect, Route} from "react-router-dom";
 import {Switch} from 'react-router';
-import Home from "./Home";
 import Toolbar from "@material-ui/core/Toolbar";
 import Menu from "./Checkout/Menu";
 import ClientProfile from "./Client/ClientProfile";
@@ -15,6 +14,8 @@ import {UserContext} from './Context/UserContext';
 import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
+import {withRouter, useRouteMatch} from 'react-router-dom';
+
 import {
     CATEGORY_CONTROLLER_ENDPOINT,
     COIN_CONTROLLER_ENDPOINT,
@@ -28,15 +29,18 @@ import {
 import {getHeaders, useNull} from "./utils/utils";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import {useCommonStyles} from "./utils/commonStyles";
+import Home from "./Home";
 
 
 netlifyIdentity.init({locale: 'es'});
 
-const  App = () => {
+const App = (props) => {
     const [notify, setNotify] = useState({isOpen: false, message: '', type: ''});
     const [state, setState] = useState({user: null});
     const value = useMemo(() => ({ state, setState }), [state, setState]);
     const [loading, setLoading] = useState(false);
+
+    const {history} = props;
     netlifyIdentity.on('logout', () => {
         setState({
             ...state,
@@ -45,8 +49,6 @@ const  App = () => {
     });
 
     const updateUserData = async (user) => {
-
-
         let updatedUser = USER_DATA;
         updatedUser.address = user.address;
         updatedUser.brandName = user.brandName;
@@ -136,6 +138,7 @@ const  App = () => {
             categories: categories && categories.data
         });
         setLoading(false);
+        history.push('/app/cliente');
     }
 
     useEffect(async () => {
@@ -169,7 +172,7 @@ const  App = () => {
 
     const classes= useCommonStyles();
 
-  return (
+    return (
       <div>
 
           <UserContext.Provider value={value}>
@@ -186,12 +189,12 @@ const  App = () => {
                   (
                       <UserContext.Provider value={value}>
                           <Switch>
-                              <Route exact from="/home" render={props => <Home page="Landing Page" {...props}/>}/>
-                              <PrivateRoute exact from="/mis-pedidos">
+                              <Route exact from="/app" render={props => <Home page="Landing Page" {...props}/>}/>
+                              <PrivateRoute exact from="/app/mis-pedidos">
                                   <ClientOrders/>
                               </PrivateRoute>
 
-                              <PrivateRoute exact path="/cliente">
+                              <PrivateRoute exact path="/app/cliente">
                                   <ClientProfile
                                       updateUserData={updateUserData}
                                       setState={setState}
@@ -199,7 +202,7 @@ const  App = () => {
                                   />
                               </PrivateRoute>
                               <PrivateRoute
-                                  exact from="/manage-catalog">
+                                  exact from="/app/manage-catalog">
                                   <CreateCatalog
                                       editMode={true}
                                       setNotify={setNotify}
@@ -207,14 +210,14 @@ const  App = () => {
                                   />
                               </PrivateRoute>
                               <Route
-                                  exact from="/:name" render={props => <Menu
+                                  exact from="/:name" render={() => <Menu
                                   notify={notify}
                                   editMode={false}
                                   setNotify={setNotify}
-                                  {...props}/>}
+                              />}
                               />
                               <Route path="*">
-                                  <Redirect to="/home" />
+                                  <Redirect to="/app" />
                               </Route>
                           </Switch>
                       </UserContext.Provider>
@@ -227,4 +230,4 @@ const  App = () => {
   )
 }
 
-export default App;
+export default withRouter(App);

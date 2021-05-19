@@ -26,7 +26,6 @@ export default function Menu({editMode, setNotify}) {
     const [loading, setLoading] = useState(true);
 
     const { name } = useParams();
-
     function useNull() {
         return null;
     }
@@ -104,8 +103,8 @@ export default function Menu({editMode, setNotify}) {
         <>
             {!loading && state === null ? (<Redirect
                 to={{
-                    pathname: "/home",
-                    state: { from: '/menu' }
+                    pathname: "/app",
+                    state: { from: '/app/menu' }
                 }}
             />):
             loading ? <div style={{textAlign: "center"}} className={classes.layout}><CircularProgress /></div>:
