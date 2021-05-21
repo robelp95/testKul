@@ -113,7 +113,8 @@ export default function Menu({editMode, setNotify}) {
                     <MainFeaturedPost
                         post={{
                             description: state.description,
-                            image: state.image ? state.image : 'https://source.unsplash.com/random',
+                            // image: state.image ? state.image : 'https://source.unsplash.com/random',
+                            image: "https://source.unsplash.com/featured/?shopping,business",
                             opening: state.opening,
                             category: state.category,
                             coin: state.coin,
