@@ -13,6 +13,7 @@ import axios from "axios";
 import {getHeaders} from "../utils/utils";
 import * as _ from "lodash";
 import Link from "@material-ui/core/Link";
+import {useConfirm} from "material-ui-confirm";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -39,25 +40,38 @@ const ClientProfileCatalogs = (props) => {
     const [url, setUrl] = useState(null);
     const { state } = useContext(UserContext);
 
+    const confirm = useConfirm();
+
     const productsEnabled = _.filter(state.user.menu.products, (e) => {
         return e.enabled;
     });
 
     const triggerSuscription = async (p) => {
-        setLoading(true);
-        let suscription = NEW_SUSCRIPTION;
-        suscription.planId = p.paykuId;
-        suscription.clientId = state.user.paykuId;
-        try {
-            const headers = {headers: getHeaders(state.user.token)};
-            const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id + '/suscriptions', suscription, headers);
-            setUrl(response.data.suscription.pop().url || null);
-            setLoading(false);
-            setNotify({isOpen:true, message: 'Suscripcion exitosa, revise email para continuar', type:'info'});
-        }catch (e) {
-            setLoading(false);
-            setNotify({isOpen:true, message: 'No se pudo realizar la suscripcion', type:'error'});
+        async function suscription(p){
+            setLoading(true);
+            let suscription = NEW_SUSCRIPTION;
+            suscription.planId = p.paykuId;
+            suscription.clientId = state.user.paykuId;
+            try {
+                const headers = {headers: getHeaders(state.user.token)};
+                const response = await axios.post(UPDATE_USER_DATA_ENDPOINT + state.user.id + '/suscriptions', suscription, headers);
+                setUrl(response.data.suscription.pop().url || null);
+                setLoading(false);
+                setNotify({isOpen:true, message: 'Suscripcion exitosa, revise email para continuar', type:'info'});
+            }catch (e) {
+                setLoading(false);
+                setNotify({isOpen:true, message: 'No se pudo realizar la suscripcion', type:'error'});
+            }
+
         }
+        confirm({ description: '¡Cuidado! Esta acción eliminará su suscripción actual' })
+            .then(() => {
+                suscription(p);
+            })
+            .catch(() => {
+                setLoading(false);
+                setNotify({isOpen:true, message: 'No se completó la suscripcion', type:'info'});
+            });
 
     }
 

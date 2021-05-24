@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import Header from "./Header";
-import {Redirect, Route} from "react-router-dom";
+import {Redirect, Route, withRouter} from "react-router-dom";
 import {Switch} from 'react-router';
 import Toolbar from "@material-ui/core/Toolbar";
 import Menu from "./Checkout/Menu";
@@ -14,7 +14,6 @@ import {UserContext} from './Context/UserContext';
 import * as _ from 'lodash';
 import PrivateRoute from "./utils/PrivateRoute";
 import axios from "axios";
-import {withRouter, useRouteMatch} from 'react-router-dom';
 
 import {
     CATEGORY_CONTROLLER_ENDPOINT,
