@@ -34,8 +34,10 @@ export const LandingPage = (props) => {
                         <div className="col-lg-12">
                             <nav className="navbar navbar-expand-lg">
                                 <a className="navbar-brand" href="/">
-                                    <img src="assets/images/White.png" width="111px" alt="Logo" />
+                                    <img src="assets/images/White.png" width="111px" alt="Logo"/>
+
                                 </a>
+
                                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                         aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +68,8 @@ export const LandingPage = (props) => {
 
 
                                 <div className="navbar-btn d-none d-sm-inline-block">
-                                    <span className="main-btn" data-scroll-nav="0" rel="nofollow" onClick={handleNavigateToApp}>Comienza ahora</span>
+                                    <span className="main-btn" data-scroll-nav="0" rel="nofollow"
+                                          onClick={handleNavigateToApp}>Comienza ahora</span>
                                     {/*<a className="main-btn" data-scroll-nav="0" rel="nofollow">Comienza ahora</a>*/}
                                 </div>
                             </nav>
@@ -79,7 +82,8 @@ export const LandingPage = (props) => {
             </div>
 
 
-            <div id="home" className="header-hero bg_cover" style={{backgroundImage: 'url(assets/images/banner-bg.svg)'}}>
+            <div id="home" className="header-hero bg_cover"
+                 style={{backgroundImage: 'url(assets/images/banner-bg.svg)'}}>
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-8">
@@ -92,7 +96,11 @@ export const LandingPage = (props) => {
                                     URL de tienda personalizada <br/> No se requiere pasarela de pago</p>
                                 <p className="text wow fadeInUp" data-wow-duration="1.3s"
                                    data-wow-delay="0.8s"> Comisiones Cero | Cancelar en cualquier momento</p>
+                                <br/>
+                                <img src="assets/images/phones_transp1.png" className="wow fadeInLeftBig" data-wow-duration="1s"
+                                     data-wow-delay="0.5s"/>
                             </div>
+
 
                         </div>
                     </div>
@@ -105,7 +113,8 @@ export const LandingPage = (props) => {
                             <div className="col-lg-12">
                                 <div
                                     className="brand-logo d-flex align-items-center justify-content-center justify-content-md-between">
-                                    <div className="single-logo mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                                    <div className="single-logo mt-30 wow fadeIn" data-wow-duration="1s"
+                                         data-wow-delay="0.2s">
                                         <img src="assets/images/Purple.png" width="50px" alt="brand"/>
                                     </div>
                                 </div>
@@ -116,9 +125,7 @@ export const LandingPage = (props) => {
             </div>
 
 
-
         </header>
-
 
 
         <section id="tablero" className="services-area pt-120">
@@ -135,11 +142,21 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/app/client_config_2.png" alt="hero" />
+                                        <img src="assets/images/app/client_config_2.png" alt="hero"/>
                                     </div>
 
                                 </div>
                             </div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/pedidos.jpg"/>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -163,7 +180,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/app/client_products_1.png" alt="client_products_1" />
+                                        <img src="assets/images/app/client_products_1.png" alt="client_products_1"/>
                                     </div>
 
                                 </div>
@@ -172,7 +189,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/app/client_products_2.png" alt="client_products_2" />
+                                        <img src="assets/images/app/client_products_2.png" alt="client_products_2"/>
                                     </div>
 
                                 </div>
@@ -181,7 +198,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/app/client_products_3.png" alt="client_products_3" />
+                                        <img src="assets/images/app/client_products_3.png" alt="client_products_3"/>
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +222,16 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/app/catalog.png" alt="catalog" />
+                                        <img src="assets/images/app/catalog.png" alt="catalog"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
+                                         data-wow-delay="1.4s">
+                                        <img src="assets/images/pedido.jpg"/>
                                     </div>
 
                                 </div>
@@ -234,7 +260,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/app/client_config_2.png" alt="client_config_2" />
+                                        <img src="assets/images/app/client_config_2.png" alt="client_config_2"/>
                                     </div>
 
                                 </div>
@@ -255,17 +281,156 @@ export const LandingPage = (props) => {
                         <div className="section-title text-center pb-40">
                             <div className="line m-auto"></div>
                             <br/>
-                                <h3 className="title">Velocidad de carga ultra rápida</h3>
-                                <p>Hasta 4 veces más rápida que cualquier web (incluso que la web responsive),
-                                    asegurando la mejor experiencia para el usuario.</p>
-                                <div className="d-flex flex-row bd-highlight mb-3 justify-content-center">
-                                    <div className="p-2 bd-highlight header-sub-title wow fadeInUp"><h5>Sin
-                                        publicación.</h5></div>
-                                    <div className="p-2 bd-highlight header-sub-title wow fadeInUp"><h5>Sin
-                                        descarga.</h5></div>
-                                    <div className="p-2 bd-highlight header-sub-title wow fadeInUp"><h5>Sin
-                                        instalación.</h5></div>
-                                </div>
+                            <h3 className="title">Velocidad de carga ultra rápida</h3>
+                            <p>Hasta 4 veces más rápida que cualquier web (incluso que la web responsive),
+                                asegurando la mejor experiencia para el usuario.</p>
+                            <div className="d-flex flex-row bd-highlight mb-3 justify-content-center">
+                                <div className="p-2 bd-highlight header-sub-title wow fadeInUp"><h5>Sin
+                                    publicación.</h5></div>
+                                <div className="p-2 bd-highlight header-sub-title wow fadeInUp"><h5>Sin
+                                    descarga.</h5></div>
+                                <div className="p-2 bd-highlight header-sub-title wow fadeInUp"><h5>Sin
+                                    instalación.</h5></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="sin_comisiones" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">¡Sin comisiones, nunca!</h3>
+                            <br/>
+                            <p>Una forma sencilla de llevar su negocio a traves de micro ecommerce al mundo digital.
+                                Kulko es una plataforma para que las empresas locales construyan y centren su presencia
+                                digital.
+                            </p>
+                            <br/>
+                            <p>
+                                Los sitios web tradicionales tienen un alto costo de desarrollo y quedan desactualizados
+                                en poco tiempo, mientras que las redes sociales no ofrecen toda la información que
+                                buscan sus clientes.
+                            </p>
+                            <br/>
+                            <p>
+                                Esto lo solucionamos con una forma nueva, sencilla de tener un espacio digital para tu
+                                negocio.
+                                Nuestro rol es brindarle el espacio y las herramientas que su negocio necesita para
+                                atraer audiencias, cerrar más ventas y relacionarse con sus clientes.
+                            </p>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="tienda_electronica" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Tu tienda electrónica</h3>
+                            <br/>
+                            <p>
+                                Sus clientes lo amarán por esta experiencia increíblemente rápida y divertida.
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="numero_actual" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Usa tu número actual</h3>
+                            <br/>
+                            <p>
+                                Reciba pedidos en su número personal de WhatsApp o WhatsApp Business
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="entrega_retiro" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Entrega o Retiro</h3>
+                            <br/>
+                            <p>
+                                Utilice la tienda electrónica Kulko App para obtener pedidos tanto para entrega como
+                                para recogida
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="revolucionando_tienda" className="services-area pt-120">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-10">
+                        <div className="section-title text-center pb-40">
+                            <div className="line m-auto"></div>
+                            <br/>
+                            <h3 className="title">Revolucionando en la tienda</h3>
+                            <br/>
+                            <p>
+                                ¡No más colas, haga un pedido, pague, cobre y listo! Tan fácil como suena.
+                            </p>
+                            <br/>
+                            <p>
+                                Menos de 1 segundo el tiempo de carga
+                            </p>
+                            <br/>
+                            <p>
+                                Se ve muy bien
+                            </p>
+                            <br/>
+                            <p>
+                                Catálogo simplificado
+
+                            </p>
+
                         </div>
 
                     </div>
@@ -282,8 +447,8 @@ export const LandingPage = (props) => {
                         <div className="section-title text-center pb-40">
                             <div className="line m-auto"></div>
                             <br/>
-                                <h3 className="title">PRECIOS SIMPLES Y TRANSPARENTES</h3>
-                                <p>Toma de pedidos simple y llanamente👇</p>
+                            <h3 className="title">PRECIOS SIMPLES Y TRANSPARENTES</h3>
+                            <p>Toma de pedidos simple y llanamente👇</p>
                         </div>
 
                     </div>
@@ -295,8 +460,8 @@ export const LandingPage = (props) => {
                              data-wow-delay="0.2s">
                             <div className="services-icon">
                                 <img className="shape" src="assets/images/services-shape.svg" alt="shape"/>
-                                    <img className="shape-1" src="assets/images/services-shape-1.svg" alt="shape"/>
-                                        <i className="lni lni-baloon"></i>
+                                <img className="shape-1" src="assets/images/services-shape-1.svg" alt="shape"/>
+                                <i className="lni lni-baloon"></i>
                             </div>
                             <div className="services-content mt-30">
                                 <h4 className="services-title"><a href="#">Pruebalo</a></h4>
@@ -347,8 +512,8 @@ export const LandingPage = (props) => {
                              data-wow-delay="0.5s">
                             <div className="services-icon">
                                 <img className="shape" src="assets/images/services-shape.svg" alt="shape"/>
-                                    <img className="shape-1" src="assets/images/services-shape-2.svg" alt="shape"/>
-                                        <i className="lni lni-cog"></i>
+                                <img className="shape-1" src="assets/images/services-shape-2.svg" alt="shape"/>
+                                <i className="lni lni-cog"></i>
                             </div>
                             <div className="services-content mt-30">
                                 <h4 className="services-title"><a href="#">ANUAL</a></h4>
@@ -396,7 +561,6 @@ export const LandingPage = (props) => {
                 </div>
 
 
-
             </div>
 
         </section>
@@ -423,7 +587,7 @@ export const LandingPage = (props) => {
                     <div className="col-lg-6">
                         <div className="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s"
                              data-wow-delay="0.5s">
-                            <img src="assets/images/about1.svg" alt="about"/>
+
                         </div>
 
                     </div>
@@ -461,7 +625,7 @@ export const LandingPage = (props) => {
                     <div className="col-lg-6 order-lg-first">
                         <div className="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s"
                              data-wow-delay="0.5s">
-                            <img src="assets/images/about2.svg" alt="about"/>
+                            <img src="assets/images/pedidos.jpg"/>
                         </div>
 
                     </div>
@@ -584,26 +748,23 @@ export const LandingPage = (props) => {
                 <div className="col-md-6 mt-5">
                     <h5 className="text-center">¿Consigo una tienda online?</h5>
                     <br/>
-                        <p className="mb-5 text-center">¡Absolutamente! Su propia tienda de WhatsApp será,
-                            https://kulko.app/tutienda</p>
-                        <h5 className="text-center">Quiero mi propio servicio Kulko App con mi marca para vender a los
-                            clientes</h5>
-                        <br/>
-                            <p className="mb-5 text-center">¡Por supuesto! ¡Proximamente!</p>
-                            <h5 className="text-center">¿Cómo cobro los pagos?</h5>
-                            <br/>
-                                <p className="mb-5 text-center">No se requiere pasarela de pago. Puede cobrar los pagos
-                                    en efectivo en el mostrador, contra reembolso, enlaces de pago, códigos QR,
-                                    totalmente a su elección. ¡Asegúrate de ingresar estas instrucciones mientras
-                                    configuras tu tienda kulko.app!
-                                </p>
-                                <h5 className="text-center">¿Hay un panel de control disponible?</h5>
-                                <br/>
-                                    <p className="text-center">No se requiere pasarela de pago. Puede cobrar los pagos
-                                        en efectivo en el mostrador, contra reembolso, enlaces de pago, códigos QR,
-                                        totalmente a su elección. ¡Asegúrate de ingresar estas instrucciones mientras
-                                        configuras tu tienda kulko.app!
-                                    </p>
+                    <p className="mb-5 text-center">¡Absolutamente! Su propia tienda de WhatsApp será,
+                        https://kulko.app/tutienda</p>
+                    <h5 className="text-center">Quiero mi propio servicio Kulko App con mi marca para vender a los
+                        clientes</h5>
+                    <br/>
+                    <p className="mb-5 text-center">¡Por supuesto! ¡Proximamente!</p>
+                    <h5 className="text-center">¿Cómo cobro los pagos?</h5>
+                    <br/>
+                    <p className="mb-5 text-center">No se requiere pasarela de pago. Puede cobrar los pagos
+                        en efectivo en el mostrador, contra reembolso, enlaces de pago, códigos QR,
+                        totalmente a su elección. ¡Asegúrate de ingresar estas instrucciones mientras
+                        configuras tu tienda kulko.app!
+                    </p>
+                    <h5 className="text-center">¿Hay un panel de control disponible?</h5>
+                    <br/>
+                    <p className="text-center">Asi es, gestion cliente y mis pedidos (donde almacenamos un CRM simple de tus pedidos).
+                    </p>
                 </div>
                 <div className="col-md-6 mt-5">
                     <h5 className="text-center">¿Cómo creo un QR para mi tienda?</h5>
@@ -635,50 +796,51 @@ export const LandingPage = (props) => {
         <footer id="footer" className="footer-area pt-120">
             <div className="container pt-100">
                 <div className="footer-widget pb-100 pt-40">
-                    <div className="row">
+
+                    <div className="row justify-content-center">
+                        <div className="col-lg-10 col-md-8 col-sm-10 " >
+                            <img className={"justify-content-end wow fadeInRightBig"} data-wow-duration="1s"
+                                 data-wow-delay="0.5s" src="assets/images/phones_transp1.png" />
+                        </div>
                         <div className="col-lg-4 col-md-6 col-sm-8">
-                            <div className="footer-about mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                            <div className="footer-about footer-contact mt-50 wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+
                                 <a className="logo" href="#">
                                     <img src="assets/images/White.png" alt="logo"/>
                                 </a>
-                                <p className="text">Lorem ipsum dolor sit amet consetetur sadipscing elitr, sederfs diam
-                                    nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam.</p>
+                                <ul className="contact">
+                                    <li>Crea tu micro catálogo online.</li>
+                                    <li>Vende y recibe pedidos en WhatsApp</li>
+                                    <li>Obten tu URL de tienda personalizada</li>
+                                    <li>No se requiere pasarela de pago</li>
+                                    <li>Comisiones Cero | Cancelar en cualquier momento</li>
+                                </ul>
+
                                 <ul className="social">
-                                    <li><a href="#"><i className="lni lni-facebook-filled"></i></a></li>
-                                    <li><a href="#"><i className="lni lni-twitter-filled"></i></a></li>
-                                    <li><a href="#"><i className="lni lni-instagram-filled"></i></a></li>
-                                    <li><a href="#"><i className="lni lni-linkedin-original"></i></a></li>
+
+
+
                                 </ul>
                             </div>
 
                         </div>
-                        <div className="col-lg-5 col-md-7 col-sm-7">
+                        <div className="col-lg-4 col-md-6 col-sm-8">
                             <div className="footer-link d-flex mt-50 justify-content-md-between">
                                 <div className="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.4s">
                                     <div className="footer-title">
-                                        <h4 className="title">Quick Link</h4>
+                                        <h4 className="title">Enlace Rápido</h4>
                                     </div>
                                     <ul className="link">
-                                        <li><a href="#">Road Map</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="#">Refund Policy</a></li>
-                                        <li><a href="#">Terms of Service</a></li>
-                                        <li><a href="#">Pricing</a></li>
+
+                                        <li><a href="https://docs.google.com/document/d/1sv2CL8RAGXF4AfrQNESQmZ9W40ZRCrq39KbWjPW43Lc/edit?usp=sharing">Política de Privacidad</a></li>
+
+                                        <li><a href="https://docs.google.com/document/d/1hnUo5Lw9fsxojvbMkO2k7Go9RfyddLSUSMdBf6Gh1Os/edit?usp=sharing">Términos de Servicio</a></li>
+                                        <li><a href="#features">Precios</a></li>
+                                        <li><a href="http://instagram.com/kulko.app"><i className="lni lni-instagram-filled"></i></a></li>
                                     </ul>
                                 </div>
 
-                                <div className="link-wrapper wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s">
-                                    <div className="footer-title">
-                                        <h4 className="title">Resources</h4>
-                                    </div>
-                                    <ul className="link">
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="#">Page</a></li>
-                                        <li><a href="#">Portfolio</a></li>
-                                        <li><a href="#">Blog</a></li>
-                                        <li><a href="#">Contact</a></li>
-                                    </ul>
-                                </div>
+
 
                             </div>
 
@@ -687,14 +849,29 @@ export const LandingPage = (props) => {
                             <div className="footer-contact mt-50 wow fadeIn" data-wow-duration="1s"
                                  data-wow-delay="0.8s">
                                 <div className="footer-title">
-                                    <h4 className="title">Contact Us</h4>
+                                    <h4 className="title">Contáctanos</h4>
                                 </div>
                                 <ul className="contact">
-                                    <li>+809272561823</li>
-                                    <li>info@gmail.com</li>
-                                    <li>www.yourweb.com</li>
-                                    <li>123 Stree New York City , United <br/> States Of America 750.</li>
+
+                                    <li>kulko.app@gmail.com</li>
+                                    <li>info@kulko.app</li>
+                                    <li>www.kulko.app</li>
+
                                 </ul>
+                            </div>
+                        </div>
+                        <div className="col-lg-10 col-md-10 col-sm-10 row justify-content-center">
+                            <div className="footer-contact mt-50 wow fadeIn col-4" data-wow-duration="1s"
+                                 data-wow-delay="0.8s">
+                                <img src={"assets/images/start-up.jpg"}/>
+                            </div>
+                            <div className="footer-contact mt-50 wow fadeIn col-4" data-wow-duration="1s"
+                                 data-wow-delay="0.8s">
+                                <img src={"assets/images/viaje_emprendedor_transp.png"}/>
+                            </div>
+                            <div className="footer-contact mt-50 wow fadeIn col-4" data-wow-duration="1s"
+                                 data-wow-delay="0.8s">
+                                <img src={"assets/images/apoyado.jpg"}/>
                             </div>
                         </div>
                     </div>
@@ -707,13 +884,13 @@ export const LandingPage = (props) => {
 
         <a href="#" className="widget-messenger"><i className="lni lni-facebook-messenger"></i></a>
         <a href="#" className="back-to-top"><i className="lni lni-chevron-up"></i></a>
-            <section>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-"></div>
-                    </div>
+        <section>
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-"></div>
                 </div>
-            </section>
+            </div>
+        </section>
         </body>
     )
 }
