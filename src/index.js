@@ -8,7 +8,6 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import {Switch} from 'react-router';
 import {LandingPage} from "./LandingPage/LandingPage";
-import Menu from "./Checkout/Menu";
 
 const theme = createMuiTheme({
     palette: {
