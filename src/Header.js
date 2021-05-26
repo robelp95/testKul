@@ -90,7 +90,7 @@ const Header = props => {
 
     const {state} = useContext(UserContext);
 
-    const { history, handleLogin, handleLogout} = props;
+    const { history, handleLogin, handleLogout, loading} = props;
 
     let { path, url } = useRouteMatch();
 
@@ -138,8 +138,8 @@ const Header = props => {
                     <div>
                     {
                         !state.user ?
-                            (<Button color="inherit" onClick={handleLogin }>Login clientes</Button>) :
-                            (<Button color="inherit" onClick={handleLogout }>Logout</Button>)
+                            (<Button color="inherit" disabled={loading} onClick={handleLogin }>Login clientes</Button>) :
+                            (<Button color="inherit" disabled={loading} onClick={handleLogout }>Logout</Button>)
                     }
                     </div>
 
