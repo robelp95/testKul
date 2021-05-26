@@ -151,7 +151,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/pedidos.jpg"/>
+                                        <img src="assets/images/pedido.png"/>
                                     </div>
 
                                 </div>
@@ -231,7 +231,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/pedido.jpg"/>
+                                        <img src="assets/images/pedido.png"/>
                                     </div>
 
                                 </div>
@@ -625,7 +625,7 @@ export const LandingPage = (props) => {
                     <div className="col-lg-6 order-lg-first">
                         <div className="about-image text-center mt-50 wow fadeInRightBig" data-wow-duration="1s"
                              data-wow-delay="0.5s">
-                            <img src="assets/images/pedidos.jpg"/>
+                            <img src="assets/images/pedido.png"/>
                         </div>
 
                     </div>
@@ -863,7 +863,7 @@ export const LandingPage = (props) => {
                         <div className="col-lg-10 col-md-10 col-sm-10 row justify-content-center">
                             <div className="footer-contact mt-50 wow fadeIn col-4" data-wow-duration="1s"
                                  data-wow-delay="0.8s">
-                                <img src={"assets/images/start-up.jpg"}/>
+                                <img src={"assets/images/start-up.jpeg"}/>
                             </div>
                             <div className="footer-contact mt-50 wow fadeIn col-4" data-wow-duration="1s"
                                  data-wow-delay="0.8s">
@@ -871,7 +871,7 @@ export const LandingPage = (props) => {
                             </div>
                             <div className="footer-contact mt-50 wow fadeIn col-4" data-wow-duration="1s"
                                  data-wow-delay="0.8s">
-                                <img src={"assets/images/apoyado.jpg"}/>
+                                <img src={"assets/images/apoyado.png"}/>
                             </div>
                         </div>
                     </div>
