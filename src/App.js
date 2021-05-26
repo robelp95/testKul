@@ -178,6 +178,7 @@ const App = (props) => {
             <Header
                 handleLogin={handleLogin}
                 handleLogout={handleLogout}
+                loading={loading}
             />
           </UserContext.Provider>
           <Toolbar/>
