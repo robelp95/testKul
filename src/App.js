@@ -189,7 +189,7 @@ const App = (props) => {
                   (
                       <UserContext.Provider value={value}>
                           <Switch>
-                              <Route exact from="/app" render={props => <Home page="Landing Page" {...props}/>}/>
+                              <Route exact from="/app" render={() => <Home/>}/>
                               <PrivateRoute exact from="/app/mis-pedidos">
                                   <ClientOrders/>
                               </PrivateRoute>
