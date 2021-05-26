@@ -464,34 +464,8 @@ export const LandingPage = (props) => {
                                 <i className="lni lni-baloon"></i>
                             </div>
                             <div className="services-content mt-30">
-                                <h4 className="services-title"><a href="#">Pruebalo</a></h4>
-                                <p>$7.990 Neto</p>
-                                <hr/>
-                                <ul style={{textAlign: "left"}}>
-                                    <li>Por 10 dias</li>
-                                    <li>Hasta 50 Productos</li>
-                                    <li>Hasta 5 Categorías</li>
-                                    <li>Recibir pedido por WhatsApp</li>
-                                    <li>Utilice su propio dominio *</li>
-                                    <li>Tu propio número de WhatsApp</li>
-                                </ul>
-                                <hr/>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div className="col-lg-3 col-md-7 col-sm-8">
-                        <div className="single-services text-center mt-30 wow fadeIn" data-wow-duration="1s"
-                             data-wow-delay="0.2s">
-                            <div className="services-icon">
-                                <img className="shape" src="assets/images/services-shape.svg" alt="shape"/>
-                                <img className="shape-1" src="assets/images/services-shape-1.svg" alt="shape"/>
-                                <i className="lni lni-baloon"></i>
-                            </div>
-                            <div className="services-content mt-30">
                                 <h4 className="services-title"><a href="#">MENSUAL</a></h4>
-                                <p>$7.990 Neto</p>
+                                <p>$5.990 Neto</p>
                                 <hr/>
                                 <ul style={{textAlign: "left"}}>
                                     <li>Por 1 mes</li>
@@ -542,8 +516,8 @@ export const LandingPage = (props) => {
                                 <i className="lni lni-cog"></i>
                             </div>
                             <div className="services-content mt-30">
-                                <h4 className="services-title"><a href="#">APOYANOS</a></h4>
-                                <p>$59.990 Neto</p>
+                                <h4 className="services-title"><a href="#">APÓYANOS</a></h4>
+                                <p>$99.990 Neto</p>
                                 <hr/>
                                 <ul style={{textAlign: "left"}}>
                                     <li>Por 5 años</li>
