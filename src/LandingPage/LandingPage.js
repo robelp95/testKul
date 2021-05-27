@@ -151,7 +151,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/pedido.png"/>
+                                        <img src="assets/images/mis-pedidos.png"/>
                                     </div>
 
                                 </div>
@@ -231,7 +231,7 @@ export const LandingPage = (props) => {
                                 <div className="col-lg-12">
                                     <div className="header-hero-image text-center wow fadeIn" data-wow-duration="1.3s"
                                          data-wow-delay="1.4s">
-                                        <img src="assets/images/pedido.png"/>
+                                        <img src="assets/images/cart-mi-pedido.png"/>
                                     </div>
 
                                 </div>
