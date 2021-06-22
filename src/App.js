@@ -110,6 +110,7 @@ const App = (props) => {
         netlifyIdentity.close();
         let activeSuscription = null;
         const headers = {headers: getHeaders(user.token.access_token)};
+        console.log(headers);
         let [plans, coins, categories, userData] = await axios.all([
             axios.get(PAYKU_CONTROLLER_ENDPOINT + 'plans', headers).catch(useNull),
             axios.get(COIN_CONTROLLER_ENDPOINT, headers).catch(useNull),
