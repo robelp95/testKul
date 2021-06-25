@@ -110,12 +110,14 @@ const App = (props) => {
         netlifyIdentity.close();
         let activeSuscription = null;
         const headers = {headers: getHeaders(user.token.access_token)};
+        console.log("uno");
         let [plans, coins, categories, userData] = await axios.all([
             axios.get(PAYKU_CONTROLLER_ENDPOINT + 'plans', headers).catch(useNull),
             axios.get(COIN_CONTROLLER_ENDPOINT, headers).catch(useNull),
             axios.get(CATEGORY_CONTROLLER_ENDPOINT, headers).catch(useNull),
             axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email, headers).catch(useNull)
         ]);
+        console.log("dos");
         if(!userData) {
             let initData = NEW_USER;
             initData.email = user.email;
