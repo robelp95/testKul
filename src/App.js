@@ -106,23 +106,16 @@ const App = (props) => {
     }
 
     const fetchInitData = async (user)=>{
-
         setLoading(true);
         netlifyIdentity.close();
         let activeSuscription = null;
         const headers = {headers: getHeaders(user.token.access_token)};
-        console.log(headers);
-        console.log(await axios.get("http://kulko-app.backend.local/api/v1/categories", headers).catch(useNull));
         let [plans, coins, categories, userData] = await axios.all([
             axios.get(PAYKU_CONTROLLER_ENDPOINT + 'plans', headers).catch(useNull),
             axios.get(COIN_CONTROLLER_ENDPOINT, headers).catch(useNull),
-            // axios.get("http://kulko-app.backend.local/api/v1/categories", headers).catch(useNull),
             axios.get(CATEGORY_CONTROLLER_ENDPOINT, headers).catch(useNull),
             axios.get(GET_USER_BY_MAIL_ENDPOINT + user.email, headers).catch(useNull)
         ]);
-        console.log(user);
-        console.log(categories);
-
         if(!userData) {
             let initData = NEW_USER;
             initData.email = user.email;
@@ -131,7 +124,6 @@ const App = (props) => {
             initData.brandName = username;
             userData = await axios.post(CREATE_USER_ENDPOINT, initData, headers);
         }
-        console.log(userData.data.suscription);
         activeSuscription = userData && _.find(userData.data.suscription, function (elem) {
             return elem.status === true;
         }) || null;
@@ -145,7 +137,6 @@ const App = (props) => {
             categories: categories && categories.data
         });
         setLoading(false);
-
         history.push('/app/cliente');
     }
 
