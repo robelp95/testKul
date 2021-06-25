@@ -23,7 +23,7 @@ export default function ClientOrders(props) {
         try {
             async function fetchOrders() {
                 const headers = {headers: getHeaders(state.user.token)};
-                const response  = await axios.get('./' + USERS_ENDPOINT + '/' + parseInt(state.user.id) + '/orders', headers).catch(useNull)
+                const response  = await axios.get(USERS_ENDPOINT + '/' + parseInt(state.user.id) + '/orders', headers).catch(useNull)
                 setOrders(response.data);
                 setLoading(false);
                 return response;
