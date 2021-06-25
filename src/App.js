@@ -106,6 +106,7 @@ const App = (props) => {
     }
 
     const fetchInitData = async (user)=>{
+
         setLoading(true);
         netlifyIdentity.close();
         let activeSuscription = null;
