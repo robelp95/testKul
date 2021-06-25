@@ -8,7 +8,7 @@ export const CREATE_USER_ENDPOINT = `${host}users`;
 export const UPDATE_USER_MENU_ENDPOINT = `${host}users/`;
 export const UPDATE_USER_DATA_ENDPOINT = `${host}users/`;
 export const PAYKU_CONTROLLER_ENDPOINT = `${host}payku/`;
-export const CATEGORY_CONTROLLER_ENDPOINT = `${host}categories`;
+export const CATEGORY_CONTROLLER_ENDPOINT = `https://kultest-back.herokuapp.com/api/v1/categories`;
 export const COIN_CONTROLLER_ENDPOINT = `${host}coins`;
 
 export const NEW_SUSCRIPTION = {
