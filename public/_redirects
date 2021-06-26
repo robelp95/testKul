@@ -1,4 +1,3 @@
-/app/api/* http://kulko-app.backend.local/api/v1/:splat 200
-/api/* http://kulko-app.backend.local/api/v1/:splat 200
+
 
 /* /index.html 200

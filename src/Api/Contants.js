@@ -1,6 +1,6 @@
 // const host="http://kulko-app.backend.local/api/v1/";
-const host="https://kultest-back.herokuapp.com/api/v1/";
-// const host=process.env.REACT_APP_URL_API;
+// const host="https://kultest-back.herokuapp.com/api/v1/";
+const host=process.env.REACT_APP_URL_API;
 export const GET_USER_BY_MAIL_ENDPOINT = `${host}users/`;
 export const USERS_ENDPOINT = `${host}users`;
 export const GET_MENU_BY_BRANDNAME_ENDPOINT = `${host}menu/`;
